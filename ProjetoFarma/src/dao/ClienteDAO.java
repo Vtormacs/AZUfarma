@@ -6,7 +6,7 @@ import model.Cliente;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-
+import java.sql.ResultSet;
 
 public class ClienteDAO {
     private Connection conexao;
@@ -39,10 +39,50 @@ public class ClienteDAO {
             
             stmt.close();
             
-            JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!");
+            JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!!");
             
         } catch (HeadlessException | SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar o cliente" + erro);
+            JOptionPane.showMessageDialog(null, "Erro ao salvar o cliente!!" + erro);
         }
     }
+    
+    public Cliente BuscaCliente(String nome){
+        try {
+            
+            String sql = "SELECT * FROM clientes WHERE nome = ?";
+            
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, nome);
+            ResultSet resultado = stmt.executeQuery();
+            
+            Cliente obj = new Cliente();
+            
+            if(resultado.next()){
+                obj.setId(resultado.getInt("id"));
+                obj.setNome(resultado.getString("nome"));
+                obj.setRg(resultado.getString("rg"));
+                obj.setCpf(resultado.getString("cpf"));
+                obj.setEmail(resultado.getString("email"));
+                obj.setTelefone(resultado.getString("telefone"));
+                obj.setCelular(resultado.getString("celular"));
+                obj.setCep(resultado.getString("cep"));
+                obj.setEndereco(resultado.getString("endereco"));
+                obj.setNumero(resultado.getInt("numero"));
+                obj.setComplemento(resultado.getString("complemento"));
+                obj.setBairro(resultado.getString("bairro"));
+                obj.setCidade(resultado.getString("cidade"));
+                obj.setEstado(resultado.getString("estado"));
+                obj.setSexo_id(resultado.getInt("sexo_id"));
+                
+                JOptionPane.showMessageDialog(null, "Cliente encontrado!!");
+            }
+            return obj;
+            
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente!!" + erro);
+        }
+        return null;
+    }
+    
+    
 }

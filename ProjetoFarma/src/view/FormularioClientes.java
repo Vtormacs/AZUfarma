@@ -8,6 +8,7 @@ import dao.ClienteDAO;
 import model.Cliente;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 public class FormularioClientes extends javax.swing.JFrame {
 
@@ -16,7 +17,19 @@ Map<String, Integer>: Isso é uma interface Map em Java que armazena pares de ch
 sexoMap: Este é o nome da variável que está sendo usada para armazenar a referência para o objeto HashMap.
 new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operador new é usado para criar o objeto, e HashMap<> é o construtor do objeto.
     */
-    
+    public String getSexoString(int sexoId) {
+    switch (sexoId) {
+        case 1:
+            return "Masculino";
+        case 2:
+            return "Feminino";
+        case 3:
+            return "Outros";
+        default:
+            return "Desconhecido";
+    }
+}
+
     
     Map<String, Integer> sexoMap = new HashMap<>();
 
@@ -116,6 +129,11 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
         });
 
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("E-mail:");
 
@@ -551,6 +569,40 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
         ClienteDAO dao = new ClienteDAO();
         dao.Salvar(obj);
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        String nome = txtNome.getText();
+        
+        Cliente obj = new Cliente();
+        
+        ClienteDAO dao =  new ClienteDAO();
+        
+        obj = dao.BuscaCliente(nome);
+        
+        if(obj.getNome() != null){
+            txtCodigo.setText(String.valueOf(obj.getId()));
+            txtNome.setText(obj.getNome());
+            txtRG.setText(obj.getRg());
+            txtCPF.setText(obj.getCpf());
+            txtEmail.setText(obj.getEmail());
+            txtTelefone.setText(obj.getTelefone());
+            txtCelular.setText(obj.getCelular());
+            txtCEP.setText(obj.getCep());
+            txtEndereco.setText(obj.getEndereco());
+            txtNumeroDaCasa.setText(String.valueOf(obj.getNumero()));
+            txtComplemento.setText(obj.getComplemento());
+            txtBairro.setText(obj.getBairro());
+            txtCidade.setText(obj.getCidade());
+            cbUF.setSelectedItem(obj.getEstado());
+            cbSexo.setSelectedItem(getSexoString(obj.getSexo_id()));
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado");
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
