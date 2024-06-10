@@ -542,7 +542,6 @@ public class FormularioClientes extends javax.swing.JFrame {
         obj.setCidade(txtCidade.getText());
         obj.setEstado(cbUF.getSelectedItem().toString());
 
-        // Aqui, nós pegamos a string do item selecionado e usamos ela para buscar o valor correspondente no sexoMap
         String sexoSelecionado = cbSexo.getSelectedItem().toString();
         Integer Sexo_id = sexoMap.get(sexoSelecionado);
         obj.setSexo_id(Sexo_id);
