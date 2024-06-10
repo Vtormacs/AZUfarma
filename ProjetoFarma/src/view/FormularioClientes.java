@@ -9,12 +9,15 @@ import model.Cliente;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author vtorl
- */
 public class FormularioClientes extends javax.swing.JFrame {
 
+    /*
+Map<String, Integer>: Isso é uma interface Map em Java que armazena pares de chave-valor. Neste caso, as chaves são do tipo String e os valores são do tipo Integer.
+sexoMap: Este é o nome da variável que está sendo usada para armazenar a referência para o objeto HashMap.
+new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operador new é usado para criar o objeto, e HashMap<> é o construtor do objeto.
+    */
+    
+    
     Map<String, Integer> sexoMap = new HashMap<>();
 
     public FormularioClientes() {
@@ -521,8 +524,7 @@ public class FormularioClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisaNomeActionPerformed
 
     private void cbSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSexoActionPerformed
-        String sexoSelecionado = cbSexo.getSelectedItem().toString();
-        Integer Sexo_id = sexoMap.get(sexoSelecionado);
+
     }//GEN-LAST:event_cbSexoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
