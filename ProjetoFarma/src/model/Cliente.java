@@ -7,6 +7,7 @@ public class Cliente {
     private String cpf;
     private String email;
     private String telefone;
+    private String celular;
     private String cep;
     private String endereco;
     private int numero;
