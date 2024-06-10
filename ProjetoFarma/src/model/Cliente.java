@@ -15,7 +15,15 @@ public class Cliente {
     private String bairro;
     private String cidade;
     private String estado;
-    private int sexo__id;
+    private int sexo_id;
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
 
     public int getId() {
         return id;
@@ -121,12 +129,12 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public int getSexo__id() {
-        return sexo__id;
+    public int getSexo_id() {
+        return sexo_id;
     }
 
-    public void setSexo__id(int sexo__id) {
-        this.sexo__id = sexo__id;
+    public void setSexo_id(int sexo_id) {
+        this.sexo_id = sexo_id;
     }
     
     
