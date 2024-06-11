@@ -94,7 +94,25 @@ public class ClienteDAO {
         List<Cliente> lista = new ArrayList<>();
         
         try {
-            String sql = "SELECT * FROM clientes ";
+            
+            String sql = "SELECT * FROM clientes";
+            
+            /*String sql = "SELECT c.id, c.nome  "
+                    + "FROM clientes c "
+                    + "INNER JOIN sexo s "
+                    + "ON c.sexo_id = s.id "
+                    + "WHERE c.id  LIKE ? OR c.nome LIKE ? OR c.rg LIKE ? OR c.cpf LIKE ? OR s.nome LIKE ? OR c.endereco LIKE ? OR c.cep LIKE ? OR c.telefone LIKE ? OR c.email LIKE ?"
+            
+            String sql = "SELECT c.*, sexo.nome AS sexo_nome "
+                    + "FROM clientes c "
+                    + "INNER JOIN sexo s "
+                    + "ON c.sexo_id = sexo.id";
+            
+            String sql = "SELECT c.id, c.nome, c.cpf, s.descricao AS sexo_nome, c.endereco, c.cep, c.telefone, c.email "
+                   + "FROM clientes c "
+                   + "JOIN sexo s ON c.sexo_id = s.id "
+                   + "WHERE c.id  LIKE ? OR c.nome LIKE ? OR c.cpf LIKE ? OR s.descricao LIKE ? OR c.endereco LIKE ? OR c.cep LIKE ? OR c.telefone LIKE ? OR c.email LIKE ?";*/
+
             
             PreparedStatement stmt = conexao.prepareStatement(sql);
             
