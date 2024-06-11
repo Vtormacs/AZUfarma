@@ -59,7 +59,7 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
         jLabel15 = new javax.swing.JLabel();
         btnPesquisaNome = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabela_clientes = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
         painel_dados_pessoais = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
@@ -140,7 +140,7 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
         btnPesquisaNome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnPesquisaNome.setText("Pesquisar");
 
-        tabela_clientes.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -148,7 +148,7 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
                 "Id", "Nome", "RG", "CPF", "Email", "Telefone", "Celular", "CEP", "Endereço", "Numero", "Complemento", "Bairro", "Cidade", "Estado", "Sexo"
             }
         ));
-        jScrollPane1.setViewportView(tabela_clientes);
+        jScrollPane1.setViewportView(tabela);
 
         javax.swing.GroupLayout painel_consultaLayout = new javax.swing.GroupLayout(painel_consulta);
         painel_consulta.setLayout(painel_consultaLayout);
@@ -753,7 +753,7 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
     private javax.swing.JPanel painel_consulta;
     private javax.swing.JPanel painel_dados_pessoais;
     private javax.swing.JTabbedPane painel_guias;
-    private javax.swing.JTable tabela_clientes;
+    private javax.swing.JTable tabela;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCEP;
     private javax.swing.JFormattedTextField txtCPF;

@@ -1,12 +1,14 @@
 package dao;
 
 import java.awt.HeadlessException;
+import java.util.List;
 import java.sql.Connection;
 import model.Cliente;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class ClienteDAO {
     private Connection conexao;
@@ -21,6 +23,7 @@ public class ClienteDAO {
             String sql = "INSERT INTO clientes (nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado,sexo_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             
             PreparedStatement stmt = conexao.prepareStatement(sql);
+            
             stmt.setString(1, obj.getNome());
             stmt.setString(2, obj.getRg());
             stmt.setString(3, obj.getCpf());
@@ -53,7 +56,9 @@ public class ClienteDAO {
             String sql = "SELECT * FROM clientes WHERE nome = ?";
             
             PreparedStatement stmt = conexao.prepareStatement(sql);
+            
             stmt.setString(1, nome);
+            
             ResultSet resultado = stmt.executeQuery();
             
             Cliente obj = new Cliente();
@@ -85,5 +90,42 @@ public class ClienteDAO {
         return null;
     }
     
+    public List<Cliente>Listar(){
+        List<Cliente> lista = new ArrayList<>();
+        
+        try {
+            String sql = "SELECT * FROM clientes ";
+            
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            
+            ResultSet resultado = stmt.executeQuery();
+            
+            while (resultado.next()) {
+                Cliente obj = new Cliente();
+                
+                obj.setId(resultado.getInt("id"));
+                obj.setNome(resultado.getString("nome"));
+                obj.setRg(resultado.getString("rg"));
+                obj.setCpf(resultado.getString("cpf"));
+                obj.setEmail(resultado.getString("email"));
+                obj.setTelefone(resultado.getString("telefone"));
+                obj.setCelular(resultado.getString("celular"));
+                obj.setCep(resultado.getString("cep"));
+                obj.setEndereco(resultado.getString("endereco"));
+                obj.setNumero(resultado.getInt("numero"));
+                obj.setComplemento(resultado.getString("complemento"));
+                obj.setBairro(resultado.getString("bairro"));
+                obj.setCidade(resultado.getString("cidade"));
+                obj.setEstado(resultado.getString("estado"));
+                obj.setSexo_id(resultado.getInt("sexo_id"));
+                
+                lista.add(obj);
+            }
+            return lista;
+        } catch (SQLException erro) {
+             JOptionPane.showMessageDialog(null, "Erro ao criar a lista!!" + erro);
+        }
+        return null;
+    }
     
 }
