@@ -9,6 +9,7 @@ import model.Cliente;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import utilitarios.Utilitarios;
 
 public class FormularioClientes extends javax.swing.JFrame {
 
@@ -114,6 +115,7 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
 
         jLabel2.setText("Código:");
 
+        txtCodigo.setEditable(false);
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
@@ -421,6 +423,11 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
 
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1564491_add_create_new_plus_icon (1).png"))); // NOI18N
         btnNovo.setText("NOVO");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/326688_floppy_save_guardar_icon (1).png"))); // NOI18N
         btnSalvar.setText("SALVAR");
@@ -482,6 +489,7 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -568,6 +576,10 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
 
         ClienteDAO dao = new ClienteDAO();
         dao.Salvar(obj);
+        
+        Utilitarios util = new Utilitarios();
+        
+        util.Limpar(painel_dados_pessoais);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -603,6 +615,12 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
         
         
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        Utilitarios util = new Utilitarios();
+        
+        util.Limpar(painel_dados_pessoais);
+    }//GEN-LAST:event_btnNovoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -15,6 +15,7 @@ public class ClienteDAO {
         this.conexao = new ConexaoBanco().conectarComBanco();
     }
     
+    
     public void Salvar(Cliente obj){
         try {
             String sql = "INSERT INTO clientes (nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado,sexo_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
