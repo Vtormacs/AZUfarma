@@ -146,4 +146,62 @@ public class ClienteDAO {
         return null;
     }
     
+    public List<Cliente>Filtrar(String nome){
+        List<Cliente> lista = new ArrayList<>();
+        
+        try {
+            
+            String sql = "SELECT * FROM clientes WHERE nome LIKE ?";
+            
+            /*String sql = "SELECT c.id, c.nome  "
+                    + "FROM clientes c "
+                    + "INNER JOIN sexo s "
+                    + "ON c.sexo_id = s.id "
+                    + "WHERE c.id  LIKE ? OR c.nome LIKE ? OR c.rg LIKE ? OR c.cpf LIKE ? OR s.nome LIKE ? OR c.endereco LIKE ? OR c.cep LIKE ? OR c.telefone LIKE ? OR c.email LIKE ?"
+            
+            String sql = "SELECT c.*, sexo.nome AS sexo_nome "
+                    + "FROM clientes c "
+                    + "INNER JOIN sexo s "
+                    + "ON c.sexo_id = sexo.id";
+            
+            String sql = "SELECT c.id, c.nome, c.cpf, s.descricao AS sexo_nome, c.endereco, c.cep, c.telefone, c.email "
+                   + "FROM clientes c "
+                   + "JOIN sexo s ON c.sexo_id = s.id "
+                   + "WHERE c.id  LIKE ? OR c.nome LIKE ? OR c.cpf LIKE ? OR s.descricao LIKE ? OR c.endereco LIKE ? OR c.cep LIKE ? OR c.telefone LIKE ? OR c.email LIKE ?";*/
+
+            
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            
+            stmt.setString(1, nome);
+            
+            ResultSet resultado = stmt.executeQuery();
+            
+            while (resultado.next()) {
+                Cliente obj = new Cliente();
+                
+                obj.setId(resultado.getInt("id"));
+                obj.setNome(resultado.getString("nome"));
+                obj.setRg(resultado.getString("rg"));
+                obj.setCpf(resultado.getString("cpf"));
+                obj.setEmail(resultado.getString("email"));
+                obj.setTelefone(resultado.getString("telefone"));
+                obj.setCelular(resultado.getString("celular"));
+                obj.setCep(resultado.getString("cep"));
+                obj.setEndereco(resultado.getString("endereco"));
+                obj.setNumero(resultado.getInt("numero"));
+                obj.setComplemento(resultado.getString("complemento"));
+                obj.setBairro(resultado.getString("bairro"));
+                obj.setCidade(resultado.getString("cidade"));
+                obj.setEstado(resultado.getString("estado"));
+                obj.setSexo_id(resultado.getInt("sexo_id"));
+                
+                lista.add(obj);
+            }
+            return lista;
+        } catch (SQLException erro) {
+             JOptionPane.showMessageDialog(null, "Erro ao criar a lista!!" + erro);
+        }
+        return null;
+    }
+    
 }
