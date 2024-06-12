@@ -5,6 +5,7 @@
 package view;
 
 import dao.ClienteDAO;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -36,6 +37,7 @@ sexoMap: Este é o nome da variável que está sendo usada para armazenar a refe
 new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operador new é usado para criar o objeto, e HashMap<> é o construtor do objeto.
      */
     Map<String, Integer> sexoMap = new HashMap<>();
+
     public CadastroDeCliente() {
         initComponents();
 
@@ -169,9 +171,9 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        background.setBackground(new java.awt.Color(0, 204, 204));
+        background.setBackground(new java.awt.Color(102, 102, 102));
 
-        painel_dados_pessoais.setBackground(new java.awt.Color(204, 255, 255));
+        painel_dados_pessoais.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Código:");
@@ -189,6 +191,11 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
+            }
+        });
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeKeyPressed(evt);
             }
         });
 
@@ -678,6 +685,41 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            String nome = txtNome.getText();
+
+            Cliente obj = new Cliente();
+
+            ClienteDAO dao = new ClienteDAO();
+
+            obj = dao.BuscaCliente(nome);
+
+            if (obj.getNome() != null) {
+                txtCodigo.setText(String.valueOf(obj.getId()));
+                txtNome.setText(obj.getNome());
+                txtRG.setText(obj.getRg());
+                txtCPF.setText(obj.getCpf());
+                txtEmail.setText(obj.getEmail());
+                txtTelefone.setText(obj.getTelefone());
+                txtCelular.setText(obj.getCelular());
+                txtCEP.setText(obj.getCep());
+                txtEndereco.setText(obj.getEndereco());
+                txtNumeroDaCasa.setText(String.valueOf(obj.getNumero()));
+                txtComplemento.setText(obj.getComplemento());
+                txtBairro.setText(obj.getBairro());
+                txtCidade.setText(obj.getCidade());
+                cbUF.setSelectedItem(obj.getEstado());
+                cbSexo.setSelectedItem(getSexoString(obj.getSexo_id()));
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado");
+            }
+
+        }
+    }//GEN-LAST:event_txtNomeKeyPressed
 
     /**
      * @param args the command line arguments
