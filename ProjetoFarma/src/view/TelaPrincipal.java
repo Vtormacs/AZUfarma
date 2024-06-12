@@ -5,10 +5,15 @@
 package view;
 
 import dao.ClienteDAO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import model.Cliente;
 import utilitarios.Utilitarios;
@@ -45,19 +50,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public String getSexoString(int sexoId) {
-        switch (sexoId) {
-            case 1:
-                return "Masculino";
-            case 2:
-                return "Feminino";
-            case 3:
-                return "Outros";
-            default:
-                return "Desconhecido";
-        }
-    }
-
     /*
 Map<String, Integer>: Isso é uma interface Map em Java que armazena pares de chave-valor. Neste caso, as chaves são do tipo String e os valores são do tipo Integer.
 sexoMap: Este é o nome da variável que está sendo usada para armazenar a referência para o objeto HashMap.
@@ -71,9 +63,6 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
         Utilitarios u = new Utilitarios();
         u.InserirIcone(this);
 
-        sexoMap.put("Masculino", 1);
-        sexoMap.put("Feminino", 2);
-        sexoMap.put("Outros", 3);
     }
 
     @SuppressWarnings("unchecked")
@@ -124,6 +113,11 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
         txtPesquisaNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPesquisaNomeActionPerformed(evt);
+            }
+        });
+        txtPesquisaNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPesquisaNomeKeyReleased(evt);
             }
         });
 
@@ -338,7 +332,30 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void btnPesquisaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaNomeActionPerformed
-        // TODO add your handling code here:
+        String nome = "%" + txtPesquisaNome.getText() + "%";
+        ClienteDAO dao = new ClienteDAO();
+        List<Cliente> lista = dao.Filtrar(nome);
+        DefaultTableModel dados = (DefaultTableModel) tabela_clientes.getModel();
+        dados.setNumRows(0);
+        for (Cliente c : lista) {
+            dados.addRow(new Object[]{
+                c.getId(),
+                c.getNome(),
+                c.getRg(),
+                c.getCpf(),
+                c.getSexo_id(),
+                c.getEmail(),
+                c.getTelefone(),
+                c.getCelular(),
+                c.getCep(),
+                c.getEndereco(),
+                c.getNumero(),
+                c.getComplemento(),
+                c.getBairro(),
+                c.getCidade(),
+                c.getEstado()
+            });
+        }
     }//GEN-LAST:event_btnPesquisaNomeActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -350,8 +367,55 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
     }//GEN-LAST:event_btnClienteActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
-       content.setSelectedIndex(1);
+        content.setSelectedIndex(1);
     }//GEN-LAST:event_btnProdutosActionPerformed
+
+    private void txtPesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaNomeKeyReleased
+        // Crie um Timer com um atraso de 300ms
+        Timer timer = new Timer(100, null);
+        timer.setRepeats(false);  // Certifique-se de que o Timer só dispara uma vez
+
+          // Adicione um ActionListener ao Timer
+        timer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Coloque aqui o código para buscar os dados e atualizar a tabela
+                String nome = "%" + txtPesquisaNome.getText() + "%";
+                ClienteDAO dao = new ClienteDAO();
+                List<Cliente> lista = dao.Filtrar(nome);
+                DefaultTableModel dados = (DefaultTableModel) tabela_clientes.getModel();
+                dados.setNumRows(0);
+                for (Cliente c : lista) {
+                    dados.addRow(new Object[]{
+                        c.getId(),
+                        c.getNome(),
+                        c.getRg(),
+                        c.getCpf(),
+                        c.getSexo_id(),
+                        c.getEmail(),
+                        c.getTelefone(),
+                        c.getCelular(),
+                        c.getCep(),
+                        c.getEndereco(),
+                        c.getNumero(),
+                        c.getComplemento(),
+                        c.getBairro(),
+                        c.getCidade(),
+                        c.getEstado()
+                    });
+                }
+            }
+        });
+
+        txtPesquisaNome.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // Reinicie o Timer sempre que uma tecla for liberada
+                timer.restart();
+            }
+        });
+
+    }//GEN-LAST:event_txtPesquisaNomeKeyReleased
 
     /**
      * @param args the command line arguments

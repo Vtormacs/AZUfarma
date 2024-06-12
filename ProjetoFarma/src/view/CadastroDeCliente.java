@@ -38,9 +38,6 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
     Map<String, Integer> sexoMap = new HashMap<>();
     public CadastroDeCliente() {
         initComponents();
-        
-         Utilitarios u = new Utilitarios();
-        u.InserirIcone(this);
 
         sexoMap.put("Masculino", 1);
         sexoMap.put("Feminino", 2);
