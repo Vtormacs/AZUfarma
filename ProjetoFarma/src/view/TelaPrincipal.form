@@ -574,6 +574,7 @@
                             <StringItem index="26" value="TO"/>
                           </StringArray>
                         </Property>
+                        <Property name="selectedIndex" type="int" value="-1"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -615,6 +616,7 @@
                             <StringItem index="3" value=" "/>
                           </StringArray>
                         </Property>
+                        <Property name="selectedIndex" type="int" value="-1"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSexoActionPerformed"/>
@@ -915,7 +917,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="130" width="160" height="670"/>
+              <AbsoluteConstraints x="0" y="60" width="160" height="740"/>
             </Constraint>
           </Constraints>
 
@@ -939,7 +941,7 @@
                       <Component id="btnProdutos" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnUsuarios" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace pref="496" max="32767" attributes="0"/>
+                      <EmptySpace pref="566" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

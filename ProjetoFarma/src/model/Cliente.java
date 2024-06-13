@@ -16,6 +16,7 @@ public class Cliente {
     private String cidade;
     private String estado;
     private int sexo_id;
+    private String nomeSexo;
 
     public String getCelular() {
         return celular;
@@ -136,6 +137,13 @@ public class Cliente {
     public void setSexo_id(int sexo_id) {
         this.sexo_id = sexo_id;
     }
-    
+
+    public String getNomeSexo() {
+        return nomeSexo;
+    }
+
+    public void setNomeSexo(String nomeSexo) {
+        this.nomeSexo = nomeSexo;
+    }
     
 }

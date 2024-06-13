@@ -46,7 +46,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 c.getNome(),
                 c.getRg(),
                 c.getCpf(),
-                getSexoString(c.getSexo_id()),
+                c.getNomeSexo(),
                 c.getEmail(),
                 c.getTelefone(),
                 c.getCelular(),
@@ -361,6 +361,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         cbUF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        cbUF.setSelectedIndex(-1);
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setText("RG:");
@@ -380,6 +381,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", "Outros", " " }));
+        cbSexo.setSelectedIndex(-1);
         cbSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSexoActionPerformed(evt);
@@ -760,10 +762,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(496, Short.MAX_VALUE))
+                .addContainerGap(566, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 160, 670));
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 160, 740));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -798,7 +800,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 c.getNome(),
                 c.getRg(),
                 c.getCpf(),
-                getSexoString(c.getSexo_id()),
+                c.getNomeSexo(),
                 c.getEmail(),
                 c.getTelefone(),
                 c.getCelular(),
@@ -859,7 +861,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         c.getNome(),
                         c.getRg(),
                         c.getCpf(),
-                        getSexoString(c.getSexo_id()),
+                        c.getNomeSexo(),
                         c.getEmail(),
                         c.getTelefone(),
                         c.getCelular(),
@@ -926,7 +928,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 txtBairro.setText(obj.getBairro());
                 txtCidade.setText(obj.getCidade());
                 cbUF.setSelectedItem(obj.getEstado());
-                cbSexo.setSelectedItem(getSexoString(obj.getSexo_id()));
+                cbSexo.setSelectedItem(obj.getNomeSexo());
+                
 
             } else {
                 JOptionPane.showMessageDialog(null, "Cliente não encontrado");
@@ -965,7 +968,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             txtBairro.setText(obj.getBairro());
             txtCidade.setText(obj.getCidade());
             cbUF.setSelectedItem(obj.getEstado());
-            cbSexo.setSelectedItem(getSexoString(obj.getSexo_id()));
+            cbSexo.setSelectedItem(obj.getNomeSexo());
 
         } else {
             JOptionPane.showMessageDialog(null, "Cliente não encontrado");
@@ -1049,10 +1052,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         obj.setBairro(txtBairro.getText());
         obj.setCidade(txtCidade.getText());
         obj.setEstado(cbUF.getSelectedItem().toString());
-
-        String sexoSelecionado = cbSexo.getSelectedItem().toString();
-        Integer Sexo_id = sexoMap.get(sexoSelecionado);
-        obj.setSexo_id(Sexo_id);
+        obj.setNomeSexo(cbSexo.getSelectedItem().toString());
 
         ClienteDAO dao = new ClienteDAO();
         dao.Salvar(obj);

@@ -26,7 +26,39 @@ public class ClienteDAO {
      */
     public void Salvar(Cliente obj) {
         try {
-            String sql = "INSERT INTO clientes (nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado,sexo_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO clientes (nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado,sexo_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,(select id from sexo where nome = ?))";
+
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+
+            stmt.setString(1, obj.getNome());
+            stmt.setString(2, obj.getRg());
+            stmt.setString(3, obj.getCpf());
+            stmt.setString(4, obj.getEmail());
+            stmt.setString(5, obj.getTelefone());
+            stmt.setString(6, obj.getCelular());
+            stmt.setString(7, obj.getCep());
+            stmt.setString(8, obj.getEndereco());
+            stmt.setInt(9, obj.getNumero());
+            stmt.setString(10, obj.getComplemento());
+            stmt.setString(11, obj.getBairro());
+            stmt.setString(12, obj.getCidade());
+            stmt.setString(13, obj.getEstado());
+            stmt.setString(14, obj.getNomeSexo());
+
+            stmt.execute();
+
+            stmt.close();
+
+            JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!!");
+
+        } catch (HeadlessException | SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar o cliente!!" + erro);
+        }
+    }
+
+    public void Editar(Cliente obj) {
+        try {
+            String sql = "UPDATE clientes set nome = ";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -62,7 +94,11 @@ public class ClienteDAO {
     public Cliente BuscaCliente(String nome) {
         try {
 
-            String sql = "SELECT * FROM clientes WHERE nome = ?";
+//            String sql = "SELECT * FROM clientes WHERE nome = ?";
+            String sql = "SELECT c.id, c.nome,c.rg,c.cpf,c.email,c.telefone,c.celular,c.cep,c.endereco,c.numero,c.complemento,c.bairro,c.cidade,c.estado,s.nome as nome_sexo "
+                    + "FROM clientes AS c "
+                    + "LEFT JOIN sexo AS s ON (s.id = c.sexo_id)"
+                    + "WHERE c.nome = ? ";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -87,7 +123,7 @@ public class ClienteDAO {
                 obj.setBairro(resultado.getString("bairro"));
                 obj.setCidade(resultado.getString("cidade"));
                 obj.setEstado(resultado.getString("estado"));
-                obj.setSexo_id(resultado.getInt("sexo_id"));
+                obj.setNomeSexo(resultado.getString("nome_sexo"));
 
                 JOptionPane.showMessageDialog(null, "Cliente encontrado!!");
             }
@@ -108,7 +144,10 @@ public class ClienteDAO {
 
         try {
 
-            String sql = "SELECT * FROM clientes";
+            String sql = """
+                             SELECT c.id, c.nome, c.rg, c.cpf, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado, s.nome AS nome_sexo
+                             FROM clientes AS c
+                             LEFT JOIN sexo AS s ON (s.id = c.sexo_id)""";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -131,7 +170,7 @@ public class ClienteDAO {
                 obj.setBairro(resultado.getString("bairro"));
                 obj.setCidade(resultado.getString("cidade"));
                 obj.setEstado(resultado.getString("estado"));
-                obj.setSexo_id(resultado.getInt("sexo_id"));
+                obj.setNomeSexo(resultado.getString("nome_sexo"));
 
                 lista.add(obj);
             }
