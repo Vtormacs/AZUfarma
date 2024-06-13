@@ -165,9 +165,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        btnCliente = new javax.swing.JButton();
         btnProdutos = new javax.swing.JButton();
         btnUsuarios = new javax.swing.JButton();
+        btnCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -183,7 +183,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 130));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 60));
 
         content.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -625,8 +625,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(txtPesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisaNome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
         );
 
         content.addTab("Consulta de Clientes", painel_consulta);
@@ -649,7 +648,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(217, 217, 217)
                 .addComponent(jLabel2)
-                .addContainerGap(442, Short.MAX_VALUE))
+                .addContainerGap(512, Short.MAX_VALUE))
         );
 
         content.addTab("tab3", jPanel3);
@@ -670,7 +669,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(199, 199, 199)
                 .addComponent(jLabel3)
-                .addContainerGap(460, Short.MAX_VALUE))
+                .addContainerGap(530, Short.MAX_VALUE))
         );
 
         content.addTab("tab4", jPanel4);
@@ -691,7 +690,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(195, 195, 195)
                 .addComponent(jLabel4)
-                .addContainerGap(464, Short.MAX_VALUE))
+                .addContainerGap(534, Short.MAX_VALUE))
         );
 
         content.addTab("tab5", jPanel5);
@@ -712,21 +711,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(159, 159, 159)
                 .addComponent(jLabel5)
-                .addContainerGap(500, Short.MAX_VALUE))
+                .addContainerGap(570, Short.MAX_VALUE))
         );
 
         content.addTab("tab6", jPanel6);
 
-        jPanel1.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 90, 1090, 710));
+        jPanel1.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 20, 1090, 780));
 
         jPanel8.setBackground(new java.awt.Color(153, 153, 153));
-
-        btnCliente.setText("Clientes");
-        btnCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClienteActionPerformed(evt);
-            }
-        });
 
         btnProdutos.setText("Produtos");
         btnProdutos.addActionListener(new java.awt.event.ActionListener() {
@@ -736,29 +728,39 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         btnUsuarios.setText("Usuarios");
+        btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuariosActionPerformed(evt);
+            }
+        });
+
+        btnCliente.setText("Clientes");
+        btnCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnUsuarios)
-                    .addComponent(btnProdutos)
-                    .addComponent(btnCliente))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(btnUsuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(btnCliente)
                 .addGap(18, 18, 18)
-                .addComponent(btnProdutos)
+                .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnUsuarios)
-                .addContainerGap(425, Short.MAX_VALUE))
+                .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(496, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 160, 670));
@@ -1107,6 +1109,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtCidade.setText(tabela_clientes.getValueAt(tabela_clientes.getSelectedRow(), 13).toString());
         cbUF.setSelectedItem(tabela_clientes.getValueAt(tabela_clientes.getSelectedRow(), 14).toString());
     }//GEN-LAST:event_tabela_clientesMouseClicked
+
+    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+       content.setSelectedIndex(2);
+    }//GEN-LAST:event_btnUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
