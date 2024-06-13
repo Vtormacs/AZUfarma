@@ -35,7 +35,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 c.getNome(),
                 c.getRg(),
                 c.getCpf(),
-                c.getSexo_id(),
+                getSexoString(c.getSexo_id()),
                 c.getEmail(),
                 c.getTelefone(),
                 c.getCelular(),
@@ -47,6 +47,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 c.getCidade(),
                 c.getEstado()
             });
+        }
+    }
+    
+        public String getSexoString(int sexoId) {
+        switch (sexoId) {
+            case 1:
+                return "Masculino";
+            case 2:
+                return "Feminino";
+            case 3:
+                return "Outros";
+            default:
+                return "Desconhecido";
         }
     }
 
@@ -343,7 +356,7 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
                 c.getNome(),
                 c.getRg(),
                 c.getCpf(),
-                c.getSexo_id(),
+                getSexoString(c.getSexo_id()),
                 c.getEmail(),
                 c.getTelefone(),
                 c.getCelular(),
@@ -391,7 +404,7 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
                         c.getNome(),
                         c.getRg(),
                         c.getCpf(),
-                        c.getSexo_id(),
+                        getSexoString(c.getSexo_id()),
                         c.getEmail(),
                         c.getTelefone(),
                         c.getCelular(),
