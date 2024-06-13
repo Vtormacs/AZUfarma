@@ -8,6 +8,7 @@ import dao.ClienteDAO;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import utilitarios.Utilitarios;
@@ -210,6 +211,11 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("E-mail:");
 
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEmailFocusLost(evt);
+            }
+        });
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
@@ -720,6 +726,14 @@ new HashMap<>(): Isso está criando uma nova instância de um HashMap. O operado
 
         }
     }//GEN-LAST:event_txtNomeKeyPressed
+
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+        if (!(Pattern.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", txtEmail.getText()))) {
+    JOptionPane.showMessageDialog(null, "Por favor, digite um e-mail válido", "Error", JOptionPane.ERROR_MESSAGE);
+    txtEmail.requestFocus();
+}
+
+    }//GEN-LAST:event_txtEmailFocusLost
 
     /**
      * @param args the command line arguments

@@ -14,10 +14,16 @@ public class ClienteDAO {
 
     private Connection conexao;
 
+    /**
+     * Construtor 'ClienteDAO'. Conecta-se ao banco de dados ao ser instanciado.
+     */
     public ClienteDAO() {
         this.conexao = new ConexaoBanco().conectarComBanco();
     }
 
+    /**
+     * Método 'Salvar'. Insere um novo cliente no banco de dados.
+     */
     public void Salvar(Cliente obj) {
         try {
             String sql = "INSERT INTO clientes (nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado,sexo_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -50,6 +56,9 @@ public class ClienteDAO {
         }
     }
 
+    /**
+     * Método 'BuscaCliente'. Busca um cliente pelo nome no banco de dados.
+     */
     public Cliente BuscaCliente(String nome) {
         try {
 
@@ -90,6 +99,10 @@ public class ClienteDAO {
         return null;
     }
 
+    /**
+     * Método 'Listar'. Retorna uma lista de todos os clientes do banco de
+     * dados.
+     */
     public List<Cliente> Listar() {
         List<Cliente> lista = new ArrayList<>();
 
@@ -129,6 +142,10 @@ public class ClienteDAO {
         return null;
     }
 
+    /**
+     * Método 'Filtrar'. Retorna uma lista de clientes cujo nome corresponde ao
+     * parâmetro.
+     */
     public List<Cliente> Filtrar(String nome) {
         List<Cliente> lista = new ArrayList<>();
 
