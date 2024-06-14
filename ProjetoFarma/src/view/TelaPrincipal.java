@@ -80,7 +80,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painel_consulta = new javax.swing.JPanel();
         txtPesquisaNome = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        btnPesquisaNome = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela_clientes = new javax.swing.JTable();
         painel_dados_pessoais = new javax.swing.JPanel();
@@ -88,7 +87,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        btnPesquisar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -168,14 +166,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setText("Nome:");
 
-        btnPesquisaNome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnPesquisaNome.setText("Pesquisar");
-        btnPesquisaNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisaNomeActionPerformed(evt);
-            }
-        });
-
         jScrollPane1.setBackground(new java.awt.Color(204, 255, 255));
 
         tabela_clientes.setBackground(new java.awt.Color(255, 255, 255));
@@ -218,14 +208,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNomeKeyPressed(evt);
-            }
-        });
-
-        btnPesquisar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnPesquisar.setText("Pesquisar pelo nome");
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
             }
         });
 
@@ -423,8 +405,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnPesquisar)
-                .addGap(18, 18, 18)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtRG)
@@ -432,7 +412,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(189, 189, 189))
+                .addGap(381, 381, 381))
             .addGroup(painel_dados_pessoaisLayout.createSequentialGroup()
                 .addGroup(painel_dados_pessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painel_dados_pessoaisLayout.createSequentialGroup()
@@ -499,13 +479,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painel_dados_pessoaisLayout.setVerticalGroup(
             painel_dados_pessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painel_dados_pessoaisLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(painel_dados_pessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar)
                     .addComponent(jLabel18)
                     .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19)
@@ -575,8 +554,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPesquisaNome)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         painel_consultaLayout.setVerticalGroup(
@@ -589,10 +566,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(painel_consultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(txtPesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisaNome))
+                    .addComponent(txtPesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
         );
 
         content.addTab("Consulta de Clientes", painel_consulta);
@@ -743,44 +719,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisaNomeActionPerformed
 
     /**
-     * Este método é acionado quando o botão 'btnPesquisaNome' é pressionado.
-     * Ele realiza uma pesquisa de clientes pelo nome. Primeiro, ele pega o
-     * texto do campo 'txtPesquisaNome' e adiciona '%' antes e depois para a
-     * pesquisa SQL. Em seguida, ele cria um novo objeto 'ClienteDAO' e chama o
-     * método 'Filtrar' com o nome como parâmetro. O método 'Filtrar' retorna
-     * uma lista de clientes que correspondem ao nome. Depois disso, ele obtém o
-     * modelo da tabela 'tabela_clientes' e limpa todas as linhas existentes.
-     * Finalmente, ele percorre a lista de clientes e adiciona cada cliente como
-     * uma nova linha na tabela.
-     */
-    private void btnPesquisaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaNomeActionPerformed
-        String nome = "%" + txtPesquisaNome.getText() + "%";
-        ClienteDAO dao = new ClienteDAO();
-        List<Cliente> lista = dao.Filtrar(nome);
-        DefaultTableModel dados = (DefaultTableModel) tabela_clientes.getModel();
-        dados.setNumRows(0);
-        for (Cliente c : lista) {
-            dados.addRow(new Object[]{
-                c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getNomeSexo(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getEstado()
-            });
-        }
-    }//GEN-LAST:event_btnPesquisaNomeActionPerformed
-
-    /**
      * Este método é chamado quando a janela do formulário é ativada. Ele chama
      * o método 'Listar()' para preencher a tabela na interface do usuário com a
      * lista atual de clientes.
@@ -902,43 +840,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_txtNomeKeyPressed
-
-    /**
-     * Este método é chamado quando o botão 'Pesquisar' é pressionado. Ele busca
-     * um cliente pelo nome usando a classe ClienteDAO e preenche os campos de
-     * texto na interface do usuário com os detalhes do cliente. Se o cliente
-     * não for encontrado, ele exibe uma mensagem de erro.
-     */
-    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        String nome = txtNome.getText();
-
-        Cliente obj = new Cliente();
-
-        ClienteDAO dao = new ClienteDAO();
-
-        obj = dao.BuscaCliente(nome);
-
-        if (obj.getNome() != null) {
-            txtCodigo.setText(String.valueOf(obj.getId()));
-            txtNome.setText(obj.getNome());
-            txtRG.setText(obj.getRg());
-            txtCPF.setText(obj.getCpf());
-            txtEmail.setText(obj.getEmail());
-            txtTelefone.setText(obj.getTelefone());
-            txtCelular.setText(obj.getCelular());
-            txtCEP.setText(obj.getCep());
-            txtEndereco.setText(obj.getEndereco());
-            txtNumeroDaCasa.setText(String.valueOf(obj.getNumero()));
-            txtComplemento.setText(obj.getComplemento());
-            txtBairro.setText(obj.getBairro());
-            txtCidade.setText(obj.getCidade());
-            cbUF.setSelectedItem(obj.getEstado());
-            cbSexo.setSelectedItem(obj.getNomeSexo());
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado");
-        }
-    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
@@ -1143,8 +1044,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnNovo;
-    private javax.swing.JButton btnPesquisaNome;
-    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnProdutos;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUsuarios;

@@ -59,7 +59,7 @@ public class ClienteDAO {
 
     public void Editar(Cliente obj) {
         try {
-            String sql = "UPDATE clientes SET nome =?,rg = ?, cpf = ?,email = ?,telefone = ?,celular = ?,cep = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,estado = ?, sexo_id = (SELECT id FROM sexo WHERE nome = ?) "
+            String sql = "UPDATE clientes SET nome =?,rg = ?, cpf = ?,email = ?,telefone = ?,celular = ?,cep = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,cidade = ?,estado = ?, sexo_id = (SELECT id FROM sexo WHERE nome = ?) "
                     + "WHERE id = ?";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -148,7 +148,7 @@ public class ClienteDAO {
         try {
 
             String sql = """
-                             SELECT c.id, c.nome, c.rg, c.cpf, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado, s.nome AS nome_sexo
+                             SELECT c.id, c.nome, c.rg, c.cpf,s.nome AS nome_sexo, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado
                              FROM clientes AS c
                              LEFT JOIN sexo AS s ON (s.id = c.sexo_id)""";
 
@@ -163,6 +163,7 @@ public class ClienteDAO {
                 obj.setNome(resultado.getString("nome"));
                 obj.setRg(resultado.getString("rg"));
                 obj.setCpf(resultado.getString("cpf"));
+                obj.setNomeSexo(resultado.getString("nome_sexo"));
                 obj.setEmail(resultado.getString("email"));
                 obj.setTelefone(resultado.getString("telefone"));
                 obj.setCelular(resultado.getString("celular"));
@@ -173,7 +174,6 @@ public class ClienteDAO {
                 obj.setBairro(resultado.getString("bairro"));
                 obj.setCidade(resultado.getString("cidade"));
                 obj.setEstado(resultado.getString("estado"));
-                obj.setNomeSexo(resultado.getString("nome_sexo"));
 
                 lista.add(obj);
             }
@@ -193,7 +193,12 @@ public class ClienteDAO {
 
         try {
 
-            String sql = "SELECT * FROM clientes WHERE nome LIKE ?";
+//            String sql = "SELECT * FROM clientes WHERE nome LIKE ?";
+            String sql = """
+                             SELECT c.id, c.nome, c.rg, c.cpf,s.nome AS nome_sexo, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado
+                             FROM clientes AS c
+                             LEFT JOIN sexo AS s ON (s.id = c.sexo_id)
+                             WHERE c.nome LIKE ?""";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -208,6 +213,7 @@ public class ClienteDAO {
                 obj.setNome(resultado.getString("nome"));
                 obj.setRg(resultado.getString("rg"));
                 obj.setCpf(resultado.getString("cpf"));
+                obj.setNomeSexo(resultado.getString("nome_sexo"));
                 obj.setEmail(resultado.getString("email"));
                 obj.setTelefone(resultado.getString("telefone"));
                 obj.setCelular(resultado.getString("celular"));
@@ -218,7 +224,6 @@ public class ClienteDAO {
                 obj.setBairro(resultado.getString("bairro"));
                 obj.setCidade(resultado.getString("cidade"));
                 obj.setEstado(resultado.getString("estado"));
-                obj.setSexo_id(resultado.getInt("sexo_id"));
 
                 lista.add(obj);
             }
