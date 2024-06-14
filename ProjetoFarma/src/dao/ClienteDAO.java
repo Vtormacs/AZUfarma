@@ -138,6 +138,24 @@ public class ClienteDAO {
         return null;
     }
 
+    public void Excluir(Cliente obj) {
+        try {
+            String sql = "DELETE FROM clientes WHERE id = ?";
+            
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            
+            stmt.setInt(1, obj.getId());
+            
+            stmt.execute();
+            
+            stmt.close();
+            
+            JOptionPane.showMessageDialog(null, "Cliente exluido!!");
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao exluir cliente!!" + erro);
+        }
+    }
+
     /**
      * Método 'Listar'. Retorna uma lista de todos os clientes do banco de
      * dados.

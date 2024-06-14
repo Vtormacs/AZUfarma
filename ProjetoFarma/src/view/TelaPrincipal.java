@@ -956,7 +956,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        Cliente obj =  new Cliente();
+        
+        obj.setId(Integer.valueOf(txtCodigo.getText()));
+        
+        ClienteDAO dao = new ClienteDAO();
+        
+        dao.Excluir(obj);
+        
+        Utilitarios util = new Utilitarios();
+        
+        util.Limpar(painel_dados_pessoais);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
