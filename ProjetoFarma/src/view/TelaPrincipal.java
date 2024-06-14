@@ -9,9 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -351,7 +349,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         cbUF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
-        cbUF.setSelectedIndex(-1);
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setText("RG:");
@@ -370,8 +367,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", "Outros", " " }));
-        cbSexo.setSelectedIndex(-1);
+        cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", "Outros" }));
         cbSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSexoActionPerformed(evt);
@@ -1366,7 +1362,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         obj.setCelular(txtCelular.getText());
         obj.setCep(txtCEP.getText());
         obj.setEndereco(txtEndereco.getText());
-        obj.setNumero(Integer.parseInt(txtNumeroDaCasa.getText()));
+        obj.setNumero(Integer.valueOf(txtNumeroDaCasa.getText()));
         obj.setComplemento(txtComplemento.getText());
         obj.setBairro(txtBairro.getText());
         obj.setCidade(txtCidade.getText());
