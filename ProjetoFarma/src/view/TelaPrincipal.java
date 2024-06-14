@@ -61,47 +61,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Este método público 'getSexoString' recebe um identificador de sexo como
-     * parâmetro. Ele usa uma instrução switch para determinar o sexo com base
-     * no identificador. Se o identificador for 1, ele retorna "Masculino". Se o
-     * identificador for 2, ele retorna "Feminino". Se o identificador for 3,
-     * ele retorna "Outros". Se o identificador não for nenhum dos valores
-     * acima, ele retorna "Desconhecido". Portanto, este método é usado para
-     * converter um identificador de sexo em uma string representativa.
-     */
-    public String getSexoString(int sexoId) {
-        switch (sexoId) {
-            case 1:
-                return "Masculino";
-            case 2:
-                return "Feminino";
-            case 3:
-                return "Outros";
-            default:
-                return "Desconhecido";
-        }
-    }
-
-    /**
-     * Map<String, Integer>: Isso é uma interface Map em Java que armazena pares
-     * de chave-valor. Neste caso, as chaves são do tipo String e os valores são
-     * do tipo Integer. sexoMap: Este é o nome da variável que está sendo usada
-     * para armazenar a referência para o objeto HashMap. new HashMap<>(): Isso
-     * está criando uma nova instância de um HashMap. O operador new é usado
-     * para criar o objeto, e HashMap<> é o construtor do objeto.
-     */
-    Map<String, Integer> sexoMap = new HashMap<>();
-
     public TelaPrincipal() {
         initComponents();
 
         Utilitarios u = new Utilitarios();
         u.InserirIcone(this);
 
-        sexoMap.put("Masculino", 1);
-        sexoMap.put("Feminino", 2);
-        sexoMap.put("Outros", 3);
 
     }
 
@@ -1063,7 +1028,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+         Cliente obj = new Cliente();
+
+        obj.setNome(txtNome.getText());
+        obj.setRg(txtRG.getText());
+        obj.setCpf(txtCPF.getText());
+        obj.setEmail(txtEmail.getText());
+        obj.setTelefone(txtTelefone.getText());
+        obj.setCelular(txtCelular.getText());
+        obj.setCep(txtCEP.getText());
+        obj.setEndereco(txtEndereco.getText());
+        obj.setNumero(Integer.parseInt(txtNumeroDaCasa.getText()));
+        obj.setComplemento(txtComplemento.getText());
+        obj.setBairro(txtBairro.getText());
+        obj.setCidade(txtCidade.getText());
+        obj.setEstado(cbUF.getSelectedItem().toString());
+        obj.setNomeSexo(cbSexo.getSelectedItem().toString());
+        obj.setId(Integer.valueOf(txtCodigo.getText()));
+
+        ClienteDAO dao = new ClienteDAO();
+        dao.Editar(obj);
+
+        Utilitarios util = new Utilitarios();
+
+        util.Limpar(painel_dados_pessoais);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed

@@ -26,7 +26,8 @@ public class ClienteDAO {
      */
     public void Salvar(Cliente obj) {
         try {
-            String sql = "INSERT INTO clientes (nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado,sexo_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,(select id from sexo where nome = ?))";
+            String sql = "INSERT INTO clientes (nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado,sexo_id) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,(select id from sexo where nome = ?))";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -58,7 +59,8 @@ public class ClienteDAO {
 
     public void Editar(Cliente obj) {
         try {
-            String sql = "UPDATE clientes set nome = ";
+            String sql = "UPDATE clientes SET nome =?,rg = ?, cpf = ?,email = ?,telefone = ?,celular = ?,cep = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,estado = ?, sexo_id = (SELECT id FROM sexo WHERE nome = ?) "
+                    + "WHERE id = ?";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -75,16 +77,17 @@ public class ClienteDAO {
             stmt.setString(11, obj.getBairro());
             stmt.setString(12, obj.getCidade());
             stmt.setString(13, obj.getEstado());
-            stmt.setInt(14, obj.getSexo_id());
+            stmt.setString(14, obj.getNomeSexo());
+            stmt.setInt(15, obj.getId());
 
             stmt.execute();
 
             stmt.close();
 
-            JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!!");
+            JOptionPane.showMessageDialog(null, "Cliente editado com sucesso!!");
 
         } catch (HeadlessException | SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar o cliente!!" + erro);
+            JOptionPane.showMessageDialog(null, "Erro ao editar o cliente!!" + erro);
         }
     }
 
