@@ -6,8 +6,6 @@ package view;
 
 import dao.ClienteDAO;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import model.Cliente;
@@ -21,6 +19,9 @@ public class CadastroDeCliente extends javax.swing.JFrame {
 
     public CadastroDeCliente() {
         initComponents();
+
+        Utilitarios u = new Utilitarios();;
+        u.InserirIcone(this);
 
     }
 
@@ -683,7 +684,7 @@ public class CadastroDeCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        Cliente obj =  new Cliente();
+        Cliente obj = new Cliente();
 
         obj.setId(Integer.parseInt(txtCodigo.getText()));
 

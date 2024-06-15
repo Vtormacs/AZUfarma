@@ -5,6 +5,7 @@
 package view;
 
 import dao.ClienteDAO;
+import dao.FuncionarioDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -13,6 +14,7 @@ import java.util.List;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import model.Cliente;
+import model.Funcionario;
 import utilitarios.Utilitarios;
 
 /**
@@ -57,12 +59,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    public void ListarFuncionario() {
+        FuncionarioDAO dao = new FuncionarioDAO();
+        List<Funcionario> lista = dao.Listar();
+        DefaultTableModel dados = (DefaultTableModel) tabela_funcionarios.getModel();
+        dados.setNumRows(0);
+        for (Funcionario f : lista) {
+            dados.addRow(new Object[]{
+                f.getId(),
+                f.getNome(),
+                f.getRg(),
+                f.getCpf(),
+                f.getEmail(),
+                f.getSenha(),
+                f.getCargo(),
+                f.getNivelAcesso(),
+                f.getCelular()
+            });
+        }
+    }
+
     public TelaPrincipal() {
         initComponents();
 
-        Utilitarios u = new Utilitarios();
+        Utilitarios u = new Utilitarios();;
         u.InserirIcone(this);
-
 
     }
 
@@ -72,7 +93,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         content = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -87,10 +107,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         painel_funcionarios = new javax.swing.JPanel();
-        txtPesquisaNome1 = new javax.swing.JTextField();
+        txtPesquisaNomeFuncionario = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabela_funcionarios = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         btnProdutos = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
@@ -112,10 +133,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/comprimidos (1).png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 40, 40));
-
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 60));
 
         content.setBackground(new java.awt.Color(153, 153, 153));
@@ -263,14 +280,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         painel_funcionarios.setBackground(new java.awt.Color(0, 204, 204));
 
-        txtPesquisaNome1.addActionListener(new java.awt.event.ActionListener() {
+        txtPesquisaNomeFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPesquisaNome1ActionPerformed(evt);
+                txtPesquisaNomeFuncionarioActionPerformed(evt);
             }
         });
-        txtPesquisaNome1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtPesquisaNomeFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPesquisaNome1KeyReleased(evt);
+                txtPesquisaNomeFuncionarioKeyReleased(evt);
             }
         });
 
@@ -286,7 +303,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "RG", "CPF", "Sexo", "Email", "Telefone", "Celular", "CEP", "Endereço", "Numero", "Complemento", "Bairro", "Cidade", "Estado"
+                "Id", "Nome", "RG", "CPF", "Email", "Senha", "Cargo", "Nivel", "Celular"
             }
         ));
         tabela_funcionarios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -296,6 +313,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabela_funcionarios);
 
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painel_funcionariosLayout = new javax.swing.GroupLayout(painel_funcionarios);
         painel_funcionarios.setLayout(painel_funcionariosLayout);
         painel_funcionariosLayout.setHorizontalGroup(
@@ -304,19 +328,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPesquisaNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtPesquisaNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(100, 100, 100))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1090, Short.MAX_VALUE)
         );
         painel_funcionariosLayout.setVerticalGroup(
             painel_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painel_funcionariosLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(25, 25, 25)
                 .addGroup(painel_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(txtPesquisaNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
+                    .addComponent(txtPesquisaNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE))
         );
 
         content.addTab("Consulta de Clientes", painel_funcionarios);
@@ -389,6 +416,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Listar();
+        ListarFuncionario();
     }//GEN-LAST:event_formWindowActivated
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
@@ -408,15 +436,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * interface do usuário com os clientes encontrados.
      */
     private void txtPesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaNomeKeyReleased
-        // Crie um Timer com um atraso de 300ms
-        Timer timer = new Timer(100, null);
-        timer.setRepeats(false);  // Certifique-se de que o Timer só dispara uma vez
 
-        // Adicione um ActionListener ao Timer
-        timer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Coloque aqui o código para buscar os dados e atualizar a tabela
                 String nome = "%" + txtPesquisaNome.getText() + "%";
                 ClienteDAO dao = new ClienteDAO();
                 List<Cliente> lista = dao.Filtrar(nome);
@@ -441,17 +461,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         c.getEstado()
                     });
                 }
-            }
-        });
-
-        txtPesquisaNome.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                // Reinicie o Timer sempre que uma tecla for liberada
-                timer.restart();
-            }
-        });
-
     }//GEN-LAST:event_txtPesquisaNomeKeyReleased
 
     /**
@@ -466,16 +475,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_tabela_clientesMouseClicked
 
     private void btnFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionariosActionPerformed
-       content.setSelectedIndex(4);
+        content.setSelectedIndex(4);
     }//GEN-LAST:event_btnFuncionariosActionPerformed
 
-    private void txtPesquisaNome1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaNome1ActionPerformed
+    private void txtPesquisaNomeFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaNomeFuncionarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisaNome1ActionPerformed
+    }//GEN-LAST:event_txtPesquisaNomeFuncionarioActionPerformed
 
-    private void txtPesquisaNome1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaNome1KeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisaNome1KeyReleased
+    private void txtPesquisaNomeFuncionarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaNomeFuncionarioKeyReleased
+        String nome = "%" + txtPesquisaNomeFuncionario.getText() + "%";
+                FuncionarioDAO dao = new FuncionarioDAO();
+                List<Funcionario> lista = dao.Filtrar(nome);
+                DefaultTableModel dados = (DefaultTableModel) tabela_funcionarios.getModel();
+                dados.setNumRows(0);
+                for (Funcionario f : lista) {
+                    dados.addRow(new Object[]{
+                        f.getId(),
+                        f.getNome(),
+                        f.getRg(),
+                        f.getCpf(),
+                        f.getEmail(),
+                        f.getSenha(),
+                        f.getCargo(),
+                        f.getNivelAcesso(),
+                        f.getCelular()
+                    });
+                }
+    }//GEN-LAST:event_txtPesquisaNomeFuncionarioKeyReleased
 
     private void tabela_funcionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_funcionariosMouseClicked
         // TODO add your handling code here:
@@ -484,6 +510,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new CadastroDeCliente().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new CadastroFuncionario().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -526,7 +556,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnProdutos;
     private javax.swing.JTabbedPane content;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
@@ -545,6 +575,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable tabela_clientes;
     private javax.swing.JTable tabela_funcionarios;
     private javax.swing.JTextField txtPesquisaNome;
-    private javax.swing.JTextField txtPesquisaNome1;
+    private javax.swing.JTextField txtPesquisaNomeFuncionario;
     // End of variables declaration//GEN-END:variables
 }
