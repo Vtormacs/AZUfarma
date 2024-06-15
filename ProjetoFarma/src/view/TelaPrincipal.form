@@ -33,7 +33,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="0" type="rgb"/>
+          <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[1250, 580]"/>
@@ -52,7 +52,7 @@
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="0" type="rgb"/>
+              <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -84,6 +84,9 @@
           <SubComponents>
             <Container class="javax.swing.JPanel" name="jPanel4">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="99" green="99" red="99" type="rgb"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[1090, 570]"/>
                 </Property>
@@ -126,6 +129,9 @@
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel5">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="99" green="99" red="99" type="rgb"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[1090, 570]"/>
                 </Property>
@@ -169,7 +175,7 @@
             <Container class="javax.swing.JPanel" name="painel_consulta">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="cc" green="cc" red="0" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -193,19 +199,26 @@
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="491" max="-2" attributes="0"/>
+                          <Component id="Funcionarios1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace pref="9" max="32767" attributes="0"/>
+                          <Component id="Funcionarios1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtPesquisaNome" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="297" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -285,10 +298,21 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JLabel" name="Funcionarios1">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="CLIENTES"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel6">
+            <Container class="javax.swing.JPanel" name="painel_fornecedores">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="99" green="99" red="99" type="rgb"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[1090, 570]"/>
                 </Property>
@@ -305,26 +329,118 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="474" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="579" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtPesquisaNomeFornecedores" min="-2" pref="314" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jScrollPane3" alignment="1" pref="1090" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="455" max="-2" attributes="0"/>
+                          <Component id="Funcionarios2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="190" max="32767" attributes="0"/>
+                          <EmptySpace pref="8" max="32767" attributes="0"/>
+                          <Component id="Funcionarios2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtPesquisaNomeFornecedores" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jScrollPane3" min="-2" pref="276" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel5">
+                <Container class="javax.swing.JScrollPane" name="jScrollPane3">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jLabel5"/>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="cc" type="rgb"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="tabela_fornecedores">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                        </Property>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="13" rowCount="0">
+                            <Column editable="true" title="Id" type="java.lang.Object"/>
+                            <Column editable="true" title="Nome" type="java.lang.Object"/>
+                            <Column editable="true" title="CNPJ" type="java.lang.Object"/>
+                            <Column editable="true" title="Email" type="java.lang.Object"/>
+                            <Column editable="true" title="Telefone" type="java.lang.Object"/>
+                            <Column editable="true" title="Celular" type="java.lang.Object"/>
+                            <Column editable="true" title="CEP" type="java.lang.Object"/>
+                            <Column editable="true" title="Endere&#xe7;o" type="java.lang.Object"/>
+                            <Column editable="true" title="N&#xb0;" type="java.lang.Object"/>
+                            <Column editable="true" title="Complemento" type="java.lang.Object"/>
+                            <Column editable="true" title="Bairro" type="java.lang.Object"/>
+                            <Column editable="true" title="Cidade" type="java.lang.Object"/>
+                            <Column editable="true" title="Estado" type="java.lang.Object"/>
+                          </Table>
+                        </Property>
+                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabela_fornecedoresMouseClicked"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Component class="javax.swing.JLabel" name="Funcionarios2">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="FORNECEDORES"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtPesquisaNomeFornecedores">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPesquisaNomeFornecedoresActionPerformed"/>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPesquisaNomeFornecedoresKeyReleased"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton3">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Adicionar Funcionario,Editar ou Exluir"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel23">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Nome:"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -332,7 +448,7 @@
             <Container class="javax.swing.JPanel" name="painel_funcionarios">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="cc" green="cc" red="0" type="rgb"/>
+                  <Color blue="99" green="99" red="99" type="rgb"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -348,27 +464,34 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel22" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtPesquisaNomeFuncionario" min="-2" pref="314" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="427" max="32767" attributes="0"/>
                           <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane2" alignment="1" pref="1090" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="455" max="-2" attributes="0"/>
+                          <Component id="Funcionarios" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace pref="8" max="32767" attributes="0"/>
+                          <Component id="Funcionarios" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel22" alignment="3" max="-2" attributes="0"/>
                               <Component id="txtPesquisaNomeFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" pref="301" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" pref="276" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -405,6 +528,11 @@
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder/>
+                          </Border>
+                        </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="12" style="1"/>
                         </Property>
@@ -433,11 +561,22 @@
                 </Container>
                 <Component class="javax.swing.JButton" name="jButton2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="jButton2"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Adicionar Funcionario,Editar ou Exluir"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="Funcionarios">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="FUNCIONARIOS"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -446,7 +585,7 @@
         <Container class="javax.swing.JPanel" name="jPanel8">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="0" type="rgb"/>
+              <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -464,6 +603,7 @@
                           <Component id="btnFuncionarios" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnCliente" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnProdutos" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="btnFornecedores" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -478,7 +618,9 @@
                       <Component id="btnCliente" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnFuncionarios" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace pref="163" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnFornecedores" min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace pref="105" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -506,6 +648,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFuncionariosActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnFornecedores">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Fornecedores"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFornecedoresActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
