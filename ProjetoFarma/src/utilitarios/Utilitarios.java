@@ -31,7 +31,7 @@ public class Utilitarios {
      */
     public void InserirIcone(JFrame frm) {
         try {
-            frm.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\imagens\\file (1).jpg"));
+            frm.setIconImage(Toolkit.getDefaultToolkit().getImage("src\\imagens\\logo.png"));
         } catch (Exception ex) {
             System.out.println(ex.toString());
         }
