@@ -3,13 +3,14 @@ package dao;
 import java.awt.HeadlessException;
 import java.util.List;
 import java.sql.Connection;
-import model.Cliente;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import model.Funcionario;
+import view.Login;
+import view.TelaPrincipal;
 
 public class FuncionarioDAO {
 
@@ -211,6 +212,30 @@ public class FuncionarioDAO {
             JOptionPane.showMessageDialog(null, "Erro ao criar a lista!!" + erro);
         }
         return null;
+    }
+    
+    public void Login(String email, String senha){
+        try {
+            String sql = "SELECT * FROM funcionarios WHERE email=? and senha=? ";
+            
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            
+            stmt.setString(1,email);
+            stmt.setString(2,senha);
+            
+            ResultSet resultado = stmt.executeQuery();
+            
+            if (resultado.next()){
+                JOptionPane.showMessageDialog(null, "Seja bem vindo(a) ao sistema!!");
+                new TelaPrincipal().setVisible(true);
+            }else{
+                Login login = new Login();
+                JOptionPane.showMessageDialog(null, "Dados inválidos!!");
+                login.setVisible(true);
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro no funcionarioDAO  " +erro);
+        }
     }
 
 }

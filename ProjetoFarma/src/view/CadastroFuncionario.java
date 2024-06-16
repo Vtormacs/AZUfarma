@@ -30,14 +30,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        painel_guias = new javax.swing.JTabbedPane();
-        painel_consulta = new javax.swing.JPanel();
-        txtPesquisaNome = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        btnPesquisaNome = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabela_clientes = new javax.swing.JTable();
         painel_dados_pessoais = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txtCodigoFuncionario = new javax.swing.JTextField();
@@ -61,72 +53,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         txtSenhaFuncionario = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         txtCargoFuncionario = new javax.swing.JTextField();
-
-        painel_consulta.setBackground(new java.awt.Color(204, 255, 255));
-
-        txtPesquisaNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPesquisaNomeActionPerformed(evt);
-            }
-        });
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel15.setText("Nome:");
-
-        btnPesquisaNome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnPesquisaNome.setText("Pesquisar");
-
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Recarregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jScrollPane1.setBackground(new java.awt.Color(204, 255, 255));
-
-        tabela_clientes.setBackground(new java.awt.Color(255, 255, 255));
-        tabela_clientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id", "Nome", "RG", "CPF", "Sexo", "Email", "Telefone", "Celular", "CEP", "Endereço", "Numero", "Complemento", "Bairro", "Cidade", "Estado"
-            }
-        ));
-        jScrollPane1.setViewportView(tabela_clientes);
-
-        javax.swing.GroupLayout painel_consultaLayout = new javax.swing.GroupLayout(painel_consulta);
-        painel_consulta.setLayout(painel_consultaLayout);
-        painel_consultaLayout.setHorizontalGroup(
-            painel_consultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painel_consultaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPesquisaNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(455, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
-        );
-        painel_consultaLayout.setVerticalGroup(
-            painel_consultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painel_consultaLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(painel_consultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(txtPesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisaNome)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))
-        );
-
-        painel_guias.addTab("Consulta de Clientes", painel_consulta);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulario de Funcionarios");
@@ -317,7 +243,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         painel_dados_pessoaisLayout.setVerticalGroup(
             painel_dados_pessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,26 +276,26 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                 .addGroup(painel_dados_pessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtCargoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(painel_dados_pessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo)
                     .addComponent(btnSalvar)
                     .addComponent(btnEditar)
                     .addComponent(btnExcluir))
-                .addGap(23, 23, 23))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 555, Short.MAX_VALUE)
+            .addGap(0, 577, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(painel_dados_pessoais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 244, Short.MAX_VALUE)
+            .addGap(0, 293, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(painel_dados_pessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -379,14 +305,6 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtPesquisaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisaNomeActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
@@ -549,12 +467,9 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
-    private javax.swing.JButton btnPesquisaNome;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbNivelAcessoFuncionario;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -563,18 +478,13 @@ public class CadastroFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel painel_consulta;
     private javax.swing.JPanel painel_dados_pessoais;
-    private javax.swing.JTabbedPane painel_guias;
-    private javax.swing.JTable tabela_clientes;
     private javax.swing.JFormattedTextField txtCPFFuncionario;
     private javax.swing.JTextField txtCargoFuncionario;
     private javax.swing.JFormattedTextField txtCelularFuncionario;
     private javax.swing.JTextField txtCodigoFuncionario;
     private javax.swing.JTextField txtEmailFuncionario;
     private javax.swing.JTextField txtNomeFuncionario;
-    private javax.swing.JTextField txtPesquisaNome;
     private javax.swing.JFormattedTextField txtRGFuncionario;
     private javax.swing.JPasswordField txtSenhaFuncionario;
     // End of variables declaration//GEN-END:variables
