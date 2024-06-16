@@ -32,84 +32,76 @@ public class FornecedoresDAO {
     /**
      * Método 'Salvar'. Insere um novo cliente no banco de dados.
      */
-    public void Salvar(Cliente obj) {
+    public void Salvar(Fornecedores obj) {
         try {
-            String sql = "INSERT INTO clientes (nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado,sexo_id) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,(select id from sexo where nome = ?))";
+            String sql = "INSERT INTO fornecedores (nome,cnpj,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
             stmt.setString(1, obj.getNome());
-            stmt.setString(2, obj.getRg());
-            stmt.setString(3, obj.getCpf());
-            stmt.setString(4, obj.getEmail());
-            stmt.setString(5, obj.getTelefone());
-            stmt.setString(6, obj.getCelular());
-            stmt.setString(7, obj.getCep());
-            stmt.setString(8, obj.getEndereco());
-            stmt.setInt(9, obj.getNumero());
-            stmt.setString(10, obj.getComplemento());
-            stmt.setString(11, obj.getBairro());
-            stmt.setString(12, obj.getCidade());
-            stmt.setString(13, obj.getEstado());
-            stmt.setString(14, obj.getNomeSexo());
+            stmt.setString(2, obj.getCnpj());
+            stmt.setString(3, obj.getEmail());
+            stmt.setString(4, obj.getTelefone());
+            stmt.setString(5, obj.getCelular());
+            stmt.setString(6, obj.getCep());
+            stmt.setString(7, obj.getEndereco());
+            stmt.setInt(8, obj.getNumero());
+            stmt.setString(9, obj.getComplemento());
+            stmt.setString(10, obj.getBairro());
+            stmt.setString(11, obj.getCidade());
+            stmt.setString(12, obj.getEstado());
 
             stmt.execute();
 
             stmt.close();
 
-            JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!!");
+            JOptionPane.showMessageDialog(null, "Fornecedores salvo com sucesso!!");
 
         } catch (HeadlessException | SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar o cliente!!" + erro);
+            JOptionPane.showMessageDialog(null, "Erro ao salvar o fornecedor!!" + erro);
         }
     }
 
-    public void Editar(Cliente obj) {
+    public void Editar(Fornecedores obj) {
         try {
-            String sql = "UPDATE clientes SET nome =?,rg = ?, cpf = ?,email = ?,telefone = ?,celular = ?,cep = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,cidade = ?,estado = ?, sexo_id = (SELECT id FROM sexo WHERE nome = ?) "
+            String sql = "UPDATE fornecedores SET nome =?,cnpj = ?,email = ?,telefone = ?,celular = ?,cep = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,cidade = ?,estado = ? "
                     + "WHERE id = ?";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
             stmt.setString(1, obj.getNome());
-            stmt.setString(2, obj.getRg());
-            stmt.setString(3, obj.getCpf());
-            stmt.setString(4, obj.getEmail());
-            stmt.setString(5, obj.getTelefone());
-            stmt.setString(6, obj.getCelular());
-            stmt.setString(7, obj.getCep());
-            stmt.setString(8, obj.getEndereco());
-            stmt.setInt(9, obj.getNumero());
-            stmt.setString(10, obj.getComplemento());
-            stmt.setString(11, obj.getBairro());
-            stmt.setString(12, obj.getCidade());
-            stmt.setString(13, obj.getEstado());
-            stmt.setString(14, obj.getNomeSexo());
-            stmt.setInt(15, obj.getId());
+            stmt.setString(2, obj.getCnpj());
+            stmt.setString(3, obj.getEmail());
+            stmt.setString(4, obj.getTelefone());
+            stmt.setString(5, obj.getCelular());
+            stmt.setString(6, obj.getCep());
+            stmt.setString(7, obj.getEndereco());
+            stmt.setInt(8, obj.getNumero());
+            stmt.setString(9, obj.getComplemento());
+            stmt.setString(10, obj.getBairro());
+            stmt.setString(11, obj.getCidade());
+            stmt.setString(12, obj.getEstado());
+            stmt.setInt(13, obj.getId());
 
             stmt.execute();
 
             stmt.close();
 
-            JOptionPane.showMessageDialog(null, "Cliente editado com sucesso!!");
+            JOptionPane.showMessageDialog(null, "Fornecedor editado com sucesso!!");
 
         } catch (HeadlessException | SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao editar o cliente!!" + erro);
+            JOptionPane.showMessageDialog(null, "Erro ao editar o fornecedor!!" + erro);
         }
     }
 
     /**
      * Método 'BuscaCliente'. Busca um cliente pelo nome no banco de dados.
      */
-    public Cliente BuscaCliente(String nome) {
+    public Fornecedores Buscar(String nome) {
         try {
 
-//            String sql = "SELECT * FROM clientes WHERE nome = ?";
-            String sql = "SELECT c.id, c.nome,c.rg,c.cpf,c.email,c.telefone,c.celular,c.cep,c.endereco,c.numero,c.complemento,c.bairro,c.cidade,c.estado,s.nome as nome_sexo "
-                    + "FROM clientes AS c "
-                    + "LEFT JOIN sexo AS s ON (s.id = c.sexo_id)"
-                    + "WHERE c.nome = ? ";
+            String sql = "SELECT * FROM fornecedores WHERE nome = ?";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -117,14 +109,12 @@ public class FornecedoresDAO {
 
             ResultSet resultado = stmt.executeQuery();
 
-            Cliente obj = new Cliente();
+            Fornecedores obj = new Fornecedores();
 
             if (resultado.next()) {
                 obj.setId(resultado.getInt("id"));
                 obj.setNome(resultado.getString("nome"));
-                obj.setRg(resultado.getString("rg"));
-                obj.setCpf(resultado.getString("cpf"));
-                obj.setEmail(resultado.getString("email"));
+                obj.setCnpj(resultado.getString("cnpj"));
                 obj.setTelefone(resultado.getString("telefone"));
                 obj.setCelular(resultado.getString("celular"));
                 obj.setCep(resultado.getString("cep"));
@@ -134,21 +124,20 @@ public class FornecedoresDAO {
                 obj.setBairro(resultado.getString("bairro"));
                 obj.setCidade(resultado.getString("cidade"));
                 obj.setEstado(resultado.getString("estado"));
-                obj.setNomeSexo(resultado.getString("nome_sexo"));
 
-                JOptionPane.showMessageDialog(null, "Cliente encontrado!!");
+                JOptionPane.showMessageDialog(null, "Fornecedor encontrado!!");
             }
             return obj;
 
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente!!" + erro);
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o fornecedor!!" + erro);
         }
         return null;
     }
 
-    public void Excluir(Cliente obj) {
+    public void Excluir(Fornecedores obj) {
         try {
-            String sql = "DELETE FROM clientes WHERE id = ?";
+            String sql = "DELETE FROM fornecedores WHERE id = ?";
             
             PreparedStatement stmt = conexao.prepareStatement(sql);
             
@@ -158,9 +147,9 @@ public class FornecedoresDAO {
             
             stmt.close();
             
-            JOptionPane.showMessageDialog(null, "Cliente exluido!!");
+            JOptionPane.showMessageDialog(null, "Fornecedor exluido!!");
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao exluir cliente!!" + erro);
+            JOptionPane.showMessageDialog(null, "Erro ao exluir fornecedor!!" + erro);
         }
     }
 
@@ -209,17 +198,12 @@ public class FornecedoresDAO {
      * Método 'Filtrar'. Retorna uma lista de clientes cujo nome corresponde ao
      * parâmetro.
      */
-    public List<Cliente> Filtrar(String nome) {
-        List<Cliente> lista = new ArrayList<>();
+    public List<Fornecedores> Filtrar(String nome) {
+        List<Fornecedores> lista = new ArrayList<>();
 
         try {
 
-//            String sql = "SELECT * FROM clientes WHERE nome LIKE ?";
-            String sql = """
-                             SELECT c.id, c.nome, c.rg, c.cpf,s.nome AS nome_sexo, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado
-                             FROM clientes AS c
-                             LEFT JOIN sexo AS s ON (s.id = c.sexo_id)
-                             WHERE c.nome LIKE ?""";
+            String sql = "SELECT * FROM fornecedores WHERE nome LIKE ?";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -228,13 +212,11 @@ public class FornecedoresDAO {
             ResultSet resultado = stmt.executeQuery();
 
             while (resultado.next()) {
-                Cliente obj = new Cliente();
+                Fornecedores obj = new Fornecedores();
 
                 obj.setId(resultado.getInt("id"));
                 obj.setNome(resultado.getString("nome"));
-                obj.setRg(resultado.getString("rg"));
-                obj.setCpf(resultado.getString("cpf"));
-                obj.setNomeSexo(resultado.getString("nome_sexo"));
+                obj.setRg(resultado.getString("cnpj"));
                 obj.setEmail(resultado.getString("email"));
                 obj.setTelefone(resultado.getString("telefone"));
                 obj.setCelular(resultado.getString("celular"));

@@ -653,11 +653,32 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisaNomeFornecedoresActionPerformed
 
     private void txtPesquisaNomeFornecedoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaNomeFornecedoresKeyReleased
-        // TODO add your handling code here:
+        String nome = "%" + txtPesquisaNomeFornecedores.getText() + "%";
+                FornecedoresDAO dao = new FornecedoresDAO();
+                List<Fornecedores> lista = dao.Filtrar(nome);
+                DefaultTableModel dados = (DefaultTableModel) tabela_fornecedores.getModel();
+                dados.setNumRows(0);
+                for (Fornecedores c : lista) {
+                    dados.addRow(new Object[]{
+                        c.getId(),
+                        c.getNome(),
+                        c.getCnpj(),
+                        c.getEmail(),
+                        c.getTelefone(),
+                        c.getCelular(),
+                        c.getCep(),
+                        c.getEndereco(),
+                        c.getNumero(),
+                        c.getComplemento(),
+                        c.getBairro(),
+                        c.getCidade(),
+                        c.getEstado()
+                    });
+                }
     }//GEN-LAST:event_txtPesquisaNomeFornecedoresKeyReleased
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        new CadastroDeFornecedores().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

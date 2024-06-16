@@ -5,10 +5,12 @@
 package view;
 
 import dao.ClienteDAO;
+import dao.FornecedoresDAO;
 import java.awt.event.KeyEvent;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import model.Cliente;
+import model.Fornecedores;
 import utilitarios.Utilitarios;
 
 /**
@@ -488,11 +490,11 @@ public class CadastroDeFornecedores extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        Cliente obj = new Cliente();
+        Fornecedores obj = new Fornecedores();
 
         obj.setId(Integer.parseInt(txtCodigo.getText()));
 
-        ClienteDAO dao = new ClienteDAO();
+        FornecedoresDAO dao = new FornecedoresDAO();
 
         dao.Excluir(obj);
 
@@ -502,7 +504,7 @@ public class CadastroDeFornecedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        Cliente obj = new Cliente();
+        Fornecedores obj = new Fornecedores();
 
         obj.setNome(txtNome.getText());
         obj.setRg(txtCNPJ.getText());
@@ -518,7 +520,7 @@ public class CadastroDeFornecedores extends javax.swing.JFrame {
         obj.setEstado(cbUF.getSelectedItem().toString());
         obj.setId(Integer.parseInt(txtCodigo.getText()));
 
-        ClienteDAO dao = new ClienteDAO();
+        FornecedoresDAO dao = new FornecedoresDAO();
         dao.Editar(obj);
 
         Utilitarios util = new Utilitarios();
@@ -527,22 +529,22 @@ public class CadastroDeFornecedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Cliente obj = new Cliente();
+        Fornecedores obj = new Fornecedores();
 
         obj.setNome(txtNome.getText());
-        obj.setRg(txtCNPJ.getText());
+        obj.setCnpj(txtCNPJ.getText());
         obj.setEmail(txtEmail.getText());
         obj.setTelefone(txtTelefone.getText());
         obj.setCelular(txtCelular.getText());
         obj.setCep(txtCEP.getText());
         obj.setEndereco(txtEndereco.getText());
-        obj.setNumero(Integer.valueOf(txtNumeroDaCasa.getText()));
+        obj.setNumero(Integer.parseInt(txtNumeroDaCasa.getText()));
         obj.setComplemento(txtComplemento.getText());
         obj.setBairro(txtBairro.getText());
         obj.setCidade(txtCidade.getText());
         obj.setEstado(cbUF.getSelectedItem().toString());
 
-        ClienteDAO dao = new ClienteDAO();
+        FornecedoresDAO dao = new FornecedoresDAO();
         dao.Salvar(obj);
 
         Utilitarios util = new Utilitarios();
@@ -600,16 +602,16 @@ public class CadastroDeFornecedores extends javax.swing.JFrame {
 
             String nome = txtNome.getText();
 
-            Cliente obj = new Cliente();
+            Fornecedores obj = new Fornecedores();
 
-            ClienteDAO dao = new ClienteDAO();
+            FornecedoresDAO dao = new FornecedoresDAO();
 
-            obj = dao.BuscaCliente(nome);
+            obj = dao.Buscar(nome);
 
             if (obj.getNome() != null) {
                 txtCodigo.setText(String.valueOf(obj.getId()));
                 txtNome.setText(obj.getNome());
-                txtCNPJ.setText(obj.getRg());
+                txtCNPJ.setText(obj.getCnpj());
                 txtEmail.setText(obj.getEmail());
                 txtTelefone.setText(obj.getTelefone());
                 txtCelular.setText(obj.getCelular());
@@ -622,7 +624,7 @@ public class CadastroDeFornecedores extends javax.swing.JFrame {
                 cbUF.setSelectedItem(obj.getEstado());
 
             } else {
-                JOptionPane.showMessageDialog(null, "Cliente não encontrado");
+                JOptionPane.showMessageDialog(null, "Fornecedor não encontrado");
             }
 
         }
