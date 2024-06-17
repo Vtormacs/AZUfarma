@@ -5,6 +5,7 @@
 package view;
 
 import dao.FuncionarioDAO;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import utilitarios.Utilitarios;
 
@@ -92,6 +93,11 @@ public class Login extends javax.swing.JFrame {
 
         txtSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtSenha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyPressed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/1564505_close_delete_exit_remove_icon.png"))); // NOI18N
@@ -168,6 +174,25 @@ public class Login extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            try {
+                String email;
+                char[] senhaArray;
+                email = txtEmail.getText();
+                senhaArray = txtSenha.getPassword(); // Usando getPassword() em vez de getText()
+
+                String senha = new String(senhaArray); // Convertendo char[] para String
+                FuncionarioDAO dao = new FuncionarioDAO();
+                dao.Login(email, senha);
+
+                java.util.Arrays.fill(senhaArray, '0'); // Zerando o array de senha para segurança
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro na tela de login  ");
+            }
+        }
+    }//GEN-LAST:event_txtSenhaKeyPressed
 
     /**
      * @param args the command line arguments
