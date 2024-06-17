@@ -87,7 +87,7 @@ public class ProdutosDAO {
                     + "ON (p.for_id = f.id) "
                     + "LEFT JOIN classeProduto AS c "
                     + "ON (c.id = p.classe_id) "
-                    + "WHERE p.descricao=? ";
+                    + "WHERE p.descricao = ? ";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -220,4 +220,35 @@ public class ProdutosDAO {
         return null;
     }
 
+    public void AdicionarEstoque(int qtd_nova, int id){
+        try {
+            String sql = "UPDATE produtos SET qtd_estoque = ? ";
+            
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            
+            stmt.setInt(1, qtd_nova);
+            stmt.setInt(2, id);
+            stmt.execute();
+            stmt.close();
+            JOptionPane.showMessageDialog(null, "Adicionado com sucesso ao estoque");
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao adicionar no estoque!!" + erro);
+        }
+    }
+    
+    public void BaixaEstoque(int qtd_nova, int id){
+        try {
+            String sql = "UPDATE produtos SET qtd_estoque = ? ";
+            
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            
+            stmt.setInt(1, qtd_nova);
+            stmt.setInt(2, id);
+            stmt.execute();
+            stmt.close();
+            JOptionPane.showMessageDialog(null, "Baixa com sucesso no estoque");
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao dar baixa no estoque!!" + erro);
+        }
+    }
 }
