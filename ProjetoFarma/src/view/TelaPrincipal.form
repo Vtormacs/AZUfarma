@@ -1017,7 +1017,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="btnProdutos" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnCliente" min="-2" pref="40" max="-2" attributes="0"/>
@@ -1025,7 +1025,7 @@
                       <Component id="btnFuncionarios" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnFornecedores" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace pref="305" max="32767" attributes="0"/>
+                      <EmptySpace pref="328" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
