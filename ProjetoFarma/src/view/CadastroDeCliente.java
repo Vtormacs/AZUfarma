@@ -624,7 +624,7 @@ public class CadastroDeCliente extends javax.swing.JFrame {
         obj.setCelular(txtCelular.getText());
         obj.setCep(txtCEP.getText());
         obj.setEndereco(txtEndereco.getText());
-        obj.setNumero(Integer.valueOf(txtNumeroDaCasa.getText()));
+        obj.setNumero(Integer.parseInt(txtNumeroDaCasa.getText()));
         obj.setComplemento(txtComplemento.getText());
         obj.setBairro(txtBairro.getText());
         obj.setCidade(txtCidade.getText());
