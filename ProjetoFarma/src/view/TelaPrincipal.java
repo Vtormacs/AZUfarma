@@ -159,7 +159,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         Funcionarios = new javax.swing.JLabel();
         painel_produtos = new javax.swing.JPanel();
-        txtPesquisaNomeProduto = new javax.swing.JTextField();
+        txtPesquisaDescricaoProduto = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabela_produtos = new javax.swing.JTable();
@@ -178,8 +178,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -510,19 +512,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         painel_produtos.setBackground(new java.awt.Color(153, 153, 153));
 
-        txtPesquisaNomeProduto.addActionListener(new java.awt.event.ActionListener() {
+        txtPesquisaDescricaoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPesquisaNomeProdutoActionPerformed(evt);
+                txtPesquisaDescricaoProdutoActionPerformed(evt);
             }
         });
-        txtPesquisaNomeProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtPesquisaDescricaoProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPesquisaNomeProdutoKeyReleased(evt);
+                txtPesquisaDescricaoProdutoKeyReleased(evt);
             }
         });
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel24.setText("Descrição;");
+        jLabel24.setText("Descrição:");
 
         jScrollPane4.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -567,7 +569,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jLabel24)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPesquisaNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPesquisaDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 496, Short.MAX_VALUE)
                         .addComponent(jButton4))
                     .addGroup(painel_produtosLayout.createSequentialGroup()
@@ -583,7 +585,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(painel_produtosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(txtPesquisaNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPesquisaDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
@@ -712,8 +714,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Produtos");
         jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jMenuItem4.setText("Controle de Estoque");
-        jMenu4.add(jMenuItem4);
+        jMenu8.setText("Meus Produtos");
 
         jMenuItem5.setText("Consulta de produtos");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -721,7 +722,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jMenuItem5ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem5);
+        jMenu8.add(jMenuItem5);
+
+        jMenuItem4.setText("Controle de Estoque");
+        jMenu8.add(jMenuItem4);
+
+        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem11.setText("Formulario de Produtos");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem11);
+
+        jMenu4.add(jMenu8);
 
         jMenuBar1.add(jMenu4);
 
@@ -947,13 +962,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
         content.setSelectedIndex(3);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void txtPesquisaNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaNomeProdutoActionPerformed
+    private void txtPesquisaDescricaoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaDescricaoProdutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisaNomeProdutoActionPerformed
+    }//GEN-LAST:event_txtPesquisaDescricaoProdutoActionPerformed
 
-    private void txtPesquisaNomeProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaNomeProdutoKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPesquisaNomeProdutoKeyReleased
+    private void txtPesquisaDescricaoProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaDescricaoProdutoKeyReleased
+        String descricao = "%" + txtPesquisaDescricaoProduto.getText() + "%";
+                ProdutosDAO dao = new ProdutosDAO();
+                List<Produtos> lista = dao.Filtrar(descricao);
+                DefaultTableModel dados = (DefaultTableModel) tabela_produtos.getModel();
+                dados.setNumRows(0);
+                for (Produtos p : lista) {
+                    dados.addRow(new Object[]{
+                        p.getId(),
+                        p.getDescricao(),
+                        p.getPreco(),
+                        p.getQtd_estoque(),
+                        p.getFornecedor().getNome(),
+                        p.getNomeClasse()
+                    });
+                }
+    }//GEN-LAST:event_txtPesquisaDescricaoProdutoKeyReleased
 
     private void tabela_produtosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_produtosMouseClicked
         // TODO add your handling code here:
@@ -962,6 +991,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         new CadastroDeProdutos().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1025,9 +1058,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -1052,9 +1087,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable tabela_fornecedores;
     private javax.swing.JTable tabela_funcionarios;
     private javax.swing.JTable tabela_produtos;
+    private javax.swing.JTextField txtPesquisaDescricaoProduto;
     private javax.swing.JTextField txtPesquisaNome;
     private javax.swing.JTextField txtPesquisaNomeFornecedores;
     private javax.swing.JTextField txtPesquisaNomeFuncionario;
-    private javax.swing.JTextField txtPesquisaNomeProduto;
     // End of variables declaration//GEN-END:variables
 }

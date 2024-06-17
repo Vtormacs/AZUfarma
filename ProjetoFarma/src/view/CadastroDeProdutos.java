@@ -4,13 +4,11 @@
  */
 package view;
 
-import dao.ClienteDAO;
 import dao.FornecedoresDAO;
 import dao.ProdutosDAO;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.Cliente;
 import model.Fornecedores;
 import model.Produtos;
 import utilitarios.Utilitarios;
@@ -26,6 +24,9 @@ public class CadastroDeProdutos extends javax.swing.JFrame {
      */
     public CadastroDeProdutos() {
         initComponents();
+        
+        Utilitarios u = new Utilitarios();;
+        u.InserirIcone(this);
     }
 
     /**
@@ -318,8 +319,8 @@ public class CadastroDeProdutos extends javax.swing.JFrame {
         Produtos obj = new Produtos();
 
         obj.setDescricao(txtDescricao.getText());
-        obj.setPreco(Double.parseDouble(txtPreco.getText()));
-        obj.setQtd_estoque(Integer.parseInt(txtQuantidadeEstoque.getText()));
+        obj.setPreco(Double.valueOf(txtPreco.getText()));
+        obj.setQtd_estoque(Integer.valueOf(txtQuantidadeEstoque.getText()));
         obj.setFornecedor((Fornecedores) cbFornecedor.getSelectedItem());
         obj.setNomeClasse(cbClasse.getSelectedItem().toString());
 

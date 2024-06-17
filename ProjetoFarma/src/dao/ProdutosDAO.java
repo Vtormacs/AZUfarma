@@ -180,42 +180,36 @@ public class ProdutosDAO {
      * Método 'Filtrar'. Retorna uma lista de clientes cujo nome corresponde ao
      * parâmetro.
      */
-    public List<Cliente> Filtrar(String nome) {
-        List<Cliente> lista = new ArrayList<>();
+    public List<Produtos> Filtrar(String descricao) {
+        List<Produtos> lista = new ArrayList<>();
 
         try {
 
-//            String sql = "SELECT * FROM clientes WHERE nome LIKE ?";
-            String sql = """
-                             SELECT c.id, c.nome, c.rg, c.cpf,s.nome AS nome_sexo, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado
-                             FROM clientes AS c
-                             LEFT JOIN sexo AS s ON (s.id = c.sexo_id)
-                             WHERE c.nome LIKE ?""";
+             String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome "
+                    + "FROM produtos AS p "
+                    + "INNER JOIN fornecedores AS f "
+                    + "ON (p.for_id = f.id) "
+                    + "LEFT JOIN classeProduto AS c "
+                    + "ON (c.id = p.classe_id) "
+                    + "WHERE p.descricao LIKE ? ";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
-            stmt.setString(1, nome);
+            stmt.setString(1, descricao);
 
             ResultSet resultado = stmt.executeQuery();
 
             while (resultado.next()) {
-                Cliente obj = new Cliente();
+                Produtos obj = new Produtos();
+                Fornecedores f = new Fornecedores();
 
-                obj.setId(resultado.getInt("id"));
-                obj.setNome(resultado.getString("nome"));
-                obj.setRg(resultado.getString("rg"));
-                obj.setCpf(resultado.getString("cpf"));
-                obj.setNomeSexo(resultado.getString("nome_sexo"));
-                obj.setEmail(resultado.getString("email"));
-                obj.setTelefone(resultado.getString("telefone"));
-                obj.setCelular(resultado.getString("celular"));
-                obj.setCep(resultado.getString("cep"));
-                obj.setEndereco(resultado.getString("endereco"));
-                obj.setNumero(resultado.getInt("numero"));
-                obj.setComplemento(resultado.getString("complemento"));
-                obj.setBairro(resultado.getString("bairro"));
-                obj.setCidade(resultado.getString("cidade"));
-                obj.setEstado(resultado.getString("estado"));
+                obj.setId(resultado.getInt("p.id"));
+                obj.setDescricao(resultado.getString("p.descricao"));
+                obj.setPreco(resultado.getDouble("p.preco"));
+                obj.setQtd_estoque(resultado.getInt("p.qtd_estoque"));
+                f.setNome(resultado.getString("f.nome"));
+                obj.setFornecedor(f);
+                obj.setNomeClasse(resultado.getString("c.nome"));
 
                 lista.add(obj);
             }
