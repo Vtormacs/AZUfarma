@@ -24,6 +24,8 @@ import utilitarios.Utilitarios;
  * @author vitor
  */
 public class TelaPrincipal extends javax.swing.JFrame {
+    //variavei globai que seram usadas no estoque
+    int idProduto, qtd_atualizada ;
 
     /**
      * Este método público 'Listar' é usado para listar todos os clientes.
@@ -1618,16 +1620,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(cbNivelAcessoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel58))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel51)
-                    .addComponent(txtEmailFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel56)
-                    .addComponent(txtSenhaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnNovoFuncionarios)
                         .addComponent(btnSalvarFuncionarios)
                         .addComponent(btnEditarFuncionarios)
-                        .addComponent(btnExcluirFuncionarios)))
+                        .addComponent(btnExcluirFuncionarios))
+                    .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel51)
+                        .addComponent(txtEmailFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel56)
+                        .addComponent(txtSenhaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2350,7 +2353,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void tabela_estoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_estoqueMouseClicked
-        // TODO add your handling code here:
+        idProduto = Integer.parseInt(tabela_estoque.getValueAt(tabela_estoque.getSelectedRow(),0).toString());
+        txtCodigoEstoque.setText(tabela_estoque.getValueAt(tabela_estoque.getSelectedRow(),0).toString());
+        txtDescricaoEstoque.setText(tabela_estoque.getValueAt(tabela_estoque.getSelectedRow(),1).toString());
+        txtQtdAtualEstoque.setText(tabela_estoque.getValueAt(tabela_estoque.getSelectedRow(),3).toString());
     }//GEN-LAST:event_tabela_estoqueMouseClicked
 
     private void txtCodigoEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoEstoqueActionPerformed

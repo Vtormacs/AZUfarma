@@ -2134,16 +2134,18 @@
                                   <Component id="jLabel58" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel51" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtEmailFuncionarios" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel56" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtSenhaFuncionarios" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                       <Component id="btnNovoFuncionarios" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnSalvarFuncionarios" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnEditarFuncionarios" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="btnExcluirFuncionarios" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel51" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtEmailFuncionarios" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel56" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtSenhaFuncionarios" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
