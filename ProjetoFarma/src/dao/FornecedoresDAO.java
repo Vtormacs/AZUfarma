@@ -124,7 +124,6 @@ public class FornecedoresDAO {
                 obj.setCidade(resultado.getString("cidade"));
                 obj.setEstado(resultado.getString("estado"));
 
-                JOptionPane.showMessageDialog(null, "Fornecedor encontrado!!");
             }
             return obj;
 
