@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package inutilizados;
 
 import dao.ClienteDAO;
 import java.awt.event.KeyEvent;
@@ -502,7 +502,7 @@ public class CadastroDeCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painel_dados_pessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 225, Short.MAX_VALUE)
+            .addComponent(painel_dados_pessoais, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
         );
 
         pack();
