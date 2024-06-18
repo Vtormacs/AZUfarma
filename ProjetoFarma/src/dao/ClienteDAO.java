@@ -1,6 +1,7 @@
 package dao;
 
 import java.awt.HeadlessException;
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
 import model.Cliente;
@@ -8,22 +9,16 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
-public class ClienteDAO {
+public class ClienteDAO implements DAOInterface<Cliente> {
 
     private Connection conexao;
 
-    /**
-     * Construtor 'ClienteDAO'. Conecta-se ao banco de dados ao ser instanciado.
-     */
     public ClienteDAO() {
         this.conexao = new ConexaoBanco().conectarComBanco();
     }
 
-    /**
-     * Método 'Salvar'. Insere um novo cliente no banco de dados.
-     */
+    @Override
     public void Salvar(Cliente obj) {
         try {
             String sql = "INSERT INTO clientes (nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado,sexo_id) "
@@ -47,7 +42,6 @@ public class ClienteDAO {
             stmt.setString(14, obj.getNomeSexo());
 
             stmt.execute();
-
             stmt.close();
 
             JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!!");
@@ -57,6 +51,7 @@ public class ClienteDAO {
         }
     }
 
+    @Override
     public void Editar(Cliente obj) {
         try {
             String sql = "UPDATE clientes SET nome =?,rg = ?, cpf = ?,email = ?,telefone = ?,celular = ?,cep = ?,endereco = ?,numero = ?,complemento = ?,bairro = ?,cidade = ?,estado = ?, sexo_id = (SELECT id FROM sexo WHERE nome = ?) "
@@ -81,7 +76,6 @@ public class ClienteDAO {
             stmt.setInt(15, obj.getId());
 
             stmt.execute();
-
             stmt.close();
 
             JOptionPane.showMessageDialog(null, "Cliente editado com sucesso!!");
@@ -91,24 +85,18 @@ public class ClienteDAO {
         }
     }
 
-    /**
-     * Método 'BuscaCliente'. Busca um cliente pelo nome no banco de dados.
-     */
-    public Cliente BuscaCliente(String nome) {
+    @Override
+    public Cliente Buscar(String nome) {
         try {
-
-//            String sql = "SELECT * FROM clientes WHERE nome = ?";
             String sql = "SELECT c.id, c.nome,c.rg,c.cpf,c.email,c.telefone,c.celular,c.cep,c.endereco,c.numero,c.complemento,c.bairro,c.cidade,c.estado,s.nome as nome_sexo "
                     + "FROM clientes AS c "
-                    + "LEFT JOIN sexo AS s ON (s.id = c.sexo_id)"
+                    + "LEFT JOIN sexo AS s ON (s.id = c.sexo_id) "
                     + "WHERE c.nome = ? ";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
-
             stmt.setString(1, nome);
 
             ResultSet resultado = stmt.executeQuery();
-
             Cliente obj = new Cliente();
 
             if (resultado.next()) {
@@ -130,6 +118,7 @@ public class ClienteDAO {
 
                 JOptionPane.showMessageDialog(null, "Cliente encontrado!!");
             }
+            stmt.close();
             return obj;
 
         } catch (SQLException erro) {
@@ -138,40 +127,34 @@ public class ClienteDAO {
         return null;
     }
 
+    @Override
     public void Excluir(Cliente obj) {
         try {
             String sql = "DELETE FROM clientes WHERE id = ?";
             
             PreparedStatement stmt = conexao.prepareStatement(sql);
-            
             stmt.setInt(1, obj.getId());
             
             stmt.execute();
-            
             stmt.close();
             
-            JOptionPane.showMessageDialog(null, "Cliente exluido!!");
+            JOptionPane.showMessageDialog(null, "Cliente excluído!!");
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao exluir cliente!!" + erro);
+            JOptionPane.showMessageDialog(null, "Erro ao excluir cliente!!" + erro);
         }
     }
 
-    /**
-     * Método 'Listar'. Retorna uma lista de todos os clientes do banco de
-     * dados.
-     */
-    public List<Cliente> Listar() {
-        List<Cliente> lista = new ArrayList<>();
+    @Override
+    public ArrayList<Cliente> Listar() {
+        ArrayList<Cliente> lista = new ArrayList<>();
 
         try {
-
             String sql = """
-                             SELECT c.id, c.nome, c.rg, c.cpf,s.nome AS nome_sexo, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado
-                             FROM clientes AS c
-                             LEFT JOIN sexo AS s ON (s.id = c.sexo_id)""";
+                         SELECT c.id, c.nome, c.rg, c.cpf,s.nome AS nome_sexo, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado
+                         FROM clientes AS c
+                         LEFT JOIN sexo AS s ON (s.id = c.sexo_id)""";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
-
             ResultSet resultado = stmt.executeQuery();
 
             while (resultado.next()) {
@@ -195,6 +178,7 @@ public class ClienteDAO {
 
                 lista.add(obj);
             }
+            stmt.close();
             return lista;
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao criar a lista!!" + erro);
@@ -202,24 +186,18 @@ public class ClienteDAO {
         return null;
     }
 
-    /**
-     * Método 'Filtrar'. Retorna uma lista de clientes cujo nome corresponde ao
-     * parâmetro.
-     */
-    public List<Cliente> Filtrar(String nome) {
-        List<Cliente> lista = new ArrayList<>();
+    @Override
+    public ArrayList<Cliente> Filtrar(String nome) {
+        ArrayList<Cliente> lista = new ArrayList<>();
 
         try {
-
-//            String sql = "SELECT * FROM clientes WHERE nome LIKE ?";
             String sql = """
-                             SELECT c.id, c.nome, c.rg, c.cpf,s.nome AS nome_sexo, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado
-                             FROM clientes AS c
-                             LEFT JOIN sexo AS s ON (s.id = c.sexo_id)
-                             WHERE c.nome LIKE ?""";
+                         SELECT c.id, c.nome, c.rg, c.cpf,s.nome AS nome_sexo, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado
+                         FROM clientes AS c
+                         LEFT JOIN sexo AS s ON (s.id = c.sexo_id)
+                         WHERE c.nome LIKE ?""";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
-
             stmt.setString(1, nome);
 
             ResultSet resultado = stmt.executeQuery();
@@ -245,11 +223,11 @@ public class ClienteDAO {
 
                 lista.add(obj);
             }
+            stmt.close();
             return lista;
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao criar a lista!!" + erro);
         }
         return null;
     }
-
 }

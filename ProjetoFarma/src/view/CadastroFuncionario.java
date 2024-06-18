@@ -399,7 +399,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
 
             FuncionarioDAO dao = new FuncionarioDAO();
 
-            obj = dao.BuscaFuncionario(nome);
+            obj = dao.Buscar(nome);
 
             if (obj.getNome() != null) {
                 txtCodigoFuncionario.setText(String.valueOf(obj.getId()));

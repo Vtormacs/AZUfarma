@@ -534,7 +534,7 @@ public class CadastroDeCliente extends javax.swing.JFrame {
 
             ClienteDAO dao = new ClienteDAO();
 
-            obj = dao.BuscaCliente(nome);
+            obj = dao.Buscar(nome);
 
             if (obj.getNome() != null) {
                 txtCodigo.setText(String.valueOf(obj.getId()));

@@ -93,7 +93,7 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+C"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Formulario Clientes"/>
+                <Property name="text" type="java.lang.String" value="Formul&#xe1;rio Clientes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
@@ -117,7 +117,7 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+F"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Formulario Funcionarios"/>
+                <Property name="text" type="java.lang.String" value="Formul&#xe1;rio Funcion&#xe1;rios"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
@@ -141,7 +141,7 @@
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+B"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Formulario Fornecedores"/>
+                <Property name="text" type="java.lang.String" value="Formul&#xe1;rio Fornecedores"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
@@ -165,12 +165,15 @@
                 <Property name="text" type="java.lang.String" value="Meus Produtos"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Consulta de produtos"/>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="Ctrl+P"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Produtos"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem11ActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
@@ -182,17 +185,6 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
-                  <Properties>
-                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                      <KeyStroke key="Ctrl+P"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Produtos"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem11ActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
@@ -509,7 +501,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtQtdEstoque" min="-2" pref="84" max="-2" attributes="0"/>
+                                      <Component id="txtQtdNova" min="-2" pref="84" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnAdicionarEstoque" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -535,7 +527,7 @@
                                           <Component id="txtDescricaoEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtQtdAtualEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtQtdEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txtQtdNova" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="btnAdicionarEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -604,9 +596,9 @@
                         <Property name="text" type="java.lang.String" value="Quantidade:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txtQtdEstoque">
+                    <Component class="javax.swing.JTextField" name="txtQtdNova">
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQtdEstoqueActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQtdNovaActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnAdicionarEstoque">
@@ -616,6 +608,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Adicionar"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarEstoqueActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

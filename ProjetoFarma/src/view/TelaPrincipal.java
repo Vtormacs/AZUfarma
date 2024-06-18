@@ -167,7 +167,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtQtdAtualEstoque = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        txtQtdEstoque = new javax.swing.JTextField();
+        txtQtdNova = new javax.swing.JTextField();
         btnAdicionarEstoque = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         painel_cliente = new javax.swing.JPanel();
@@ -317,9 +317,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -479,14 +478,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("Quantidade:");
 
-        txtQtdEstoque.addActionListener(new java.awt.event.ActionListener() {
+        txtQtdNova.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQtdEstoqueActionPerformed(evt);
+                txtQtdNovaActionPerformed(evt);
             }
         });
 
         btnAdicionarEstoque.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdicionarEstoque.setText("Adicionar");
+        btnAdicionarEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarEstoqueActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painel_dados_estoqueLayout = new javax.swing.GroupLayout(painel_dados_estoque);
         painel_dados_estoque.setLayout(painel_dados_estoqueLayout);
@@ -511,7 +515,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtQtdEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtQtdNova, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdicionarEstoque)))
                 .addContainerGap(12, Short.MAX_VALUE))
@@ -532,7 +536,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(txtDescricaoEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtQtdAtualEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13)
-                            .addComponent(txtQtdEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQtdNova, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
                             .addComponent(btnAdicionarEstoque))))
                 .addContainerGap())
@@ -1998,7 +2002,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem1.setText("Formulario Clientes");
+        jMenuItem1.setText("Formulário Clientes");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -2013,7 +2017,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem2.setText("Formulario Funcionarios");
+        jMenuItem2.setText("Formulário Funcionários");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -2028,7 +2032,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem3.setText("Formulario Fornecedores");
+        jMenuItem3.setText("Formulário Fornecedores");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -2044,13 +2048,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu8.setText("Meus Produtos");
 
-        jMenuItem5.setText("Consulta de produtos");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem11.setText("Produtos");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jMenuItem11ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem5);
+        jMenu8.add(jMenuItem11);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem4.setText("Controle de Estoque");
@@ -2060,15 +2065,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu8.add(jMenuItem4);
-
-        jMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem11.setText("Produtos");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        jMenu8.add(jMenuItem11);
 
         jMenu4.add(jMenu8);
 
@@ -2304,10 +2300,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         content.setSelectedIndex(4);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         content.setSelectedIndex(3);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -2353,6 +2345,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void tabela_estoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_estoqueMouseClicked
+        content.setSelectedIndex(1);
         idProduto = Integer.parseInt(tabela_estoque.getValueAt(tabela_estoque.getSelectedRow(),0).toString());
         txtCodigoEstoque.setText(tabela_estoque.getValueAt(tabela_estoque.getSelectedRow(),0).toString());
         txtDescricaoEstoque.setText(tabela_estoque.getValueAt(tabela_estoque.getSelectedRow(),1).toString());
@@ -2386,7 +2379,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 txtCodigoEstoque.setText(String.valueOf(obj.getId()));
                 txtDescricaoEstoque.setText(obj.getDescricao());
                 txtQtdAtualEstoque.setText(String.valueOf(obj.getPreco()));
-                txtQtdEstoque.setText(String.valueOf(obj.getQtd_estoque()));
+                txtQtdNova.setText(String.valueOf(obj.getQtd_estoque()));
 
             } else {
                 JOptionPane.showMessageDialog(null, "Produto não encontrado");
@@ -2399,9 +2392,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQtdAtualEstoqueActionPerformed
 
-    private void txtQtdEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtdEstoqueActionPerformed
+    private void txtQtdNovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtdNovaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtQtdEstoqueActionPerformed
+    }//GEN-LAST:event_txtQtdNovaActionPerformed
 
     private void btnNovoEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoEstoqueActionPerformed
         Utilitarios util = new Utilitarios();
@@ -2414,7 +2407,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         obj.setDescricao(txtDescricaoEstoque.getText());
         obj.setPreco(Double.valueOf(txtQtdAtualEstoque.getText()));
-        obj.setQtd_estoque(Integer.valueOf(txtQtdEstoque.getText()));
+        obj.setQtd_estoque(Integer.valueOf(txtQtdNova.getText()));
 
         ProdutosDAO dao = new ProdutosDAO();
         dao.Salvar(obj);
@@ -2430,7 +2423,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         obj.setId(Integer.valueOf(txtCodigoEstoque.getText()));
         obj.setDescricao(txtDescricaoEstoque.getText());
         obj.setPreco(Double.valueOf(txtQtdAtualEstoque.getText()));
-        obj.setQtd_estoque(Integer.parseInt(txtQtdEstoque.getText()));
+        obj.setQtd_estoque(Integer.parseInt(txtQtdNova.getText()));
 
         ProdutosDAO dao = new ProdutosDAO();
         dao.Editar(obj);
@@ -2630,7 +2623,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             ClienteDAO dao = new ClienteDAO();
 
-            obj = dao.BuscaCliente(nome);
+            obj = dao.Buscar(nome);
 
             if (obj.getNome() != null) {
                 txtCodigoClientes.setText(String.valueOf(obj.getId()));
@@ -2907,7 +2900,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             FuncionarioDAO dao = new FuncionarioDAO();
 
-            obj = dao.BuscaFuncionario(nome);
+            obj = dao.Buscar(nome);
 
             if (obj.getNome() != null) {
                 txtCodigoFuncionarios.setText(String.valueOf(obj.getId()));
@@ -3010,6 +3003,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         util.Limpar(painel_dados_funcionarios);
     }//GEN-LAST:event_btnExcluirFuncionariosActionPerformed
+
+    private void btnAdicionarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEstoqueActionPerformed
+        try {
+            int qtd_atual,qtd_nova;
+                qtd_atual = Integer.valueOf(txtQtdAtualEstoque.getText());
+                qtd_nova = Integer.valueOf(txtQtdNova.getText());
+                
+                qtd_atualizada = qtd_atual + qtd_nova;
+                
+                ProdutosDAO daop = new ProdutosDAO();
+                
+                daop.AdicionarEstoque(idProduto, qtd_atualizada);
+                
+                new Utilitarios().Limpar(painel_dados_estoque);
+                
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null, "Erro" + e);
+        }
+    }//GEN-LAST:event_btnAdicionarEstoqueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3156,7 +3169,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
@@ -3222,7 +3234,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtPesquisaNomeFuncionario;
     private javax.swing.JTextField txtPrecoProduto;
     private javax.swing.JTextField txtQtdAtualEstoque;
-    private javax.swing.JTextField txtQtdEstoque;
+    private javax.swing.JTextField txtQtdNova;
     private javax.swing.JTextField txtQuantidadeEstoqueProduto;
     private javax.swing.JFormattedTextField txtRGClientes;
     private javax.swing.JFormattedTextField txtRGFuncionarios;
