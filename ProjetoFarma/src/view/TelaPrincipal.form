@@ -645,7 +645,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="1" pref="1200" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
@@ -655,8 +655,8 @@
                       </Group>
                       <Component id="Funcionarios1" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="painel_dados_clientes" min="-2" pref="978" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="222" max="32767" attributes="0"/>
+                          <Component id="painel_dados_clientes" min="-2" pref="1035" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -853,17 +853,6 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtEmailClientes" min="-2" pref="214" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtCelularClientes" min="-2" pref="106" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtTelefoneClientes" min="-2" pref="112" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                                               <Component id="txtNomeClientes" min="-2" pref="174" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -879,7 +868,36 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="cbSexoClientes" min="-2" max="-2" attributes="0"/>
                                           </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="txtEmailClientes" min="-2" pref="214" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtCelularClientes" min="-2" pref="106" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtTelefoneClientes" min="-2" pref="112" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="166" pref="166" max="-2" attributes="0"/>
+                                              <Component id="lblStatus" max="32767" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="cbUFClientes" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtCidadeClientes" min="-2" pref="149" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txtBairroClientes" min="-2" pref="149" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
+                                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -889,63 +907,43 @@
                                       <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="txtCEPClientes" min="-2" pref="106" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtEnderecoClientes" min="-2" pref="298" max="-2" attributes="0"/>
+                                      <Component id="txtEnderecoClientes" min="-2" pref="207" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtNumeroDaCasaClientes" min="-2" pref="84" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbUFClientes" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtCidadeClientes" min="-2" pref="149" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                      <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtBairroClientes" min="-2" pref="149" max="-2" attributes="0"/>
+                                      <Component id="txtNumeroDaCasaClientes" min="-2" pref="46" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="txtComplementoClientes" min="-2" pref="189" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtCEPClientes" min="-2" pref="77" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnCEP" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <EmptySpace pref="58" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnSalvarClientes" min="-2" pref="120" max="-2" attributes="0"/>
                                   <Component id="btnNovoClientes" min="-2" pref="120" max="-2" attributes="0"/>
                                   <Component id="btnEditarClientes" min="-2" pref="120" max="-2" attributes="0"/>
                                   <Component id="btnExcluirClientes" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                      <Component id="btnNovoClientes" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btnSalvarClientes" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btnEditarClientes" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btnExcluirClientes" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -970,28 +968,52 @@
                                           <Component id="txtTelefoneClientes" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtCEPClientes" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtEnderecoClientes" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtNumeroDaCasaClientes" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cbUFClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                              <Component id="txtBairroClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel27" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtCidadeClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnCEP" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cbUFClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtCEPClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblStatus" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtCidadeClientes" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtBairroClientes" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtComplementoClientes" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel27" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                              <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtComplementoClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtNumeroDaCasaClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtEnderecoClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
+                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="btnNovoClientes" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btnSalvarClientes" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btnEditarClientes" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btnExcluirClientes" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1143,16 +1165,6 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JFormattedTextField" name="txtCEPClientes">
-                      <Properties>
-                        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                          <Format format="#####-###" subtype="-1" type="5"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCEPClientesActionPerformed"/>
-                      </Events>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel27">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1239,6 +1251,9 @@
                           <Format format="##.###.###-##" subtype="-1" type="5"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRGClientesActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnSalvarClientes">
                       <Properties>
@@ -1335,6 +1350,24 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeClientesActionPerformed"/>
                         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomeClientesKeyPressed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btnCEP">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="12" style="1"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Buscar CEP"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCEPActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtCEPClientes">
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="RestrictedTextField validar = new RestrictedTextField(txtCEPClientes);&#xa;validar.setOnlyNums(true);&#xa;validar.setLimit(8);"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblStatus">
                     </Component>
                   </SubComponents>
                 </Container>
