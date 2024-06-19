@@ -10,19 +10,15 @@ import dao.FornecedoresDAO;
 import dao.FuncionarioDAO;
 import dao.ProdutosDAO;
 import java.awt.event.KeyEvent;
-import java.net.URL;
-import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.CEPinfo;
 import model.Cliente;
 import model.Fornecedores;
 import model.Funcionario;
 import model.Produtos;
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 import utilitarios.Utilitarios;
 
 /**
@@ -142,56 +138,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     private void buscarCep() {
-        String logradouro = "";
-        String tipoLogradouro = "";
-        String resultado = null;
         String cep = txtCEPClientes.getText();
+        CEPinfo cepInfo = Utilitarios.buscarCep(cep);
 
-        try {
-            URL url = new URL("http://cep.republicavirtual.com.br/web_cep.php?cep=" + cep + "&formato=xml");
+        if ("1".equals(cepInfo.getResultado())) {
+            txtCidadeClientes.setText(cepInfo.getCidade());
+            txtBairroClientes.setText(cepInfo.getBairro());
+            cbUFClientes.setSelectedItem(cepInfo.getUf());
+            txtEnderecoClientes.setText(cepInfo.getTipoLogradouro() + " " + cepInfo.getLogradouro());
+        }
+    }
+    
+    private void buscarCepFornecedores() {
+        String cep = txtCEPFornecedores.getText();
+        CEPinfo cepInfo = Utilitarios.buscarCep(cep);
 
-            SAXReader xml = new SAXReader();
-            Document documento = xml.read(url);
-            Element root = documento.getRootElement();
-
-            // iterate through child elements of root
-            for (Iterator<Element> it = root.elementIterator(); it.hasNext();) {
-                Element element = it.next();
-                
-                if(element.getQualifiedName().equals("cidade")){
-                    txtCidadeClientes.setText(element.getText());
-                }
-                
-                if(element.getQualifiedName().equals("bairro")){
-                    txtBairroClientes.setText(element.getText());
-                }
-                
-                if(element.getQualifiedName().equals("uf")){
-                    cbUFClientes.setSelectedItem(element.getText());
-                }
-                
-                if(element.getQualifiedName().equals("tipo_logradouro")){
-                    tipoLogradouro = element.getText();
-                }
-                
-                if(element.getQualifiedName().equals("logradouro")){
-                    logradouro = element.getText();
-                }
-                
-                if(element.getQualifiedName().equals("resultado")){
-                    resultado = element.getText();
-                    if(resultado.equals("1")){
-                        lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/282474_ok_done_check_icon.png")));
-                    }else {
-                        JOptionPane.showMessageDialog(null, "CEP não encontrado!" );
-                    }
-                }
-            }
-            
-            txtEnderecoClientes.setText(tipoLogradouro + " " + logradouro);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao buscar cep " + e);
+        if ("1".equals(cepInfo.getResultado())) {
+            txtCidadeFornecedores.setText(cepInfo.getCidade());
+            txtBairroFornecedores.setText(cepInfo.getBairro());
+            cbUFFornecedores.setSelectedItem(cepInfo.getUf());
+            txtEnderecoFornecedores.setText(cepInfo.getTipoLogradouro() + " " + cepInfo.getLogradouro());
         }
     }
 
@@ -274,7 +240,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtNomeClientes = new javax.swing.JTextField();
         btnCEP = new javax.swing.JButton();
         txtCEPClientes = new javax.swing.JTextField();
-        lblStatus = new javax.swing.JLabel();
         painel_fornecedores = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabela_fornecedores = new javax.swing.JTable();
@@ -295,7 +260,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         txtEnderecoFornecedores = new javax.swing.JTextField();
         jLabel41 = new javax.swing.JLabel();
-        txtCEPFornecedores = new javax.swing.JFormattedTextField();
         jLabel42 = new javax.swing.JLabel();
         txtNumeroDaCasaFornecedores = new javax.swing.JTextField();
         txtBairroFornecedores = new javax.swing.JTextField();
@@ -313,6 +277,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnExcluirFornecedores = new javax.swing.JButton();
         txtCNPJFornecedores = new javax.swing.JFormattedTextField();
         jLabel48 = new javax.swing.JLabel();
+        txtCEPFornecedores = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         painel_funcionarios = new javax.swing.JPanel();
         txtPesquisaNomeFuncionario = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
@@ -929,24 +895,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel30)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTelefoneClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(painel_dados_clientesLayout.createSequentialGroup()
-                                .addGap(166, 166, 166)
-                                .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel31)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbUFClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCidadeClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel27)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBairroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)))
-                        .addGap(17, 17, 17))
+                                .addComponent(txtTelefoneClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(painel_dados_clientesLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -970,8 +919,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCEPClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCEP)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addComponent(btnCEP)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbUFClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCidadeClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBairroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalvarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1007,20 +968,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel30)
                             .addComponent(txtTelefoneClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtBairroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel27))
-                            .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel21)
-                                .addComponent(txtCidadeClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel14)
                                 .addComponent(btnCEP)
-                                .addComponent(jLabel31)
-                                .addComponent(cbUFClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtCEPClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtCEPClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtBairroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel27))
+                                .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel21)
+                                    .addComponent(txtCidadeClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel31)
+                                    .addComponent(cbUFClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(painel_dados_clientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1195,17 +1157,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel41.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel41.setText("CEP:");
 
-        try {
-            txtCEPFornecedores.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtCEPFornecedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCEPFornecedoresActionPerformed(evt);
-            }
-        });
-
         jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel42.setText("N°:");
 
@@ -1300,6 +1251,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel48.setText("Procurar fornecedor pelo nome ao pressionar enter");
         jLabel48.setOpaque(true);
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("Buscar CEP");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painel_dados_fornecedoresLayout = new javax.swing.GroupLayout(painel_dados_fornecedores);
         painel_dados_fornecedores.setLayout(painel_dados_fornecedoresLayout);
         painel_dados_fornecedoresLayout.setHorizontalGroup(
@@ -1307,22 +1266,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(painel_dados_fornecedoresLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painel_dados_fornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painel_dados_fornecedoresLayout.createSequentialGroup()
-                        .addComponent(jLabel43)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBairroFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel40)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEnderecoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel42)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNumeroDaCasaFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(painel_dados_fornecedoresLayout.createSequentialGroup()
-                        .addComponent(jLabel45)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtComplementoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painel_dados_fornecedoresLayout.createSequentialGroup()
                         .addComponent(jLabel35)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1343,6 +1286,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
                                 .addComponent(txtEmailFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel48)))
                     .addGroup(painel_dados_fornecedoresLayout.createSequentialGroup()
+                        .addComponent(jLabel44)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCidadeFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel43)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBairroFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEnderecoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painel_dados_fornecedoresLayout.createSequentialGroup()
                         .addComponent(jLabel38)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCelularFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1352,17 +1307,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(txtTelefoneFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel41)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCEPFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCEPFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel47)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbUFFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel44)
+                        .addComponent(cbUFFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painel_dados_fornecedoresLayout.createSequentialGroup()
+                        .addComponent(jLabel42)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCidadeFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(txtNumeroDaCasaFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel45)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtComplementoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37)
                 .addGroup(painel_dados_fornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painel_dados_fornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnEditarFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1384,7 +1345,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEditarFornecedores)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnExcluirFornecedores))
+                        .addGroup(painel_dados_fornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnExcluirFornecedores)
+                            .addGroup(painel_dados_fornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel42)
+                                .addComponent(txtNumeroDaCasaFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(painel_dados_fornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel45)
+                                    .addComponent(txtComplementoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(painel_dados_fornecedoresLayout.createSequentialGroup()
                         .addComponent(jLabel48)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1404,25 +1372,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel39)
                             .addComponent(txtTelefoneFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel41)
-                            .addComponent(txtCEPFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel47)
                             .addComponent(cbUFFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel44)
-                            .addComponent(txtCidadeFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
+                            .addComponent(txtCEPFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
+                        .addGap(11, 11, 11)
                         .addGroup(painel_dados_fornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel44)
+                            .addComponent(txtCidadeFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel43)
                             .addComponent(txtBairroFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel40)
-                            .addComponent(txtEnderecoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel42)
-                            .addComponent(txtNumeroDaCasaFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(painel_dados_fornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel45)
-                            .addComponent(txtComplementoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtEnderecoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        RestrictedTextField validarf = new RestrictedTextField(txtCEPFornecedores);
+        validarf.setOnlyNums(true);
+        validarf.setLimit(8);
 
         javax.swing.GroupLayout painel_fornecedoresLayout = new javax.swing.GroupLayout(painel_fornecedores);
         painel_fornecedores.setLayout(painel_fornecedoresLayout);
@@ -2886,10 +2854,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEnderecoFornecedoresActionPerformed
 
-    private void txtCEPFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCEPFornecedoresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCEPFornecedoresActionPerformed
-
     private void txtNumeroDaCasaFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroDaCasaFornecedoresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroDaCasaFornecedoresActionPerformed
@@ -3133,6 +3097,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRGClientesActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (txtCEPFornecedores.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Infome o CEP!");
+            txtCEPFornecedores.requestFocus();
+        } else {
+            buscarCepFornecedores();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3206,6 +3179,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbUFClientes;
     private javax.swing.JComboBox<String> cbUFFornecedores;
     private javax.swing.JTabbedPane content;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3292,7 +3266,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JLabel lblStatus;
     private javax.swing.JPanel painel_cliente;
     private javax.swing.JPanel painel_dados_clientes;
     private javax.swing.JPanel painel_dados_estoque;
@@ -3311,7 +3284,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtBairroClientes;
     private javax.swing.JTextField txtBairroFornecedores;
     private javax.swing.JTextField txtCEPClientes;
-    private javax.swing.JFormattedTextField txtCEPFornecedores;
+    private javax.swing.JTextField txtCEPFornecedores;
     private javax.swing.JFormattedTextField txtCNPJFornecedores;
     private javax.swing.JFormattedTextField txtCPFClientes;
     private javax.swing.JFormattedTextField txtCPFFuncionarios;
