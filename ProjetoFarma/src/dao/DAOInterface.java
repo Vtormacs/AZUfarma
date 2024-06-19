@@ -12,6 +12,8 @@ public interface DAOInterface<ObjetoGenerico> {
     
     ObjetoGenerico Buscar(String descricao);
     
+    ObjetoGenerico BuscarCpf(String cpf);
+
     ArrayList<ObjetoGenerico> Listar();
 
     ArrayList<ObjetoGenerico> Filtrar(String descricao);    

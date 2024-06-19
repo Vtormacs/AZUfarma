@@ -125,6 +125,48 @@ public class ClienteDAO implements DAOInterface<Cliente> {
         }
         return null;
     }
+    
+    @Override
+    public Cliente BuscarCpf(String cpf) {
+        try {
+            String sql = "SELECT c.id, c.nome,c.rg,c.cpf,c.email,c.telefone,c.celular,c.cep,c.endereco,c.numero,c.complemento,c.bairro,c.cidade,c.estado,s.nome as nome_sexo "
+                    + "FROM clientes AS c "
+                    + "LEFT JOIN sexo AS s ON (s.id = c.sexo_id) "
+                    + "WHERE c.cpf = ? ";
+
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, cpf);
+
+            ResultSet resultado = stmt.executeQuery();
+            Cliente obj = new Cliente();
+
+            if (resultado.next()) {
+                obj.setId(resultado.getInt("id"));
+                obj.setNome(resultado.getString("nome"));
+                obj.setRg(resultado.getString("rg"));
+                obj.setCpf(resultado.getString("cpf"));
+                obj.setEmail(resultado.getString("email"));
+                obj.setTelefone(resultado.getString("telefone"));
+                obj.setCelular(resultado.getString("celular"));
+                obj.setCep(resultado.getString("cep"));
+                obj.setEndereco(resultado.getString("endereco"));
+                obj.setNumero(resultado.getInt("numero"));
+                obj.setComplemento(resultado.getString("complemento"));
+                obj.setBairro(resultado.getString("bairro"));
+                obj.setCidade(resultado.getString("cidade"));
+                obj.setEstado(resultado.getString("estado"));
+                obj.setNomeSexo(resultado.getString("nome_sexo"));
+
+                JOptionPane.showMessageDialog(null, "Cliente encontrado!!");
+            }
+            stmt.close();
+            return obj;
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente!!" + erro);
+        }
+        return null;
+    }
 
     @Override
     public void Excluir(Cliente obj) {

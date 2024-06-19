@@ -230,4 +230,9 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
             JOptionPane.showMessageDialog(null, "Erro ao dar baixa no estoque!!" + erro);
         }
     }
+
+    @Override
+    public Produtos BuscarCpf(String cpf) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

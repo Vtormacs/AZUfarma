@@ -9,10 +9,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import utilitarios.Utilitarios;
 
-/**
- *
- * @author vitor
- */
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -184,6 +180,8 @@ public class Login extends javax.swing.JFrame {
             dao.Login(email, senha);
 
             java.util.Arrays.fill(senhaArray, '0'); // Zerando o array de senha para segurança
+
+            this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro na tela de login  ");
         }
@@ -203,6 +201,8 @@ public class Login extends javax.swing.JFrame {
                 dao.Login(email, senha);
 
                 java.util.Arrays.fill(senhaArray, '0'); // Zerando o array de senha para segurança
+
+                this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro na tela de login  ");
             }

@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import model.Funcionario;
 import view.Login;
@@ -212,9 +211,15 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
                 JOptionPane.showMessageDialog(null, "Dados inválidos!!");
                 login.setVisible(true);
             }
+
             stmt.close();
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro no funcionarioDAO " + erro);
         }
+    }
+
+    @Override
+    public Funcionario BuscarCpf(String cpf) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
