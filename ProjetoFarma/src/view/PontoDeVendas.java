@@ -1,18 +1,41 @@
 package view;
 
 import dao.ClienteDAO;
+import dao.FornecedoresDAO;
+import dao.ProdutosDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 import model.Cliente;
+import model.Fornecedores;
+import model.Produtos;
 import utilitarios.Utilitarios;
 
 public class PontoDeVendas extends javax.swing.JFrame {
+    
+    public void ListarProdutos() {
+        ProdutosDAO dao = new ProdutosDAO();
+        List<Produtos> lista = dao.Listar();
+        DefaultTableModel dados = (DefaultTableModel) tabelaProduto.getModel();
+        dados.setNumRows(0);
+        for (Produtos c : lista) {
+            dados.addRow(new Object[]{
+                c.getId(),
+                c.getDescricao(),
+                c.getPreco(),
+                c.getQtd_estoque(),
+                c.getFornecedor().getNome(),
+                c.getNomeClasse()
+            });
+        }
+    }
 
     Cliente obj = new Cliente();
 
@@ -442,12 +465,17 @@ public class PontoDeVendas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        ListarProdutos();
+        
         Timer timer = new Timer(1000, new Hora());
         timer.start();
     }//GEN-LAST:event_formWindowActivated
 
     private void tabelaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProdutoMouseClicked
-
+        txtCodigo.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 0).toString());
+        txtProduto.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 1).toString());
+        txtPreco.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 2).toString());
+        txtEstoque.setText(tabelaProduto.getValueAt(tabelaProduto.getSelectedRow(), 3).toString());    
     }//GEN-LAST:event_tabelaProdutoMouseClicked
 
     private void txtProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoActionPerformed
