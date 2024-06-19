@@ -2,7 +2,6 @@ package dao;
 
 import java.awt.HeadlessException;
 import java.util.ArrayList;
-import java.util.List;
 import java.sql.Connection;
 import model.Cliente;
 import java.sql.PreparedStatement;
@@ -22,7 +21,7 @@ public class ClienteDAO implements DAOInterface<Cliente> {
     public void Salvar(Cliente obj) {
         try {
             String sql = "INSERT INTO clientes (nome,rg,cpf,email,telefone,celular,cep,endereco,numero,complemento,bairro,cidade,estado,sexo_id) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,(select id from sexo where nome = ?))";
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,(select id from sexo where nome = ?),)";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
