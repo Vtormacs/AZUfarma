@@ -351,6 +351,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jlData = new javax.swing.JLabel();
         jlHora = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        btnPTV = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -2062,6 +2063,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnPTV.setBackground(new java.awt.Color(0, 51, 153));
+        btnPTV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnPTV.setForeground(new java.awt.Color(255, 255, 255));
+        btnPTV.setText("PTV");
+        btnPTV.setBorder(null);
+        btnPTV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPTVActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -2075,7 +2087,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnProdutos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPTV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -2091,7 +2104,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPTV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jlData, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlHora, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2100,7 +2115,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 570));
 
-        jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuBar1.setBackground(new java.awt.Color(0, 0, 204));
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuBar1.setOpaque(true);
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/4850490_clients_communication_discussion_media_social_icon.png"))); // NOI18N
         jMenu1.setText("Clientes");
@@ -2246,18 +2263,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * lista atual de clientes.
      */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        Listar();
-        ListarFuncionario();
-        ListarFornecedores();
-        ListarProdutos();
+
+        
     }//GEN-LAST:event_formWindowActivated
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         content.setSelectedIndex(2);
+        Listar();
     }//GEN-LAST:event_btnClienteActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
         content.setSelectedIndex(5);
+        ListarProdutos();
     }//GEN-LAST:event_btnProdutosActionPerformed
 
     /**
@@ -2414,10 +2431,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         content.setSelectedIndex(4);
+        ListarFuncionario();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         content.setSelectedIndex(3);
+        ListarFornecedores();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void txtPesquisaDescricaoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaDescricaoProdutoActionPerformed
@@ -3192,6 +3211,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
        content.setSelectedIndex(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnPTVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPTVActionPerformed
+        new PontoDeVendas().setVisible(true);
+    }//GEN-LAST:event_btnPTVActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3252,6 +3275,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnNovoFornecedores;
     private javax.swing.JButton btnNovoFuncionarios;
     private javax.swing.JButton btnNovoProduto;
+    private javax.swing.JButton btnPTV;
     private javax.swing.JButton btnProdutos;
     private javax.swing.JButton btnSalvarClientes;
     private javax.swing.JButton btnSalvarEstoque;

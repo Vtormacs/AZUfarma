@@ -99,7 +99,7 @@ public class PontoDeVendas extends javax.swing.JFrame {
             }
         });
 
-        fundo.setBackground(new java.awt.Color(153, 153, 153));
+        fundo.setBackground(new java.awt.Color(0, 51, 153));
         fundo.setPreferredSize(new java.awt.Dimension(1250, 669));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N

@@ -4,6 +4,8 @@
  */
 package view;
 
+import utilitarios.Utilitarios;
+
 /**
  *
  * @author vitor
@@ -15,6 +17,9 @@ public class Pagamento extends javax.swing.JFrame {
      */
     public Pagamento() {
         initComponents();
+
+        Utilitarios u = new Utilitarios();
+        u.InserirIcone(this);
     }
 
     /**
