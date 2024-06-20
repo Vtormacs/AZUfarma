@@ -1,20 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package view;
 
+import javax.swing.table.DefaultTableModel;
+import model.Cliente;
+import model.ItensVendas;
 import utilitarios.Utilitarios;
 
-/**
- *
- * @author vitor
- */
 public class Pagamento extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Pagamento
-     */
+    ItensVendas obj = new ItensVendas();
+    Cliente clientes = new Cliente();
+    DefaultTableModel meusProdutos;
+    
     public Pagamento() {
         initComponents();
 
@@ -49,6 +45,7 @@ public class Pagamento extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pagamentos");
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
