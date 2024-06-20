@@ -1403,7 +1403,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painel_fornecedores.setLayout(painel_fornecedoresLayout);
         painel_fornecedoresLayout.setHorizontalGroup(
             painel_fornecedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1090, Short.MAX_VALUE)
             .addComponent(Funcionarios2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(painel_fornecedoresLayout.createSequentialGroup()
                 .addContainerGap()
@@ -1427,7 +1427,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel23)
                     .addComponent(txtPesquisaNomeFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1471,7 +1471,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         Funcionarios.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         Funcionarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Funcionarios.setText("FUNCIONARIOS");
+        Funcionarios.setText("FUNCIONÁRIOS");
 
         jLabel49.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel49.setText("Código:");
@@ -1704,17 +1704,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
             .addGroup(painel_funcionariosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painel_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Funcionarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(painel_funcionariosLayout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPesquisaNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPesquisaNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(829, Short.MAX_VALUE))
             .addGroup(painel_funcionariosLayout.createSequentialGroup()
                 .addComponent(painel_dados_funcionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(Funcionarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         painel_funcionariosLayout.setVerticalGroup(
             painel_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2564,6 +2561,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoProdutoKeyPressed
 
     private void btnSalvarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProdutoActionPerformed
+       if(txtCodigoProduto.getText().equals("")){
         Produtos obj = new Produtos();
 
         obj.setDescricao(txtDescricaoProduto.getText());
@@ -2578,6 +2576,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Utilitarios util = new Utilitarios();
 
         util.Limpar(painel_dados_produto);
+       }else {
+           JOptionPane.showMessageDialog(null, "Esse produto já existe!!");
+       }
     }//GEN-LAST:event_btnSalvarProdutoActionPerformed
 
     private void txtDescricaoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoProdutoActionPerformed
@@ -2754,6 +2755,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoClientesActionPerformed
 
     private void btnSalvarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarClientesActionPerformed
+        if(txtCodigoClientes.getText().equals("")){
+            
         Cliente obj = new Cliente();
 
         obj.setNome(txtNomeClientes.getText());
@@ -2777,6 +2780,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Utilitarios util = new Utilitarios();
 
         util.Limpar(painel_dados_clientes);
+        }else {
+            JOptionPane.showMessageDialog(null, "Esse cliente já existe!");
+        }
     }//GEN-LAST:event_btnSalvarClientesActionPerformed
 
     private void txtCPFClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCPFClientesActionPerformed
@@ -2907,6 +2913,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoFornecedoresActionPerformed
 
     private void btnSalvarFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFornecedoresActionPerformed
+        if(txtCodigoFornecedores.getText().equals("")){
         Fornecedores obj = new Fornecedores();
 
         obj.setNome(txtNomeFornecedores.getText());
@@ -2928,6 +2935,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Utilitarios util = new Utilitarios();
 
         util.Limpar(painel_dados_fornecedores);
+        }else {
+            JOptionPane.showMessageDialog(null, "Esse fornecedor já existe!!");
+        }
     }//GEN-LAST:event_btnSalvarFornecedoresActionPerformed
 
     private void btnEditarFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarFornecedoresActionPerformed
@@ -3032,6 +3042,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoFuncionariosActionPerformed
 
     private void btnSalvarFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFuncionariosActionPerformed
+       if(txtCodigoFuncionarios.getText().equals("")){
         Funcionario obj = new Funcionario();
 
         obj.setNome(txtNomeFuncionarios.getText());
@@ -3051,6 +3062,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Utilitarios util = new Utilitarios();
 
         util.Limpar(painel_dados_funcionarios);
+       }else {
+           JOptionPane.showMessageDialog(null, "Esse funcionário já existe!");
+       }
     }//GEN-LAST:event_btnSalvarFuncionariosActionPerformed
 
     private void btnEditarFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarFuncionariosActionPerformed
