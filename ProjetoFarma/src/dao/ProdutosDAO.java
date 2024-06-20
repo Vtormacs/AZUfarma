@@ -94,7 +94,41 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
                 obj.setFornecedor(f);
                 obj.setNomeClasse(resultado.getString("c.nome"));
 
-                JOptionPane.showMessageDialog(null, "Produto encontrado!!");
+            }
+            stmt.close();
+            return obj;
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o produto!!" + erro);
+        }
+        return null;
+    }
+    
+    public Produtos BuscarCodigoProduto(int id) {
+        try {
+            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome "
+                    + "FROM produtos AS p "
+                    + "INNER JOIN fornecedores AS f "
+                    + "ON (p.for_id = f.id) "
+                    + "LEFT JOIN classeProduto AS c "
+                    + "ON (c.id = p.classe_id) "
+                    + "WHERE p.id = ? ";
+
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            ResultSet resultado = stmt.executeQuery();
+            Produtos obj = new Produtos();
+            Fornecedores f = new Fornecedores();
+
+            if (resultado.next()) {
+                obj.setId(resultado.getInt("p.id"));
+                obj.setDescricao(resultado.getString("p.descricao"));
+                obj.setPreco(resultado.getDouble("p.preco"));
+                obj.setQtd_estoque(resultado.getInt("p.qtd_estoque"));
+                f.setNome(resultado.getString("f.nome"));
+                obj.setFornecedor(f);
+                obj.setNomeClasse(resultado.getString("c.nome"));
             }
             stmt.close();
             return obj;
