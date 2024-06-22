@@ -1577,7 +1577,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painel_dados_funcionariosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painel_dados_funcionariosLayout.createSequentialGroup()
                         .addComponent(jLabel49)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1598,22 +1598,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel52)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCelularFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(painel_dados_funcionariosLayout.createSequentialGroup()
-                        .addComponent(jLabel57)
-                        .addGap(2, 2, 2)
-                        .addComponent(txtCargoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel58)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbNivelAcessoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel51)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEmailFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel56)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSenhaFuncionarios)))
+                    .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painel_dados_funcionariosLayout.createSequentialGroup()
+                            .addComponent(jLabel56)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtSenhaFuncionarios))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painel_dados_funcionariosLayout.createSequentialGroup()
+                            .addComponent(jLabel57)
+                            .addGap(2, 2, 2)
+                            .addComponent(txtCargoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel58)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cbNivelAcessoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel51)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtEmailFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painel_dados_funcionariosLayout.createSequentialGroup()
@@ -1629,7 +1630,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painel_dados_funcionariosLayout.setVerticalGroup(
             painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painel_dados_funcionariosLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel49)
                     .addComponent(txtCodigoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1651,11 +1652,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel58)
                     .addComponent(jLabel51)
                     .addComponent(txtEmailFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel56)
-                    .addComponent(txtSenhaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditarFuncionarios)
                     .addComponent(btnExcluirFuncionarios))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel56)
+                    .addComponent(txtSenhaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout painel_funcionariosLayout = new javax.swing.GroupLayout(painel_funcionarios);
@@ -1683,8 +1685,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(painel_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(txtPesquisaNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
         );
 
         content.addTab("Consulta de Clientes", painel_funcionarios);
@@ -2325,6 +2327,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtCargoFuncionarios.setText(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 6).toString());
         cbNivelAcessoFuncionarios.setSelectedItem(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 7).toString());
         txtCelularFuncionarios.setText(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 8).toString());
+        txtSenhaFuncionarios.setEnabled(false);
     }//GEN-LAST:event_tabela_funcionariosMouseClicked
 
     private void tabela_fornecedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_fornecedoresMouseClicked
@@ -3058,6 +3061,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Utilitarios util = new Utilitarios();
 
         util.Limpar(painel_dados_funcionarios);
+        
+        txtSenhaFuncionarios.setEnabled(true);
     }//GEN-LAST:event_btnNovoFuncionariosActionPerformed
 
     private void btnSalvarFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFuncionariosActionPerformed

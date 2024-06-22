@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import model.Funcionario;
 import view.Login;
 import view.TelaPrincipal;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class FuncionarioDAO implements DAOInterface<Funcionario> {
 
@@ -19,6 +21,20 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
         this.conexao = new ConexaoBanco().conectarComBanco();
     }
 
+    public static String hashSenha(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void Salvar(Funcionario obj) {
         try {
@@ -26,12 +42,15 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
                     + "VALUES (?,?,?,?,?,?,?,?)";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
+            
+            String senhaNormal = obj.getSenha();
+            String senhaCryp = hashSenha(senhaNormal);
 
             stmt.setString(1, obj.getNome());
             stmt.setString(2, obj.getRg());
             stmt.setString(3, obj.getCpf());
             stmt.setString(4, obj.getEmail());
-            stmt.setString(5, obj.getSenha());
+            stmt.setString(5, senhaCryp);
             stmt.setString(6, obj.getCargo());
             stmt.setString(7, obj.getNivelAcesso());
             stmt.setString(8, obj.getCelular());
@@ -198,8 +217,11 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
+            String senhaCryp = hashSenha(senha);
+            
+            
             stmt.setString(1, email);
-            stmt.setString(2, senha);
+            stmt.setString(2, senhaCryp);
 
             ResultSet resultado = stmt.executeQuery();
 
