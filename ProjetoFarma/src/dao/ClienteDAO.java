@@ -115,7 +115,6 @@ public class ClienteDAO implements DAOInterface<Cliente> {
                 obj.setEstado(resultado.getString("estado"));
                 obj.setNomeSexo(resultado.getString("nome_sexo"));
 
-                JOptionPane.showMessageDialog(null, "Cliente encontrado!!");
             }
             stmt.close();
             return obj;
@@ -157,7 +156,6 @@ public class ClienteDAO implements DAOInterface<Cliente> {
                 obj.setEstado(resultado.getString("estado"));
                 obj.setNomeSexo(resultado.getString("nome_sexo"));
 
-                JOptionPane.showMessageDialog(null, "Cliente encontrado!!");
             }
             stmt.close();
             return obj;

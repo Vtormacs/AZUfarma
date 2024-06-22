@@ -46,6 +46,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * cep, endereço, número, complemento, bairro, cidade e estado.
      */
     public void Listar() {
+        System.out.print("carreguei cliente");
         ClienteDAO dao = new ClienteDAO();
         List<Cliente> lista = dao.Listar();
         DefaultTableModel dados = (DefaultTableModel) tabela_clientes.getModel();
@@ -72,6 +73,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void ListarFuncionario() {
+        System.out.print("carreguei funcionario");
         FuncionarioDAO dao = new FuncionarioDAO();
         List<Funcionario> lista = dao.Listar();
         DefaultTableModel dados = (DefaultTableModel) tabela_funcionarios.getModel();
@@ -92,6 +94,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void ListarFornecedores() {
+        System.out.print("carreguei fornecedores");
         FornecedoresDAO dao = new FornecedoresDAO();
         List<Fornecedores> lista = dao.Listar();
         DefaultTableModel dados = (DefaultTableModel) tabela_fornecedores.getModel();
@@ -116,6 +119,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     public void ListarProdutos() {
+        System.out.print("carreguei produtos");
         ProdutosDAO dao = new ProdutosDAO();
         List<Produtos> lista = dao.Listar();
         DefaultTableModel dados = (DefaultTableModel) tabela_produtos.getModel();
@@ -2477,6 +2481,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         content.setSelectedIndex(5);
+        ListarProdutos();
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void tabela_estoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_estoqueMouseClicked

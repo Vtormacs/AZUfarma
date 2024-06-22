@@ -1,7 +1,6 @@
 package view;
 
 import dao.ClienteDAO;
-import dao.FornecedoresDAO;
 import dao.ProdutosDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -203,7 +202,7 @@ public class PontoDeVendas extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jLabel3)
                     .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -211,8 +210,8 @@ public class PontoDeVendas extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtPesquisaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
         );
 
         painelProduto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -656,7 +655,25 @@ public class PontoDeVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagamentoActionPerformed
-        new Pagamento().setVisible(true);
+        String nome = txtNome.getText();
+        String cpf = txtCpf.getText();
+        
+        obj = new Cliente();
+        
+        ClienteDAO daoc = new ClienteDAO();
+        obj = daoc.Buscar(nome);
+        obj = daoc.BuscarCpf(cpf);
+        
+        if(obj.getNome() != null && obj.getCpf() != null){
+            Pagamento telaPagamento = new Pagamento();
+            
+            telaPagamento.clientes = obj;
+            telaPagamento.meusProdutos = meusProdutos;
+            telaPagamento.txtTotal.setText(String.valueOf(total));
+            telaPagamento.setVisible(true);
+        }else {
+            JOptionPane.showMessageDialog(null, "Verifique se você não esqueceu de \n preencher alguma imformação importante!\n Os campos podem ser NOME e/ou CPF" );
+        }
     }//GEN-LAST:event_btnPagamentoActionPerformed
 
     /**

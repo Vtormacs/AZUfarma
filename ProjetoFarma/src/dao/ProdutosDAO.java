@@ -269,4 +269,22 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
     public Produtos BuscarCpf(String cpf) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public int retornaQtdAtualEstoque (int id){
+        try {
+            int qtdAtualEstoque = 0;
+            
+            String sql = "SELECT qtd_estoque FROM produtos WHERE id = ?";
+            
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            ResultSet resultado = stmt.executeQuery();
+            
+            if(resultado.next()){
+                qtdAtualEstoque = (resultado.getInt("qtd_estoque"));
+            }
+            return qtdAtualEstoque;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao retornar a quantidade atual do estoque" + e);
+        }
+    }
 }

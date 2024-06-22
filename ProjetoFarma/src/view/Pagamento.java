@@ -63,6 +63,7 @@ public class Pagamento extends javax.swing.JFrame {
         jLabel5.setText("Total:");
 
         txtTotal.setEditable(false);
+        txtTotal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
 
         aretxtObservacoes.setColumns(20);
         aretxtObservacoes.setRows(5);
@@ -197,7 +198,7 @@ public class Pagamento extends javax.swing.JFrame {
     private javax.swing.JTextField txtCatao;
     private javax.swing.JTextField txtDinheiro;
     private javax.swing.JTextField txtPix;
-    private javax.swing.JTextField txtTotal;
+    public javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtTroco;
     // End of variables declaration//GEN-END:variables
 }
