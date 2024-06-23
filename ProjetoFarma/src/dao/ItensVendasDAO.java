@@ -13,7 +13,7 @@ public class ItensVendasDAO {
     }
     public void salvar (ItensVendas obj){
         try {
-            String sql = "INSERT INTO itensVendas (venda_id,produto_id,qtd,subtotal) "
+            String sql = "INSERT INTO itensVenda (venda_id,produto_id,qtd,subtotal) "
                     + "VALUES (?,?,?,?)";
             
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -26,7 +26,7 @@ public class ItensVendasDAO {
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
-             throw new RuntimeException("Erro ao salvar os itens da mionha venda" + e);
+             throw new RuntimeException("Erro ao salvar os itens da mihha venda" + e);
         }
     }
 }

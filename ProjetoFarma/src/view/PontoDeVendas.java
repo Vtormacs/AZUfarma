@@ -159,6 +159,11 @@ public class PontoDeVendas extends javax.swing.JFrame {
         txtData.setEditable(false);
         txtData.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtData.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -655,26 +660,31 @@ public class PontoDeVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagamentoActionPerformed
+
         String nome = txtNome.getText();
         String cpf = txtCpf.getText();
-        
+
         obj = new Cliente();
-        
+
         ClienteDAO daoc = new ClienteDAO();
         obj = daoc.Buscar(nome);
         obj = daoc.BuscarCpf(cpf);
-        
-        if(obj.getNome() != null && obj.getCpf() != null){
+
+        if (obj.getNome() != null && obj.getCpf() != null) {
             Pagamento telaPagamento = new Pagamento();
-            
+
             telaPagamento.clientes = obj;
             telaPagamento.meusProdutos = meusProdutos;
-            telaPagamento.txtTotal.setText(String.valueOf(total));
+            telaPagamento.txtTotalVenda.setText(String.valueOf(total));
             telaPagamento.setVisible(true);
-        }else {
-            JOptionPane.showMessageDialog(null, "Verifique se você não esqueceu de \n preencher alguma imformação importante!\n Os campos podem ser NOME e/ou CPF" );
+        } else {
+            JOptionPane.showMessageDialog(null, "Verifique se você não esqueceu de \n preencher alguma imformação importante!\n Os campos podem ser NOME e/ou CPF");
         }
     }//GEN-LAST:event_btnPagamentoActionPerformed
+
+    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataActionPerformed
 
     /**
      * @param args the command line arguments

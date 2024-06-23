@@ -277,6 +277,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
             String sql = "SELECT qtd_estoque FROM produtos WHERE id = ?";
             
             PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1, id);
             ResultSet resultado = stmt.executeQuery();
             
             if(resultado.next()){

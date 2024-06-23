@@ -39,7 +39,7 @@ public class VendasDAO {
         try {
             int ultimoId = 0;
             
-            String sql = "SELECT max(id) FROM vendas";
+            String sql = "SELECT id FROM vendas";
                 PreparedStatement stmt = conexao.prepareStatement(sql);
                 ResultSet resultado = stmt.executeQuery();
                 
