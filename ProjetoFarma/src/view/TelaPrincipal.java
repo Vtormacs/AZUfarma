@@ -5,12 +5,15 @@ import dao.ClienteDAO;
 import dao.FornecedoresDAO;
 import dao.FuncionarioDAO;
 import dao.ProdutosDAO;
+import dao.VendasDAO;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +27,7 @@ import model.Cliente;
 import model.Fornecedores;
 import model.Funcionario;
 import model.Produtos;
+import model.Vendas;
 import utilitarios.Utilitarios;
 
 /**
@@ -348,6 +352,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtQuantidadeEstoqueProduto = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         cbFornecedorProduto = new javax.swing.JComboBox();
+        painel_historico_de_vendas = new javax.swing.JPanel();
+        Funcionarios5 = new javax.swing.JLabel();
+        painel_dados_historico = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtInicio = new javax.swing.JFormattedTextField();
+        txtFim = new javax.swing.JFormattedTextField();
+        btnPesquisarVenda = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tabela_historico = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         btnProdutos = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
@@ -482,7 +496,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Funcionarios4.setText("ESTOQUE");
         Funcionarios4.setOpaque(true);
 
-        painel_dados_estoque.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Formulario:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+        painel_dados_estoque.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Adicionar Estoque:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Código:");
@@ -1952,6 +1966,114 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         content.addTab("Consulta de Clientes", painel_produtos);
 
+        Funcionarios5.setBackground(new java.awt.Color(0, 51, 153));
+        Funcionarios5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        Funcionarios5.setForeground(new java.awt.Color(255, 255, 255));
+        Funcionarios5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Funcionarios5.setText("HISTÓRICO DE VENDAS");
+        Funcionarios5.setOpaque(true);
+
+        painel_dados_historico.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Consultar Historico por Data:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Data Início:");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Data Fim:");
+
+        txtInicio.setBorder(null);
+        try {
+            txtInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/20##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        txtFim.setBorder(null);
+        try {
+            txtFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/20##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        btnPesquisarVenda.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnPesquisarVenda.setText("Pesquisar");
+        btnPesquisarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarVendaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painel_dados_historicoLayout = new javax.swing.GroupLayout(painel_dados_historico);
+        painel_dados_historico.setLayout(painel_dados_historicoLayout);
+        painel_dados_historicoLayout.setHorizontalGroup(
+            painel_dados_historicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painel_dados_historicoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(txtFim, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(btnPesquisarVenda)
+                .addContainerGap(600, Short.MAX_VALUE))
+        );
+        painel_dados_historicoLayout.setVerticalGroup(
+            painel_dados_historicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painel_dados_historicoLayout.createSequentialGroup()
+                .addGroup(painel_dados_historicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(txtInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisarVenda))
+                .addGap(0, 3, Short.MAX_VALUE))
+        );
+
+        jScrollPane6.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true), "Lista do histórico", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
+
+        tabela_historico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tabela_historico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Cliente", "Data da Venda", "Total da Venda", "Observações"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tabela_historico);
+
+        javax.swing.GroupLayout painel_historico_de_vendasLayout = new javax.swing.GroupLayout(painel_historico_de_vendas);
+        painel_historico_de_vendas.setLayout(painel_historico_de_vendasLayout);
+        painel_historico_de_vendasLayout.setHorizontalGroup(
+            painel_historico_de_vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Funcionarios5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painel_dados_historico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        painel_historico_de_vendasLayout.setVerticalGroup(
+            painel_historico_de_vendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painel_historico_de_vendasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Funcionarios5)
+                .addGap(18, 18, 18)
+                .addComponent(painel_dados_historico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
+        );
+
+        content.addTab("tab7", painel_historico_de_vendas);
+
         jPanel1.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, -40, 1210, 610));
 
         jPanel8.setBackground(new java.awt.Color(0, 51, 153));
@@ -2162,6 +2284,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu5.add(jMenuItem7);
 
         jMenuItem8.setText("Historico de vendas");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem8);
 
         jMenuBar1.add(jMenu5);
@@ -2545,7 +2672,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         content.setSelectedIndex(1);
-        ListarProdutos();
+        ListarEstoque();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     @SuppressWarnings("unchecked")
@@ -3210,6 +3337,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbFornecedorProdutoActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        content.setSelectedIndex(6);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void btnPesquisarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarVendaActionPerformed
+      DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      LocalDate dataInicio = LocalDate.parse(txtInicio.getText(),formato);
+      LocalDate dataFim = LocalDate.parse(txtFim.getText(),formato);
+      
+      VendasDAO vd = new VendasDAO();
+      
+      List<Vendas> lista = vd.historicoVendas(dataInicio, dataFim);
+      
+        DefaultTableModel historico = (DefaultTableModel) tabela_historico.getModel();
+        
+        historico.setNumRows(0);
+        
+        for(Vendas v : lista){
+            historico.addRow(new Object[]{
+                v.getId(),
+                v.getCliente().getNome(),
+                v.getDataVenda(),
+                v.getTotalVenda(),
+                v.getObservacoes()
+            });
+        }
+    }//GEN-LAST:event_btnPesquisarVendaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3251,6 +3406,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel Funcionarios2;
     private javax.swing.JLabel Funcionarios3;
     private javax.swing.JLabel Funcionarios4;
+    private javax.swing.JLabel Funcionarios5;
     private javax.swing.JButton btnAdicionarEstoque;
     private javax.swing.JButton btnCEP;
     private javax.swing.JButton btnCliente;
@@ -3271,6 +3427,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnNovoFuncionarios;
     private javax.swing.JButton btnNovoProduto;
     private javax.swing.JButton btnPTV;
+    private javax.swing.JButton btnPesquisarVenda;
     private javax.swing.JButton btnProdutos;
     private javax.swing.JButton btnSalvarClientes;
     private javax.swing.JButton btnSalvarEstoque;
@@ -3286,6 +3443,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane content;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -3296,6 +3454,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -3365,6 +3524,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel jlData;
     private javax.swing.JLabel jlHora;
     private javax.swing.JPanel painel_cliente;
@@ -3372,15 +3532,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel painel_dados_estoque;
     private javax.swing.JPanel painel_dados_fornecedores;
     private javax.swing.JPanel painel_dados_funcionarios;
+    private javax.swing.JPanel painel_dados_historico;
     private javax.swing.JPanel painel_dados_produto;
     private javax.swing.JPanel painel_estoque;
     private javax.swing.JPanel painel_fornecedores;
     private javax.swing.JPanel painel_funcionarios;
+    private javax.swing.JPanel painel_historico_de_vendas;
     private javax.swing.JPanel painel_produtos;
     private javax.swing.JTable tabela_clientes;
     private javax.swing.JTable tabela_estoque;
     private javax.swing.JTable tabela_fornecedores;
     private javax.swing.JTable tabela_funcionarios;
+    private javax.swing.JTable tabela_historico;
     private javax.swing.JTable tabela_produtos;
     private javax.swing.JTextField txtBairroClientes;
     private javax.swing.JTextField txtBairroFornecedores;
@@ -3409,6 +3572,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmailFuncionarios;
     private javax.swing.JTextField txtEnderecoClientes;
     private javax.swing.JTextField txtEnderecoFornecedores;
+    private javax.swing.JFormattedTextField txtFim;
+    private javax.swing.JFormattedTextField txtInicio;
     private javax.swing.JTextField txtNomeClientes;
     private javax.swing.JTextField txtNomeFornecedores;
     private javax.swing.JTextField txtNomeFuncionarios;

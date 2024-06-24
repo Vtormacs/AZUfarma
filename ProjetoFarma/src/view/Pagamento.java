@@ -166,7 +166,7 @@ public class Pagamento extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnPagar)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtCartao, txtPix, txtTroco});
@@ -192,9 +192,7 @@ public class Pagamento extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,8 +229,8 @@ public class Pagamento extends javax.swing.JFrame {
 
             VendasDAO vd = new VendasDAO();
             vd.salvar(v);
-//            v.setId(vd.retornaUltimoIdVenda());
-//            JOptionPane.showMessageDialog(null, "ID da ultima venda!" + v.getId());
+            v.setId(vd.retornaUltimoIdVenda());
+            JOptionPane.showMessageDialog(null, "ID da ultima venda!" + v.getId());
 
             for (int i = 0; i < meusProdutos.getRowCount(); i++) {
                 int qtdEstoque, qtdComprada, qtdAtualizada;
