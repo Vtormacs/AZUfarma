@@ -41,6 +41,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     //variavei globai que seram usadas no estoque
     int idProduto, qtd_atualizada;
+    
+    public String usuarioLogado;
 
     /**
      * Este método público 'Listar' é usado para listar todos os clientes.
@@ -438,6 +440,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AZUfarma");
         setBackground(new java.awt.Color(0, 0, 0));
+        setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -448,7 +451,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 51, 153));
         jPanel1.setMinimumSize(new java.awt.Dimension(1250, 580));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

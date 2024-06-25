@@ -260,8 +260,8 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
                 // Verificar se a senha fornecida corresponde à senha armazenada usando o salt
                 if (autenticacao(senha, senhaArmazenada, saltArmazenado)) {
                     // Se a autenticação for bem-sucedida, exibir mensagem de boas-vindas e abrir a tela principal
-                    JOptionPane.showMessageDialog(null, "Seja bem vindo(a) ao sistema!!");
                     new TelaPrincipal().setVisible(true);
+                    JOptionPane.showMessageDialog(null, "Seja bem vindo(a) ao sistema!!");
                 } else {
                     // Se a autenticação falhar, exibir mensagem de erro e abrir a tela de login novamente
                     JOptionPane.showMessageDialog(null, "Dados inválidos!!");
