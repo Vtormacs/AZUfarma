@@ -4,6 +4,7 @@ import Atxy2k.CustomTextField.RestrictedTextField;
 import dao.ClienteDAO;
 import dao.FornecedoresDAO;
 import dao.FuncionarioDAO;
+import dao.ItensVendasDAO;
 import dao.ProdutosDAO;
 import dao.VendasDAO;
 import java.awt.Graphics;
@@ -21,11 +22,13 @@ import javax.swing.Timer;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import model.CEPinfo;
 import model.Cliente;
 import model.Fornecedores;
 import model.Funcionario;
+import model.ItensVendas;
 import model.Produtos;
 import model.Vendas;
 import utilitarios.Utilitarios;
@@ -88,7 +91,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 f.getRg(),
                 f.getCpf(),
                 f.getEmail(),
-                f.getSenha(),
+
                 f.getCargo(),
                 f.getNivelAcesso(),
                 f.getCelular()
@@ -329,6 +332,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtCargoFuncionarios = new javax.swing.JTextField();
         jLabel58 = new javax.swing.JLabel();
         btnNovoFuncionarios = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         painel_produtos = new javax.swing.JPanel();
         txtPesquisaDescricaoProduto = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
@@ -1443,9 +1447,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "RG", "CPF", "Email", "Senha", "Cargo", "Nivel", "Celular"
+                "Id", "Nome", "RG", "CPF", "Email", "Cargo", "Nivel", "Celular"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabela_funcionarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabela_funcionariosMouseClicked(evt);
@@ -1585,6 +1597,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setText("Alterar Senha");
+
         javax.swing.GroupLayout painel_dados_funcionariosLayout = new javax.swing.GroupLayout(painel_dados_funcionarios);
         painel_dados_funcionarios.setLayout(painel_dados_funcionariosLayout);
         painel_dados_funcionariosLayout.setHorizontalGroup(
@@ -1607,11 +1622,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel53)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRGFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel52)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCelularFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtRGFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painel_dados_funcionariosLayout.createSequentialGroup()
                             .addComponent(jLabel56)
@@ -1629,6 +1640,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel51)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtEmailFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painel_dados_funcionariosLayout.createSequentialGroup()
+                        .addComponent(jLabel52)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCelularFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painel_dados_funcionariosLayout.createSequentialGroup()
@@ -1659,19 +1677,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnNovoFuncionarios)
                     .addComponent(btnSalvarFuncionarios))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel57)
-                    .addComponent(txtCargoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbNivelAcessoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel58)
-                    .addComponent(jLabel51)
-                    .addComponent(txtEmailFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditarFuncionarios)
-                    .addComponent(btnExcluirFuncionarios))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel56)
-                    .addComponent(txtSenhaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painel_dados_funcionariosLayout.createSequentialGroup()
+                        .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel57)
+                            .addComponent(txtCargoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbNivelAcessoFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel58)
+                            .addComponent(jLabel51)
+                            .addComponent(txtEmailFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditarFuncionarios)
+                            .addComponent(btnExcluirFuncionarios))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(painel_dados_funcionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel56)
+                            .addComponent(txtSenhaFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_dados_funcionariosLayout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(20, 20, 20))))
         );
 
         javax.swing.GroupLayout painel_funcionariosLayout = new javax.swing.GroupLayout(painel_funcionarios);
@@ -2051,6 +2074,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabela_historico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabela_historicoMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(tabela_historico);
 
         javax.swing.GroupLayout painel_historico_de_vendasLayout = new javax.swing.GroupLayout(painel_historico_de_vendas);
@@ -2298,6 +2326,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem9.setText("Trocar Usuario");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem9);
 
         jMenuBar1.add(jMenu6);
@@ -2366,31 +2399,51 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * interface do usuário com os clientes encontrados.
      */
     private void txtPesquisaNomeClientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaNomeClientesKeyReleased
+    // Obtém o nome para a pesquisa
+    String nome = "%" + txtPesquisaNomeClientes.getText() + "%";
 
-        String nome = "%" + txtPesquisaNomeClientes.getText() + "%";
-        ClienteDAO dao = new ClienteDAO();
-        List<Cliente> lista = dao.Filtrar(nome);
-        DefaultTableModel dados = (DefaultTableModel) tabela_clientes.getModel();
-        dados.setNumRows(0);
-        for (Cliente c : lista) {
-            dados.addRow(new Object[]{
-                c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getNomeSexo(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getEstado()
-            });
+    // Cria um SwingWorker para realizar a pesquisa em segundo plano
+    new SwingWorker<List<Cliente>, Void>() {
+        @Override
+        protected List<Cliente> doInBackground() throws Exception {
+            ClienteDAO dao = new ClienteDAO();
+            return dao.Filtrar(nome);
         }
+
+        @Override
+        protected void done() {
+            try {
+                // Obtém a lista de clientes filtrados
+                List<Cliente> lista = get();
+
+                // Atualiza a tabela com os novos dados
+                DefaultTableModel dados = (DefaultTableModel) tabela_clientes.getModel();
+                dados.setNumRows(0);
+
+                for (Cliente c : lista) {
+                    dados.addRow(new Object[]{
+                        c.getId(),
+                        c.getNome(),
+                        c.getRg(),
+                        c.getCpf(),
+                        c.getNomeSexo(),
+                        c.getEmail(),
+                        c.getTelefone(),
+                        c.getCelular(),
+                        c.getCep(),
+                        c.getEndereco(),
+                        c.getNumero(),
+                        c.getComplemento(),
+                        c.getBairro(),
+                        c.getCidade(),
+                        c.getEstado()
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }.execute();
     }//GEN-LAST:event_txtPesquisaNomeClientesKeyReleased
 
     /**
@@ -2425,24 +2478,45 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisaNomeFuncionarioActionPerformed
 
     private void txtPesquisaNomeFuncionarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaNomeFuncionarioKeyReleased
-        String nome = "%" + txtPesquisaNomeFuncionario.getText() + "%";
-        FuncionarioDAO dao = new FuncionarioDAO();
-        List<Funcionario> lista = dao.Filtrar(nome);
-        DefaultTableModel dados = (DefaultTableModel) tabela_funcionarios.getModel();
-        dados.setNumRows(0);
-        for (Funcionario f : lista) {
-            dados.addRow(new Object[]{
-                f.getId(),
-                f.getNome(),
-                f.getRg(),
-                f.getCpf(),
-                f.getEmail(),
-                f.getSenha(),
-                f.getCargo(),
-                f.getNivelAcesso(),
-                f.getCelular()
-            });
+        // Obtém o nome para a pesquisa
+    String nome = "%" + txtPesquisaNomeFuncionario.getText() + "%";
+
+    // Cria um SwingWorker para realizar a pesquisa em segundo plano
+    new SwingWorker<List<Funcionario>, Void>() {
+        @Override
+        protected List<Funcionario> doInBackground() throws Exception {
+            FuncionarioDAO dao = new FuncionarioDAO();
+            return dao.Filtrar(nome);
         }
+
+        @Override
+        protected void done() {
+            try {
+                // Obtém a lista de funcionários filtrados
+                List<Funcionario> lista = get();
+
+                // Atualiza a tabela com os novos dados
+                DefaultTableModel dados = (DefaultTableModel) tabela_funcionarios.getModel();
+                dados.setNumRows(0);
+
+                for (Funcionario f : lista) {
+                    dados.addRow(new Object[]{
+                        f.getId(),
+                        f.getNome(),
+                        f.getRg(),
+                        f.getCpf(),
+                        f.getEmail(),
+                        f.getSenha(),
+                        f.getCargo(),
+                        f.getNivelAcesso(),
+                        f.getCelular()
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }.execute();
     }//GEN-LAST:event_txtPesquisaNomeFuncionarioKeyReleased
 
     private void tabela_funcionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_funcionariosMouseClicked
@@ -2452,10 +2526,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtRGFuncionarios.setText(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 2).toString());
         txtCPFFuncionarios.setText(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 3).toString());
         txtEmailFuncionarios.setText(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 4).toString());
-        txtSenhaFuncionarios.setText(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 5).toString());
-        txtCargoFuncionarios.setText(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 6).toString());
-        cbNivelAcessoFuncionarios.setSelectedItem(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 7).toString());
-        txtCelularFuncionarios.setText(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 8).toString());
+        txtCargoFuncionarios.setText(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 5).toString());
+        cbNivelAcessoFuncionarios.setSelectedItem(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 6).toString());
+        txtCelularFuncionarios.setText(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 7).toString());
         txtSenhaFuncionarios.setEnabled(false);
     }//GEN-LAST:event_tabela_funcionariosMouseClicked
 
@@ -2482,28 +2555,49 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisaNomeFornecedoresActionPerformed
 
     private void txtPesquisaNomeFornecedoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaNomeFornecedoresKeyReleased
-        String nome = "%" + txtPesquisaNomeFornecedores.getText() + "%";
-        FornecedoresDAO dao = new FornecedoresDAO();
-        List<Fornecedores> lista = dao.Filtrar(nome);
-        DefaultTableModel dados = (DefaultTableModel) tabela_fornecedores.getModel();
-        dados.setNumRows(0);
-        for (Fornecedores c : lista) {
-            dados.addRow(new Object[]{
-                c.getId(),
-                c.getNome(),
-                c.getCnpj(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getEstado()
-            });
+        // Obtém o nome para a pesquisa
+    String nome = "%" + txtPesquisaNomeFornecedores.getText() + "%";
+
+    // Cria um SwingWorker para realizar a pesquisa em segundo plano
+    new SwingWorker<List<Fornecedores>, Void>() {
+        @Override
+        protected List<Fornecedores> doInBackground() throws Exception {
+            FornecedoresDAO dao = new FornecedoresDAO();
+            return dao.Filtrar(nome);
         }
+
+        @Override
+        protected void done() {
+            try {
+                // Obtém a lista de fornecedores filtrados
+                List<Fornecedores> lista = get();
+
+                // Atualiza a tabela com os novos dados
+                DefaultTableModel dados = (DefaultTableModel) tabela_fornecedores.getModel();
+                dados.setNumRows(0);
+
+                for (Fornecedores c : lista) {
+                    dados.addRow(new Object[]{
+                        c.getId(),
+                        c.getNome(),
+                        c.getCnpj(),
+                        c.getEmail(),
+                        c.getTelefone(),
+                        c.getCelular(),
+                        c.getCep(),
+                        c.getEndereco(),
+                        c.getNumero(),
+                        c.getComplemento(),
+                        c.getBairro(),
+                        c.getCidade(),
+                        c.getEstado()
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }.execute();
     }//GEN-LAST:event_txtPesquisaNomeFornecedoresKeyReleased
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -2526,21 +2620,42 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesquisaDescricaoProdutoActionPerformed
 
     private void txtPesquisaDescricaoProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaDescricaoProdutoKeyReleased
-        String descricao = "%" + txtPesquisaDescricaoProduto.getText() + "%";
-        ProdutosDAO dao = new ProdutosDAO();
-        List<Produtos> lista = dao.Filtrar(descricao);
-        DefaultTableModel dados = (DefaultTableModel) tabela_produtos.getModel();
-        dados.setNumRows(0);
-        for (Produtos p : lista) {
-            dados.addRow(new Object[]{
-                p.getId(),
-                p.getDescricao(),
-                p.getPreco(),
-                p.getQtd_estoque(),
-                p.getFornecedor().getNome(),
-                p.getNomeClasse()
-            });
+        // Obtém a descrição para a pesquisa
+    String descricao = "%" + txtPesquisaDescricaoProduto.getText() + "%";
+
+    // Cria um SwingWorker para realizar a pesquisa em segundo plano
+    new SwingWorker<List<Produtos>, Void>() {
+        @Override
+        protected List<Produtos> doInBackground() throws Exception {
+            ProdutosDAO dao = new ProdutosDAO();
+            return dao.Filtrar(descricao);
         }
+
+        @Override
+        protected void done() {
+            try {
+                // Obtém a lista de produtos filtrados
+                List<Produtos> lista = get();
+
+                // Atualiza a tabela com os novos dados
+                DefaultTableModel dados = (DefaultTableModel) tabela_produtos.getModel();
+                dados.setNumRows(0);
+
+                for (Produtos p : lista) {
+                    dados.addRow(new Object[]{
+                        p.getId(),
+                        p.getDescricao(),
+                        p.getPreco(),
+                        p.getQtd_estoque(),
+                        p.getFornecedor().getNome(),
+                        p.getNomeClasse()
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }.execute();
     }//GEN-LAST:event_txtPesquisaDescricaoProdutoKeyReleased
 
     private void tabela_produtosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_produtosMouseClicked
@@ -3322,7 +3437,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        new Login().setVisible(true);
+        int janela = JOptionPane.showConfirmDialog(null, "Deseja sair do sistema?");
+        
+        if(janela == 0){
+            System.exit(0);
+        }else if(janela == 2){
+            JOptionPane.showMessageDialog(null, "Cancelando...");
+        }
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -3364,6 +3485,40 @@ public class TelaPrincipal extends javax.swing.JFrame {
             });
         }
     }//GEN-LAST:event_btnPesquisarVendaActionPerformed
+
+    private void tabela_historicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_historicoMouseClicked
+        DetalheVenda dv = new DetalheVenda();
+        
+        dv.txtIdVenda.setText(tabela_historico.getValueAt(tabela_historico.getSelectedRow(),0).toString());
+        dv.txtCliente.setText(tabela_historico.getValueAt(tabela_historico.getSelectedRow(),1).toString());
+        dv.txtDataVenda.setText(tabela_historico.getValueAt(tabela_historico.getSelectedRow(),2).toString());
+        dv.txtTotalVenda.setText(tabela_historico.getValueAt(tabela_historico.getSelectedRow(),3).toString());
+        dv.txtObs.setText(tabela_historico.getValueAt(tabela_historico.getSelectedRow(),4).toString());
+        
+        int venda_id =  Integer.valueOf(dv.txtIdVenda.getText());
+        ItensVendasDAO dao = new ItensVendasDAO();
+        List<ItensVendas>lista = dao.listaItens(venda_id);
+        DefaultTableModel dados = (DefaultTableModel) dv.tabelaCarrinho.getModel();
+        
+        for(ItensVendas i : lista){
+            dados.addRow(new Object[]{
+               i.getProdutos().getId(),
+                i.getProdutos().getDescricao(),
+                i.getQtd(),
+                i.getProdutos().getPreco(),
+                i.getSubTotal()
+            });
+        }
+        
+        dv.setVisible(true);
+        
+    }//GEN-LAST:event_tabela_historicoMouseClicked
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+       Login login = new Login();
+       this.dispose();
+       login.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3443,6 +3598,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane content;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

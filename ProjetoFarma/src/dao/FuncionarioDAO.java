@@ -10,8 +10,13 @@ import javax.swing.JOptionPane;
 import model.Funcionario;
 import view.Login;
 import view.TelaPrincipal;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import java.security.spec.KeySpec;
+import java.security.SecureRandom;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FuncionarioDAO implements DAOInterface<Funcionario> {
 
@@ -21,39 +26,64 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
         this.conexao = new ConexaoBanco().conectarComBanco();
     }
 
-    public static String hashSenha(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(password.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashedBytes) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+    public static String geradorSalt() {
+        // Cria um array de bytes para armazenar o salt
+        byte[] salt = new byte[16];
+
+        // Cria uma instância de SecureRandom para gerar valores aleatórios
+        SecureRandom secureRandom = new SecureRandom();
+        // Gera bytes aleatórios e os armazena no array de salt
+        secureRandom.nextBytes(salt);
+
+        // Codifica o array de bytes em Base64 e retorna como uma string
+        return Base64.getEncoder().encodeToString(salt);
+    }
+
+    public static String senhaCriptografada(String senha, String salt) throws Exception {
+        // Define o número de iterações e o comprimento da chave
+        int iteracoes = 10000; // Você pode ajustar o número de iterações conforme necessário 
+        int comprimento = 256; // Você pode ajustar o comprimento da chave conforme necessário
+
+        // Cria um KeySpec com a senha, salt, número de iterações e comprimento da chave
+        KeySpec keySpec = new PBEKeySpec(senha.toCharArray(), Base64.getDecoder().decode(salt), iteracoes, comprimento);
+        // Obtém uma instância de SecretKeyFactory para o algoritmo PBKDF2WithHmacSHA256
+        SecretKeyFactory gerandoSenhaCrip = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+
+        // Gera a chave secreta a partir do KeySpec e a codifica em um array de bytes
+        byte[] senhaHash = gerandoSenhaCrip.generateSecret(keySpec).getEncoded();
+
+        // Codifica o array de bytes resultante em Base64 e retorna como uma string
+        return Base64.getEncoder().encodeToString(senhaHash);
+    }
+
+    public static boolean autenticacao(String senhaFornecida, String senhaArmazenada, String salt) throws Exception {
+        // Criptografa a senha fornecida usando o salt armazenado
+        String senhaNovaCriptografada = senhaCriptografada(senhaFornecida, salt);
+        // Compara a senha criptografada recém-gerada com a senha armazenada
+        return senhaNovaCriptografada.equals(senhaArmazenada);
     }
 
     @Override
     public void Salvar(Funcionario obj) {
         try {
-            String sql = "INSERT INTO funcionarios(nome,rg,cpf,email,senha,cargo,nivel_acesso,celular) "
-                    + "VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO funcionarios(nome,rg,cpf,email,senha,cargo,nivel_acesso,celular,salt) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
-            
+
             String senhaNormal = obj.getSenha();
-            String senhaCryp = hashSenha(senhaNormal);
+            String salt = geradorSalt();
+            String senhaCrip = senhaCriptografada(senhaNormal, salt);
 
             stmt.setString(1, obj.getNome());
             stmt.setString(2, obj.getRg());
             stmt.setString(3, obj.getCpf());
             stmt.setString(4, obj.getEmail());
-            stmt.setString(5, senhaCryp);
+            stmt.setString(5, senhaCrip);
             stmt.setString(6, obj.getCargo());
             stmt.setString(7, obj.getNivelAcesso());
             stmt.setString(8, obj.getCelular());
+            stmt.setString(9, salt);
 
             stmt.execute();
             stmt.close();
@@ -62,13 +92,15 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
 
         } catch (HeadlessException | SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar o funcionario!!" + erro);
+        } catch (Exception ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     public void Editar(Funcionario obj) {
         try {
-            String sql = "UPDATE funcionarios SET nome =?,rg = ?, cpf = ?,email = ?,senha = ?,cargo = ?,nivel_acesso = ?,celular = ? "
+            String sql = "UPDATE funcionarios SET nome =?,rg = ?, cpf = ?,email = ?,cargo = ?,nivel_acesso = ?,celular = ? "
                     + "WHERE id = ?";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -77,11 +109,10 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
             stmt.setString(2, obj.getRg());
             stmt.setString(3, obj.getCpf());
             stmt.setString(4, obj.getEmail());
-            stmt.setString(5, obj.getSenha());
-            stmt.setString(6, obj.getCargo());
-            stmt.setString(7, obj.getNivelAcesso());
-            stmt.setString(8, obj.getCelular());
-            stmt.setInt(9, obj.getId());
+            stmt.setString(5, obj.getCargo());
+            stmt.setString(6, obj.getNivelAcesso());
+            stmt.setString(7, obj.getCelular());
+            stmt.setInt(8, obj.getId());
 
             stmt.execute();
             stmt.close();
@@ -110,7 +141,6 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
                 obj.setRg(resultado.getString("rg"));
                 obj.setCpf(resultado.getString("cpf"));
                 obj.setEmail(resultado.getString("email"));
-                obj.setSenha(resultado.getString("senha"));
                 obj.setCargo(resultado.getString("cargo"));
                 obj.setNivelAcesso(resultado.getString("nivel_acesso"));
                 obj.setCelular(resultado.getString("celular"));
@@ -161,7 +191,6 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
                 obj.setRg(resultado.getString("rg"));
                 obj.setCpf(resultado.getString("cpf"));
                 obj.setEmail(resultado.getString("email"));
-                obj.setSenha(resultado.getString("senha"));
                 obj.setCargo(resultado.getString("cargo"));
                 obj.setNivelAcesso(resultado.getString("nivel_acesso"));
                 obj.setCelular(resultado.getString("celular"));
@@ -196,7 +225,6 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
                 obj.setRg(resultado.getString("rg"));
                 obj.setCpf(resultado.getString("cpf"));
                 obj.setEmail(resultado.getString("email"));
-                obj.setSenha(resultado.getString("senha"));
                 obj.setCargo(resultado.getString("cargo"));
                 obj.setNivelAcesso(resultado.getString("nivel_acesso"));
                 obj.setCelular(resultado.getString("celular"));
@@ -211,31 +239,44 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
         return null;
     }
 
-    public void Login(String email, String senha) {
+    public void Login(String email, String senha) throws Exception {
         try {
-            String sql = "SELECT * FROM funcionarios WHERE email=? and senha=?";
+            String sql = "SELECT senha, salt FROM funcionarios WHERE email = ?";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
-            String senhaCryp = hashSenha(senha);
-            
-            
+            // Definir o valor do parâmetro de email na declaração preparada
             stmt.setString(1, email);
-            stmt.setString(2, senhaCryp);
 
+            // Executar a consulta e armazenar o resultado no ResultSet
             ResultSet resultado = stmt.executeQuery();
 
+            // Verificar se a consulta retornou algum resultado
             if (resultado.next()) {
-                JOptionPane.showMessageDialog(null, "Seja bem vindo(a) ao sistema!!");
-                new TelaPrincipal().setVisible(true);
+                // Recuperar a senha criptografada e o salt armazenados no banco de dados
+                String senhaArmazenada = resultado.getString("senha");
+                String saltArmazenado = resultado.getString("salt");
+
+                // Verificar se a senha fornecida corresponde à senha armazenada usando o salt
+                if (autenticacao(senha, senhaArmazenada, saltArmazenado)) {
+                    // Se a autenticação for bem-sucedida, exibir mensagem de boas-vindas e abrir a tela principal
+                    JOptionPane.showMessageDialog(null, "Seja bem vindo(a) ao sistema!!");
+                    new TelaPrincipal().setVisible(true);
+                } else {
+                    // Se a autenticação falhar, exibir mensagem de erro e abrir a tela de login novamente
+                    JOptionPane.showMessageDialog(null, "Dados inválidos!!");
+                    new Login().setVisible(true);
+                }
             } else {
-                Login login = new Login();
+                // Se nenhum resultado for retornado, exibir mensagem de erro e abrir a tela de login novamente
                 JOptionPane.showMessageDialog(null, "Dados inválidos!!");
-                login.setVisible(true);
+                new Login().setVisible(true);
             }
 
+            // Fechar a declaração preparada
             stmt.close();
         } catch (SQLException erro) {
+            // Se ocorrer um erro SQL, exibir mensagem de erro
             JOptionPane.showMessageDialog(null, "Erro no funcionarioDAO " + erro);
         }
     }

@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import model.Cliente;
@@ -389,7 +390,15 @@ public class PontoDeVendas extends javax.swing.JFrame {
             new String [] {
                 "Codígo", "Produto", "QTD", "Preço", "SubTotal"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabelaCarrinho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaCarrinhoMouseClicked(evt);
@@ -605,21 +614,42 @@ public class PontoDeVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaProdutoMouseClicked
 
     private void txtPesquisaProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaProdutoKeyPressed
-        String descricao = "%" + txtPesquisaProduto.getText() + "%";
-        ProdutosDAO dao = new ProdutosDAO();
-        List<Produtos> lista = dao.Filtrar(descricao);
-        DefaultTableModel dados = (DefaultTableModel) tabelaProduto.getModel();
-        dados.setNumRows(0);
-        for (Produtos p : lista) {
-            dados.addRow(new Object[]{
-                p.getId(),
-                p.getDescricao(),
-                p.getPreco(),
-                p.getQtd_estoque(),
-                p.getFornecedor().getNome(),
-                p.getNomeClasse()
-            });
+           // Obtém a descrição para a pesquisa
+    String descricao = "%" + txtPesquisaProduto.getText() + "%";
+
+    // Cria um SwingWorker para realizar a pesquisa em segundo plano
+    new SwingWorker<List<Produtos>, Void>() {
+        @Override
+        protected List<Produtos> doInBackground() throws Exception {
+            ProdutosDAO dao = new ProdutosDAO();
+            return dao.Filtrar(descricao);
         }
+
+        @Override
+        protected void done() {
+            try {
+                // Obtém a lista de produtos filtrados
+                List<Produtos> lista = get();
+
+                // Atualiza a tabela com os novos dados
+                DefaultTableModel dados = (DefaultTableModel) tabelaProduto.getModel();
+                dados.setNumRows(0);
+
+                for (Produtos p : lista) {
+                    dados.addRow(new Object[]{
+                        p.getId(),
+                        p.getDescricao(),
+                        p.getPreco(),
+                        p.getQtd_estoque(),
+                        p.getFornecedor().getNome(),
+                        p.getNomeClasse()
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }.execute();
         txtCodigo.setEnabled(false);
     }//GEN-LAST:event_txtPesquisaProdutoKeyPressed
 

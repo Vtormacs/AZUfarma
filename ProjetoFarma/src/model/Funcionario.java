@@ -18,6 +18,7 @@ public class Funcionario {
     private String cargo;
     private String nivelAcesso;
     private String celular;
+    private String salt;
 
     public int getId() {
         return id;
@@ -89,6 +90,14 @@ public class Funcionario {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
     
     
