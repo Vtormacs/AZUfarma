@@ -4,6 +4,8 @@
  */
 package view;
 
+import utilitarios.Utilitarios;
+
 /**
  *
  * @author vitor
@@ -15,6 +17,9 @@ public class DetalheVenda extends javax.swing.JFrame {
      */
     public DetalheVenda() {
         initComponents();
+        
+        Utilitarios u = new Utilitarios();;
+        u.InserirIcone(this);
     }
 
     /**
