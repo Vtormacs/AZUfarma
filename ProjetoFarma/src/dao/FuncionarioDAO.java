@@ -50,10 +50,10 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
         SecretKeyFactory gerandoSenhaCrip = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
 
         // Gera a chave secreta a partir do KeySpec e a codifica em um array de bytes
-        byte[] senhaHash = gerandoSenhaCrip.generateSecret(keySpec).getEncoded();
+        byte[] chave = gerandoSenhaCrip.generateSecret(keySpec).getEncoded();
 
         // Codifica o array de bytes resultante em Base64 e retorna como uma string
-        return Base64.getEncoder().encodeToString(senhaHash);
+        return Base64.getEncoder().encodeToString(chave);
     }
 
     public static boolean autenticacao(String senhaFornecida, String senhaArmazenada, String salt) throws Exception {
