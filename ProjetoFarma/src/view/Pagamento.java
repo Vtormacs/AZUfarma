@@ -230,7 +230,6 @@ public class Pagamento extends javax.swing.JFrame {
             VendasDAO vd = new VendasDAO();
             vd.salvar(v);
             v.setId(vd.retornaUltimoIdVenda());
-            JOptionPane.showMessageDialog(null, "ID da ultima venda!" + v.getId());
 
             for (int i = 0; i < meusProdutos.getRowCount(); i++) {
                 int qtdEstoque, qtdComprada, qtdAtualizada;
@@ -252,6 +251,12 @@ public class Pagamento extends javax.swing.JFrame {
                 ItensVendasDAO ivd = new ItensVendasDAO();
                 ivd.salvar(item);
             }
+            JOptionPane.showMessageDialog(null, "TROCO: " + troco);
+
+            this.dispose();
+
+            new PontoDeVendas().setVisible(true);
+
         } else {
             JOptionPane.showMessageDialog(null, "Não foi possivel fazer a venda!! O valor pago é menor do que a venda");
         }

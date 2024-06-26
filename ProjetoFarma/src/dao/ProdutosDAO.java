@@ -259,7 +259,6 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
             
             stmt.execute();
             stmt.close();
-            JOptionPane.showMessageDialog(null, "Baixa com sucesso no estoque");
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao dar baixa no estoque!!" + erro);
         }

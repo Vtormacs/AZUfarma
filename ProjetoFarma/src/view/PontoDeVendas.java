@@ -88,7 +88,6 @@ public class PontoDeVendas extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         txtTotalVenda = new javax.swing.JTextField();
-        btnCanscelar = new javax.swing.JButton();
         btnPagamento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -435,14 +434,6 @@ public class PontoDeVendas extends javax.swing.JFrame {
             }
         });
 
-        btnCanscelar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnCanscelar.setText("CANCELAR");
-        btnCanscelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCanscelarActionPerformed(evt);
-            }
-        });
-
         btnPagamento.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/4753731_business_cash_coin_dollar_finance_icon.png"))); // NOI18N
         btnPagamento.setText("PAGAMENTO");
@@ -461,8 +452,7 @@ public class PontoDeVendas extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(btnPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCanscelar, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -477,9 +467,7 @@ public class PontoDeVendas extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(txtTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCanscelar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
 
@@ -537,10 +525,6 @@ public class PontoDeVendas extends javax.swing.JFrame {
         Timer timer = new Timer(1000, new Hora());
         timer.start();
     }//GEN-LAST:event_formWindowActivated
-
-    private void btnCanscelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanscelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCanscelarActionPerformed
 
     private void txtTotalVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalVendaActionPerformed
         // TODO add your handling code here:
@@ -820,7 +804,6 @@ public class PontoDeVendas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnCanscelar;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnPagamento;
     private javax.swing.JButton btnPesquisarProduto;
