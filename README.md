@@ -27,5 +27,4 @@ Este é um sistema de gerenciamento de farmácia em Java com operações CRUD e 
 
 - **Java JDK 17 ou superior**
 - **MySQL**
-- **Bibliotecas Necessárias**: As bibliotecas necessárias podem ser encontradas na pasta (Dependências do projeto
-da biblioteca).
+- **Bibliotecas Necessárias**: As bibliotecas necessárias podem ser encontradas na pasta (Dependências do projeto).
