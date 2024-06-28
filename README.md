@@ -1,4 +1,4 @@
-# ProjetoFarma
+# AZUfarma
 
 ## Sistema de Gerenciamento de Farmácia
 
