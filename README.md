@@ -1,7 +1,31 @@
 # ProjetoFarma
 
-Sistema de Gerenciamento de Farmácia
+## Sistema de Gerenciamento de Farmácia
 
-Este é um sistema de gerenciamento de farmácia em Java com operações CRUD e módulo de vendas, utilizando um banco de dados para armazenamento de informações. Ele gerencia estoque, vendas e informações do cliente de forma eficiente.
+Este é um sistema de gerenciamento de farmácia em Java com operações CRUD e um módulo de vendas. Ele gerencia estoque, vendas e informações do cliente de forma eficiente. O sistema inclui um sistema de login com criptografia, controle de vendas, baixa de estoque, histórico de vendas, cadastramento de clientes, funcionários, fornecedores e produtos.
 
-No momento ainda estou desenvolvendo o sistema!
+### Funcionalidades
+
+- **Sistema de Login**: Login seguro com criptografia de senha.
+- **Módulo de Vendas**: Processamento de vendas e atualização de estoque.
+- **Baixa de Estoque**: Atualização automática do estoque após cada venda.
+- **Histórico de Vendas**: Registro de todas as vendas realizadas.
+- **Cadastro de Clientes**: Gerenciamento de informações dos clientes.
+- **Cadastro de Funcionários**: Gerenciamento de informações dos funcionários.
+- **Cadastro de Fornecedores**: Gerenciamento de informações dos fornecedores.
+- **Cadastro de Produtos**: Gerenciamento de informações dos produtos.
+- **API de ViaCEP**: Integração para busca de endereços a partir do CEP.
+
+### Tecnologias Utilizadas
+
+- **Java**
+- **Swing**
+- **MySQL**
+- **API ViaCEP**
+
+### Requisitos
+
+- **Java JDK 8 ou superior**
+- **MySQL**
+- **Bibliotecas Necessárias**: As bibliotecas necessárias podem ser encontradas na pasta (Dependências do projeto
+da biblioteca).
