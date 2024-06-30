@@ -1,15 +1,16 @@
 package test;
+
 import java.io.IOException;
 
 public class teste {
 
     public static void main(String[] args) {
         // Caminho do arquivo que você quer abrir
-        String filePath = "C:\\Battlestate Games\\BsgLauncher\\BsgLauncher.exe";
+        String filePath = "C:\\Users\\vitor\\Desktop\\quati_beta\\testeQuati.py";
 
         try {
-            // Executando o comando apropriado para abrir o arquivo
-            String command = "cmd.exe /c start \"\" \"" + filePath + "\"";
+            // Executando o comando para abrir o arquivo e manter o terminal aberto
+            String command = "cmd /c start cmd /k \"python \"" + filePath + "\"\"";
 
             Process process = Runtime.getRuntime().exec(command);
 
@@ -20,5 +21,4 @@ public class teste {
             e.printStackTrace();
         }
     }
-    
 }

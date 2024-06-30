@@ -1,6 +1,5 @@
 package dao;
 
-import dao.ConexaoBanco;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
