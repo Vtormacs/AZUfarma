@@ -88,6 +88,7 @@ public class PontoDeVendas extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         txtTotalVenda = new javax.swing.JTextField();
+        btnCancelarVenda = new javax.swing.JButton();
         btnPagamento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -434,6 +435,15 @@ public class PontoDeVendas extends javax.swing.JFrame {
             }
         });
 
+        btnCancelarVenda.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnCancelarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/4753731_business_cash_coin_dollar_finance_icon.png"))); // NOI18N
+        btnCancelarVenda.setText("CANCELAR");
+        btnCancelarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarVendaActionPerformed(evt);
+            }
+        });
+
         btnPagamento.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/4753731_business_cash_coin_dollar_finance_icon.png"))); // NOI18N
         btnPagamento.setText("PAGAMENTO");
@@ -450,13 +460,14 @@ public class PontoDeVendas extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(btnPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTotalVenda)))
+                        .addComponent(txtTotalVenda))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(btnPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -467,8 +478,10 @@ public class PontoDeVendas extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(txtTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout fundoLayout = new javax.swing.GroupLayout(fundo);
@@ -694,38 +707,12 @@ public class PontoDeVendas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
-    private void btnPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagamentoActionPerformed
-        Double totalString = Double.valueOf(txtTotalVenda.getText());
-        total = totalString;
-        
-        System.out.print(total);
-
-        if (total > 0.0) {
-           
-            String nome = txtNome.getText();
-            String cpf = txtCpf.getText();
-
-            obj = new Cliente();
-
-            ClienteDAO daoc = new ClienteDAO();
-            obj = daoc.Buscar(nome);
-            obj = daoc.BuscarCpf(cpf);
-
-            if (obj.getNome() != null && obj.getCpf() != null) {
-                Pagamento telaPagamento = new Pagamento();
-
-                telaPagamento.clientes = obj;
-                telaPagamento.meusProdutos = meusProdutos;
-                telaPagamento.txtTotalVenda.setText(String.valueOf(total));
-                telaPagamento.setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Verifique se você não esqueceu de \n preencher alguma imformação importante!\n Os campos podem ser NOME e/ou CPF");
-            }
-        }else {
-            JOptionPane.showMessageDialog(null, "Não a itens no carrinho para vender!!");
-        }
-    }//GEN-LAST:event_btnPagamentoActionPerformed
+    private void btnCancelarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVendaActionPerformed
+       DefaultTableModel model = (DefaultTableModel) tabelaCarrinho.getModel();
+        model.setRowCount(0);
+        total = 0.0;
+        txtTotalVenda.setText(String.valueOf(total));
+    }//GEN-LAST:event_btnCancelarVendaActionPerformed
 
     private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
         // TODO add your handling code here:
@@ -767,6 +754,39 @@ public class PontoDeVendas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabelaCarrinhoMouseClicked
 
+    private void btnPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagamentoActionPerformed
+         Double totalString = Double.valueOf(txtTotalVenda.getText());
+        total = totalString;
+        
+        System.out.print(total);
+
+        if (total > 0.0) {
+           
+            String nome = txtNome.getText();
+            String cpf = txtCpf.getText();
+
+            obj = new Cliente();
+
+            ClienteDAO daoc = new ClienteDAO();
+            obj = daoc.Buscar(nome);
+            obj = daoc.BuscarCpf(cpf);
+
+            if (obj.getNome() != null && obj.getCpf() != null) {
+                Pagamento telaPagamento = new Pagamento();
+
+                telaPagamento.clientes = obj;
+                telaPagamento.meusProdutos = meusProdutos;
+                telaPagamento.txtTotalVenda.setText(String.valueOf(total));
+                telaPagamento.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Verifique se você não esqueceu de \n preencher alguma imformação importante!\n Os campos podem ser NOME e/ou CPF");
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, "Não a itens no carrinho para vender!!");
+        }
+    }//GEN-LAST:event_btnPagamentoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -804,6 +824,7 @@ public class PontoDeVendas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnCancelarVenda;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnPagamento;
     private javax.swing.JButton btnPesquisarProduto;

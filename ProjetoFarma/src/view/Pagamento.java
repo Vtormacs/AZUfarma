@@ -60,6 +60,7 @@ public class Pagamento extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pagamentos");
+        setUndecorated(true);
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 153));
