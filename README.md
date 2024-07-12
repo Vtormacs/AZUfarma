@@ -25,7 +25,7 @@ AZUfarma é um sistema de gerenciamento de farmácias desenvolvido em Java. Ele 
 
 ## Requisitos
 
-- **Java JDK 17 ou superior**
+- **Java JDK 22**
 - **MySQL**
 - **Bibliotecas Necessárias**: As bibliotecas necessárias podem ser encontradas na pasta de dependências do projeto.
 
