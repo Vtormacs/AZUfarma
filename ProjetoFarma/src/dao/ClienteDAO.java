@@ -17,6 +17,7 @@ public class ClienteDAO implements DAOInterface<Cliente> {
         this.conexao = new ConexaoBanco().conectarComBanco();
     }
 
+    //Salva o cliente no banco
     @Override
     public void Salvar(Cliente obj) {
         try {
@@ -50,6 +51,7 @@ public class ClienteDAO implements DAOInterface<Cliente> {
         }
     }
 
+    //Edita o cliente no banco
     @Override
     public void Editar(Cliente obj) {
         try {
@@ -84,6 +86,7 @@ public class ClienteDAO implements DAOInterface<Cliente> {
         }
     }
 
+    //Busca o cliente atravez do nome no banco
     @Override
     public Cliente Buscar(String nome) {
         try {
@@ -125,6 +128,7 @@ public class ClienteDAO implements DAOInterface<Cliente> {
         return null;
     }
     
+    //Buscao cliente atravez do cpf no no banco
     @Override
     public Cliente BuscarCpf(String cpf) {
         try {
@@ -166,6 +170,7 @@ public class ClienteDAO implements DAOInterface<Cliente> {
         return null;
     }
 
+    //Exclui o cliente no banco
     @Override
     public void Excluir(Cliente obj) {
         try {
@@ -183,6 +188,7 @@ public class ClienteDAO implements DAOInterface<Cliente> {
         }
     }
 
+    //Cria um lista de cliente com os dados do banco
     @Override
     public ArrayList<Cliente> Listar() {
         ArrayList<Cliente> lista = new ArrayList<>();
@@ -224,7 +230,8 @@ public class ClienteDAO implements DAOInterface<Cliente> {
         }
         return null;
     }
-
+    
+    //Cria uma lista de clientes atravez do nome
     @Override
     public ArrayList<Cliente> Filtrar(String nome) {
         ArrayList<Cliente> lista = new ArrayList<>();
