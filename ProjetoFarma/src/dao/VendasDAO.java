@@ -43,7 +43,8 @@ public class VendasDAO {
         try {
             int ultimoId = 0;
             
-            String sql = "SELECT id FROM vendas";
+            String sql = "SELECT id FROM vendas "
+                    + "ORDER BY vendas.id ASC";
                 PreparedStatement stmt = conexao.prepareStatement(sql);
                 ResultSet resultado = stmt.executeQuery();
                 

@@ -231,7 +231,7 @@ public class Pagamento extends javax.swing.JFrame {
             VendasDAO vd = new VendasDAO();
             vd.salvar(v);
             v.setId(vd.retornaUltimoIdVenda());
-
+        
             for (int i = 0; i < meusProdutos.getRowCount(); i++) {
                 int qtdEstoque, qtdComprada, qtdAtualizada;
 
