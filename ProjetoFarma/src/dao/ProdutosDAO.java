@@ -21,8 +21,8 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
     @Override
     public void Salvar(Produtos obj) {
         try {
-            String sql = "INSERT INTO produtos (descricao,preco,qtd_estoque,for_id,classe_id ) "
-                    + "VALUES (?,?,?,?,(SELECT id FROM classeProduto WHERE nome = ?))";
+            String sql = "INSERT INTO produtos (descricao,preco,qtd_estoque,for_id,classe_id,precisa_de_receita) "
+                    + "VALUES (?,?,?,?,(SELECT id FROM classeProduto WHERE nome = ?),?)";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -31,6 +31,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
             stmt.setInt(3, obj.getQtd_estoque());
             stmt.setInt(4, obj.getFornecedor().getId());
             stmt.setString(5, obj.getNomeClasse());
+            stmt.setBoolean(6, obj.isPrecisa_de_receita());
 
             stmt.execute();
             stmt.close();
@@ -45,7 +46,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
     @Override
     public void Editar(Produtos obj) {
         try {
-            String sql = "UPDATE produtos SET descricao= ?,preco = ?,qtd_estoque = ?,for_id = ?,classe_id =(SELECT id FROM classeProduto WHERE nome = ?) "
+            String sql = "UPDATE produtos SET descricao= ?,preco = ?,qtd_estoque = ?,for_id = ?,classe_id =(SELECT id FROM classeProduto WHERE nome = ?), precisa_de_receita = ? "
                     + "WHERE id = ?";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -55,7 +56,8 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
             stmt.setInt(3, obj.getQtd_estoque());
             stmt.setInt(4, obj.getFornecedor().getId());
             stmt.setString(5, obj.getNomeClasse());
-            stmt.setInt(6, obj.getId());
+            stmt.setBoolean(6, obj.isPrecisa_de_receita());
+            stmt.setInt(7, obj.getId());
 
             stmt.execute();
             stmt.close();
@@ -70,7 +72,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
     @Override
     public Produtos Buscar(String descricao) {
         try {
-            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome "
+            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome,p.precisa_de_receita "
                     + "FROM produtos AS p "
                     + "INNER JOIN fornecedores AS f "
                     + "ON (p.for_id = f.id) "
@@ -93,6 +95,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
                 f.setNome(resultado.getString("f.nome"));
                 obj.setFornecedor(f);
                 obj.setNomeClasse(resultado.getString("c.nome"));
+                obj.setPrecisa_de_receita(resultado.getBoolean("p.precisa_de_receita"));
 
             }
             stmt.close();
@@ -161,7 +164,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
         ArrayList<Produtos> lista = new ArrayList<>();
 
         try {
-            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome "
+            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome,p.precisa_de_receita "
                     + "FROM produtos AS p "
                     + "INNER JOIN fornecedores AS f "
                     + "ON (p.for_id = f.id) "
@@ -182,6 +185,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
                 f.setNome(resultado.getString("f.nome"));
                 obj.setFornecedor(f);
                 obj.setNomeClasse(resultado.getString("c.nome"));
+                obj.setPrecisa_de_receita(resultado.getBoolean("p.precisa_de_receita"));
 
                 lista.add(obj);
             }
@@ -198,7 +202,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
         ArrayList<Produtos> lista = new ArrayList<>();
 
         try {
-            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome "
+            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome,p.precisa_de_receita "
                     + "FROM produtos AS p "
                     + "INNER JOIN fornecedores AS f "
                     + "ON (p.for_id = f.id) "
@@ -222,6 +226,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
                 f.setNome(resultado.getString("f.nome"));
                 obj.setFornecedor(f);
                 obj.setNomeClasse(resultado.getString("c.nome"));
+                obj.setPrecisa_de_receita(resultado.getBoolean("p.precisa_de_receita"));
 
                 lista.add(obj);
             }

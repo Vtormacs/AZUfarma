@@ -17,6 +17,7 @@ public class Produtos {
     private Fornecedores fornecedor;
     private int classe_id;
     private String nomeClasse;
+    private boolean precisa_de_receita;
 
     public int getId() {
         return id;
@@ -74,6 +75,12 @@ public class Produtos {
         this.nomeClasse = nomeClasse;
     }
 
-    
-    
+    public boolean isPrecisa_de_receita() {
+        return precisa_de_receita;
+    }
+
+    public void setPrecisa_de_receita(boolean precisa_de_receita) {
+        this.precisa_de_receita = precisa_de_receita;
+    }
+
 }

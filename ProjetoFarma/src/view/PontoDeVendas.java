@@ -674,37 +674,45 @@ public class PontoDeVendas extends javax.swing.JFrame {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         String nome = txtProduto.getText();
-        Produtos obj = new Produtos();
-        ProdutosDAO daop = new ProdutosDAO();
-        obj = daop.Buscar(nome);
+    Produtos obj = new Produtos();
+    ProdutosDAO daop = new ProdutosDAO();
+    obj = daop.Buscar(nome);
 
-        Utilitarios util = new Utilitarios();
+    Utilitarios util = new Utilitarios();
 
-        if (obj.getDescricao() != null) {
-            int estoque = Integer.valueOf(txtEstoque.getText());
-            int quantidade = Integer.valueOf(txtQtd.getText());
-            preco = Double.valueOf(txtPreco.getText());
-            qtd = Integer.valueOf(txtQtd.getText());
-            subtotal = preco * qtd;
-            total += subtotal;
+    if (obj.getDescricao() != null) {
+        int estoque = Integer.valueOf(txtEstoque.getText());
+        int quantidade = Integer.valueOf(txtQtd.getText());
+        preco = Double.valueOf(txtPreco.getText());
+        qtd = Integer.valueOf(txtQtd.getText());
+        subtotal = preco * qtd;
+        total += subtotal;
 
-            if (estoque >= quantidade) {
-                txtTotalVenda.setText(String.valueOf(total));
-                meusProdutos = (DefaultTableModel) tabelaCarrinho.getModel();
-                meusProdutos.addRow(new Object[]{
-                    txtCodigo.getText(),
-                    txtProduto.getText(),
-                    txtQtd.getText(),
-                    txtPreco.getText(),
-                    subtotal
-
-                });
-            } else {
-                JOptionPane.showMessageDialog(null, "Quantidade desejada é maior do que tem no estoque!");
+        // Verifica se precisa de receita
+        if (obj.isPrecisa_de_receita()) {
+            int resposta = JOptionPane.showConfirmDialog(null, "A receita foi entregue para o farmacêutico?", "Verificação de Receita", JOptionPane.YES_NO_OPTION);
+            if (resposta != JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(null, "O item não pode ser adicionado ao carrinho sem a receita.");
+                return; // Sai do método se a resposta for "Não"
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Não foir possivel adicionar no carrinho. Falta informações!");
         }
+
+        if (estoque >= quantidade) {
+            txtTotalVenda.setText(String.valueOf(total));
+            meusProdutos = (DefaultTableModel) tabelaCarrinho.getModel();
+            meusProdutos.addRow(new Object[]{
+                txtCodigo.getText(),
+                txtProduto.getText(),
+                txtQtd.getText(),
+                txtPreco.getText(),
+                subtotal
+            });
+        } else {
+            JOptionPane.showMessageDialog(null, "Quantidade desejada é maior do que tem no estoque!");
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Não foi possível adicionar no carrinho. Faltam informações!");
+    }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnCancelarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVendaActionPerformed
