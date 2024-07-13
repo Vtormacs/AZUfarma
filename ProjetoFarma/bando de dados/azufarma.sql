@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13/07/2024 às 21:38
+-- Tempo de geração: 14/07/2024 às 00:50
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -186,7 +186,9 @@ INSERT INTO `itensvenda` (`id`, `venda_id`, `produto_id`, `qtd`, `subtotal`) VAL
 (254, 296, 38, 1, 7.00),
 (255, 297, 51, 1, 30.00),
 (256, 298, 65, 1, 85.00),
-(257, 299, 48, 1, 110.00);
+(257, 299, 48, 1, 110.00),
+(258, 300, 80, 1, 3.00),
+(259, 301, 38, 1, 7.00);
 
 -- --------------------------------------------------------
 
@@ -216,64 +218,65 @@ CREATE TABLE `produtos` (
   `preco` decimal(10,2) DEFAULT NULL,
   `qtd_estoque` int(11) DEFAULT NULL,
   `for_id` int(11) DEFAULT NULL,
-  `classe_id` int(11) NOT NULL
+  `classe_id` int(11) NOT NULL,
+  `precisa_de_receita` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Despejando dados para a tabela `produtos`
 --
 
-INSERT INTO `produtos` (`id`, `descricao`, `preco`, `qtd_estoque`, `for_id`, `classe_id`) VALUES
-(29, 'Shampoo Anticaspa', 15.90, 90, 14, 1),
-(30, 'Sabonete Líquido', 7.50, 200, 16, 1),
-(31, 'Desodorante Aerosol', 12.00, 150, 16, 1),
-(32, 'Perfume Floral', 120.00, 50, 14, 2),
-(33, 'Colônia Masculina', 95.00, 78, 14, 2),
-(34, 'Vitamínico ABC', 45.00, 100, 17, 3),
-(35, 'Ômega 3', 60.00, 120, 17, 3),
-(36, 'Multivitamínico Infantil', 25.00, 90, 17, 4),
-(37, 'Shampoo Infantil', 10.50, 110, 16, 4),
-(38, 'Chupeta Ortodôntica', 7.00, 128, 13, 4),
-(39, 'Água Mineral 500ml', 2.00, 290, 15, 5),
-(40, 'Chocolate ao Leite', 5.50, 150, 15, 5),
-(41, 'Biscoito Integral', 4.00, 200, 15, 5),
-(42, 'Analgésico 500mg', 8.00, 300, 14, 6),
-(43, 'Antigripal', 15.00, 179, 14, 6),
-(44, 'Creme Dental', 6.00, 220, 16, 1),
-(45, 'Enxaguante Bucal', 18.00, 90, 16, 1),
-(46, 'Condicionador Capilar', 11.00, 130, 16, 1),
-(47, 'Creme Hidratante', 22.00, 80, 14, 2),
-(48, 'Perfume Cítrico', 110.00, 58, 14, 2),
-(49, 'Whey Protein', 150.00, 70, 17, 3),
-(50, 'Creatina', 90.00, 100, 17, 3),
-(51, 'Leite Infantil', 30.00, 87, 13, 4),
-(52, 'Fralda Descartável', 25.00, 139, 13, 4),
-(53, 'Lenço Umedecido', 12.00, 150, 13, 4),
-(54, 'Refrigerante 2L', 7.00, 200, 15, 5),
-(55, 'Suco Natural 1L', 6.00, 170, 15, 5),
-(56, 'Salgadinho', 5.00, 190, 15, 5),
-(57, 'Antibiótico 500mg', 35.00, 79, 14, 6),
-(58, 'Anti-inflamatório', 25.00, 120, 14, 6),
-(59, 'Sabonete em Barra', 3.00, 200, 16, 1),
-(60, 'Desodorante Roll-on', 10.00, 170, 16, 1),
-(61, 'Escova de Dentes', 4.50, 200, 16, 1),
-(62, 'Loção Corporal', 24.00, 80, 14, 2),
-(63, 'Água de Colônia', 75.00, 90, 14, 2),
-(64, 'BCAA', 80.00, 110, 17, 3),
-(65, 'Glutamina', 85.00, 89, 17, 3),
-(66, 'Xarope Infantil', 20.00, 60, 14, 4),
-(67, 'Brinquedo Educativo', 45.00, 59, 13, 4),
-(68, 'Mamadeira', 15.00, 129, 13, 4),
-(69, 'Água Tônica 1L', 5.00, 179, 15, 5),
-(70, 'Barra de Cereal', 3.50, 220, 15, 5),
-(71, 'Café Solúvel', 10.00, 150, 15, 5),
-(72, 'Analgésico Infantil', 10.00, 110, 14, 6),
-(73, 'Antisséptico Bucal', 8.00, 130, 14, 6),
-(74, 'Toalha de Rosto', 15.00, 100, 16, 1),
-(75, 'Cotonetes', 5.00, 300, 16, 1),
-(76, 'Hidratante Facial', 35.00, 70, 14, 2),
-(77, 'Perfume Amadeirado', 150.00, 50, 14, 2),
-(80, 'Água Minera c/Gásl 500ml', 3.00, 97, 13, 5);
+INSERT INTO `produtos` (`id`, `descricao`, `preco`, `qtd_estoque`, `for_id`, `classe_id`, `precisa_de_receita`) VALUES
+(29, 'Shampoo Anticaspa', 15.90, 90, 14, 1, 0),
+(30, 'Sabonete Líquido', 7.50, 200, 16, 1, 0),
+(31, 'Desodorante Aerosol', 12.00, 150, 16, 1, 0),
+(32, 'Perfume Floral', 120.00, 50, 14, 2, 0),
+(33, 'Colônia Masculina', 95.00, 78, 14, 2, 0),
+(34, 'Vitamínico ABC', 45.00, 100, 17, 3, 0),
+(35, 'Ômega 3', 60.00, 120, 17, 3, 0),
+(36, 'Multivitamínico Infantil', 25.00, 90, 17, 4, 0),
+(37, 'Shampoo Infantil', 10.50, 110, 16, 4, 0),
+(38, 'Chupeta Ortodôntica', 7.00, 127, 13, 4, 0),
+(39, 'Água Mineral 500ml', 2.00, 290, 15, 5, 0),
+(40, 'Chocolate ao Leite', 5.50, 150, 15, 5, 0),
+(41, 'Biscoito Integral', 4.00, 200, 15, 5, 0),
+(42, 'Analgésico 500mg', 8.00, 300, 14, 6, 0),
+(43, 'Antigripal', 15.00, 179, 14, 6, 1),
+(44, 'Creme Dental', 6.00, 220, 16, 1, 0),
+(45, 'Enxaguante Bucal', 18.00, 90, 16, 1, 0),
+(46, 'Condicionador Capilar', 11.00, 130, 16, 1, 0),
+(47, 'Creme Hidratante', 22.00, 80, 14, 2, 0),
+(48, 'Perfume Cítrico', 110.00, 58, 14, 2, 0),
+(49, 'Whey Protein', 150.00, 70, 17, 3, 0),
+(50, 'Creatina', 90.00, 100, 17, 3, 0),
+(51, 'Leite Infantil', 30.00, 87, 13, 4, 0),
+(52, 'Fralda Descartável', 25.00, 139, 13, 4, 0),
+(53, 'Lenço Umedecido', 12.00, 150, 13, 4, 0),
+(54, 'Refrigerante 2L', 7.00, 200, 15, 5, 0),
+(55, 'Suco Natural 1L', 6.00, 170, 15, 5, 0),
+(56, 'Salgadinho', 5.00, 190, 15, 5, 0),
+(57, 'Antibiótico 500mg', 35.00, 79, 14, 6, 1),
+(58, 'Anti-inflamatório', 25.00, 120, 14, 6, 0),
+(59, 'Sabonete em Barra', 3.00, 200, 16, 1, 0),
+(60, 'Desodorante Roll-on', 10.00, 170, 16, 1, 0),
+(61, 'Escova de Dentes', 4.50, 200, 16, 1, 0),
+(62, 'Loção Corporal', 24.00, 80, 14, 2, 0),
+(63, 'Água de Colônia', 75.00, 90, 14, 2, 0),
+(64, 'BCAA', 80.00, 110, 17, 3, 0),
+(65, 'Glutamina', 85.00, 89, 17, 3, 0),
+(66, 'Xarope Infantil', 20.00, 60, 14, 4, 0),
+(67, 'Brinquedo Educativo', 45.00, 59, 13, 4, 0),
+(68, 'Mamadeira', 15.00, 129, 13, 4, 0),
+(69, 'Água Tônica 1L', 5.00, 179, 15, 5, 0),
+(70, 'Barra de Cereal', 3.50, 220, 15, 5, 0),
+(71, 'Café Solúvel', 10.00, 150, 15, 5, 0),
+(72, 'Analgésico Infantil', 10.00, 110, 14, 6, 0),
+(73, 'Antisséptico Bucal', 8.00, 130, 14, 6, 0),
+(74, 'Toalha de Rosto', 15.00, 100, 16, 1, 0),
+(75, 'Cotonetes', 5.00, 300, 16, 1, 0),
+(76, 'Hidratante Facial', 35.00, 70, 14, 2, 0),
+(77, 'Perfume Amadeirado', 150.00, 50, 14, 2, 0),
+(80, 'Água Minera c/Gásl 500ml', 3.00, 96, 13, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -320,7 +323,9 @@ INSERT INTO `vendas` (`id`, `cliente_id`, `data_venda`, `total_venda`, `observac
 (296, 406, '2024-07-13 14:42:58', 7.00, ''),
 (297, 406, '2024-07-13 14:52:13', 30.00, ''),
 (298, 406, '2024-07-13 14:53:24', 85.00, ''),
-(299, 426, '2024-07-13 14:55:05', 110.00, '');
+(299, 426, '2024-07-13 14:55:05', 110.00, ''),
+(300, 426, '2024-07-13 16:46:47', 3.00, ''),
+(301, 406, '2024-07-13 18:41:46', 7.00, 'oi');
 
 --
 -- Índices para tabelas despejadas
@@ -421,7 +426,7 @@ ALTER TABLE `funcionarios`
 -- AUTO_INCREMENT de tabela `itensvenda`
 --
 ALTER TABLE `itensvenda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=258;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=260;
 
 --
 -- AUTO_INCREMENT de tabela `parcelas`
@@ -433,7 +438,7 @@ ALTER TABLE `parcelas`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT de tabela `sexo`
@@ -445,7 +450,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
 
 --
 -- Restrições para tabelas despejadas
