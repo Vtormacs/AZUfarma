@@ -39,7 +39,7 @@ AZUfarma é um sistema de gerenciamento de farmácias desenvolvido em Java. Ele 
 2. **Configure o Banco de Dados MySQL:**
     - Crie um banco de dados no seu gerenciador de banco de dados.
     - Importe o arquivo `azufarma.sql` localizado na pasta `banco de dados` localizada dentro da pastra do projeto.
-    - Na pasta `dao` localize o arquivo `ConexaoComBanco` modifique a porta da conexão com a porta do seu banco de dados local.
+    - Na pasta `dao` localize o arquivo `ConexaoBanco` modifique a varial `url` para a porta do seu banco de dados local.
 
 3. **Configure o Projeto:**
     - Adicione as bibliotecas necessárias encontradas na pasta `dependências do projeto` localizada dentro da pastra do projeto.
