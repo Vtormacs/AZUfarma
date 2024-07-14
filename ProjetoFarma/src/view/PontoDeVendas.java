@@ -37,7 +37,7 @@ public class PontoDeVendas extends javax.swing.JFrame {
     }
 
     Cliente obj = new Cliente();
-    double preco, subtotal, total;
+    double preco, subtotal, total, desconto;
     int qtd;
     DefaultTableModel meusProdutos;
 
@@ -611,42 +611,42 @@ public class PontoDeVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaProdutoMouseClicked
 
     private void txtPesquisaProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaProdutoKeyPressed
-           // Obtém a descrição para a pesquisa
-    String descricao = "%" + txtPesquisaProduto.getText() + "%";
+        // Obtém a descrição para a pesquisa
+        String descricao = "%" + txtPesquisaProduto.getText() + "%";
 
-    // Cria um SwingWorker para realizar a pesquisa em segundo plano
-    new SwingWorker<List<Produtos>, Void>() {
-        @Override
-        protected List<Produtos> doInBackground() throws Exception {
-            ProdutosDAO dao = new ProdutosDAO();
-            return dao.Filtrar(descricao);
-        }
-
-        @Override
-        protected void done() {
-            try {
-                // Obtém a lista de produtos filtrados
-                List<Produtos> lista = get();
-
-                // Atualiza a tabela com os novos dados
-                DefaultTableModel dados = (DefaultTableModel) tabelaProduto.getModel();
-                dados.setNumRows(0);
-
-                for (Produtos p : lista) {
-                    dados.addRow(new Object[]{
-                        p.getId(),
-                        p.getDescricao(),
-                        p.getPreco(),
-                        p.getQtd_estoque(),
-                        p.getFornecedor().getNome(),
-                        p.getNomeClasse()
-                    });
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+        // Cria um SwingWorker para realizar a pesquisa em segundo plano
+        new SwingWorker<List<Produtos>, Void>() {
+            @Override
+            protected List<Produtos> doInBackground() throws Exception {
+                ProdutosDAO dao = new ProdutosDAO();
+                return dao.Filtrar(descricao);
             }
-        }
-    }.execute();
+
+            @Override
+            protected void done() {
+                try {
+                    // Obtém a lista de produtos filtrados
+                    List<Produtos> lista = get();
+
+                    // Atualiza a tabela com os novos dados
+                    DefaultTableModel dados = (DefaultTableModel) tabelaProduto.getModel();
+                    dados.setNumRows(0);
+
+                    for (Produtos p : lista) {
+                        dados.addRow(new Object[]{
+                            p.getId(),
+                            p.getDescricao(),
+                            p.getPreco(),
+                            p.getQtd_estoque(),
+                            p.getFornecedor().getNome(),
+                            p.getNomeClasse()
+                        });
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute();
         txtCodigo.setEnabled(false);
     }//GEN-LAST:event_txtPesquisaProdutoKeyPressed
 
@@ -674,49 +674,63 @@ public class PontoDeVendas extends javax.swing.JFrame {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         String nome = txtProduto.getText();
-    Produtos obj = new Produtos();
-    ProdutosDAO daop = new ProdutosDAO();
-    obj = daop.Buscar(nome);
+        Produtos obj = new Produtos();
+        ProdutosDAO daop = new ProdutosDAO();
+        obj = daop.Buscar(nome);
 
-    Utilitarios util = new Utilitarios();
+        Utilitarios util = new Utilitarios();
 
-    if (obj.getDescricao() != null) {
-        int estoque = Integer.valueOf(txtEstoque.getText());
-        int quantidade = Integer.valueOf(txtQtd.getText());
-        preco = Double.valueOf(txtPreco.getText());
-        qtd = Integer.valueOf(txtQtd.getText());
-        subtotal = preco * qtd;
-        total += subtotal;
+        if (obj.getDescricao() != null) {
+            int estoque = Integer.valueOf(txtEstoque.getText());
+            int quantidade = Integer.valueOf(txtQtd.getText());
+            preco = Double.valueOf(txtPreco.getText());
+            qtd = Integer.valueOf(txtQtd.getText());
 
-        // Verifica se precisa de receita
-        if (obj.isPrecisa_de_receita()) {
-            int resposta = JOptionPane.showConfirmDialog(null, "A receita foi entregue para o farmacêutico?", "Verificação de Receita", JOptionPane.YES_NO_OPTION);
-            if (resposta != JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, "O item não pode ser adicionado ao carrinho sem a receita.");
-                return; // Sai do método se a resposta for "Não"
+            // Verifica se o campo de desconto está vazio
+            if (txtDesconto.getText().isEmpty()) {
+                desconto = 0.0; // Se estiver vazio, define o desconto como 0
+            } else {
+                desconto = Double.valueOf(txtDesconto.getText());
             }
-        }
 
-        if (estoque >= quantidade) {
-            txtTotalVenda.setText(String.valueOf(total));
-            meusProdutos = (DefaultTableModel) tabelaCarrinho.getModel();
-            meusProdutos.addRow(new Object[]{
-                txtCodigo.getText(),
-                txtProduto.getText(),
-                txtQtd.getText(),
-                txtPreco.getText(),
-                subtotal
-            });
+            subtotal = preco * qtd;
+
+            double valorDesconto = subtotal * (desconto / 100);
+
+            double subtotalComDesconto = subtotal - valorDesconto;
+
+            // Atualiza o total com o valor do produto com desconto
+            total += subtotalComDesconto;
+
+            // Verifica se precisa de receita
+            if (obj.isPrecisa_de_receita()) {
+                int resposta = JOptionPane.showConfirmDialog(null, "O Clinete Forneceu a Receita do Medicamento?", "Verificação de Receita", JOptionPane.YES_NO_OPTION);
+                if (resposta != JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(null, "O item não pode ser adicionado ao carrinho sem a receita.");
+                    return; // Sai do método se a resposta for "Não"
+                }
+            }
+
+            if (estoque >= quantidade) {
+                txtTotalVenda.setText(String.valueOf(total));
+                meusProdutos = (DefaultTableModel) tabelaCarrinho.getModel();
+                meusProdutos.addRow(new Object[]{
+                    txtCodigo.getText(),
+                    txtProduto.getText(),
+                    txtQtd.getText(),
+                    txtPreco.getText(),
+                    subtotalComDesconto
+                });
+            } else {
+                JOptionPane.showMessageDialog(null, "Quantidade desejada é maior do que tem no estoque!");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Quantidade desejada é maior do que tem no estoque!");
+            JOptionPane.showMessageDialog(null, "Não foi possível adicionar no carrinho. Faltam informações!");
         }
-    } else {
-        JOptionPane.showMessageDialog(null, "Não foi possível adicionar no carrinho. Faltam informações!");
-    }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnCancelarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVendaActionPerformed
-       DefaultTableModel model = (DefaultTableModel) tabelaCarrinho.getModel();
+        DefaultTableModel model = (DefaultTableModel) tabelaCarrinho.getModel();
         model.setRowCount(0);
         total = 0.0;
         txtTotalVenda.setText(String.valueOf(total));
@@ -763,13 +777,13 @@ public class PontoDeVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaCarrinhoMouseClicked
 
     private void btnPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagamentoActionPerformed
-         Double totalString = Double.valueOf(txtTotalVenda.getText());
+        Double totalString = Double.valueOf(txtTotalVenda.getText());
         total = totalString;
-        
+
         System.out.print(total);
 
         if (total > 0.0) {
-           
+
             String nome = txtNome.getText();
             String cpf = txtCpf.getText();
 
@@ -790,7 +804,7 @@ public class PontoDeVendas extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Verifique se você não esqueceu de \n preencher alguma imformação importante!\n Os campos podem ser NOME e/ou CPF");
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Não a itens no carrinho para vender!!");
         }
     }//GEN-LAST:event_btnPagamentoActionPerformed
