@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14/07/2024 às 20:21
+-- Tempo de geração: 14/07/2024 às 23:15
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -189,7 +189,8 @@ INSERT INTO `itensvenda` (`id`, `venda_id`, `produto_id`, `qtd`, `subtotal`) VAL
 (257, 299, 48, 1, 110.00),
 (258, 300, 80, 1, 3.00),
 (259, 301, 38, 1, 7.00),
-(260, 302, 42, 1, 8.00);
+(260, 302, 42, 1, 8.00),
+(261, 303, 38, 1, 5.60);
 
 -- --------------------------------------------------------
 
@@ -237,7 +238,7 @@ INSERT INTO `produtos` (`id`, `descricao`, `preco`, `qtd_estoque`, `for_id`, `cl
 (35, 'Ômega 3', 60.00, 120, 17, 3, 0),
 (36, 'Multivitamínico Infantil', 25.00, 90, 17, 4, 0),
 (37, 'Shampoo Infantil', 10.50, 110, 16, 4, 0),
-(38, 'Chupeta Ortodôntica', 7.00, 127, 13, 4, 0),
+(38, 'Chupeta Ortodôntica', 7.00, 126, 13, 4, 0),
 (39, 'Água Mineral 500ml', 2.00, 290, 15, 5, 0),
 (40, 'Chocolate ao Leite', 5.50, 150, 15, 5, 0),
 (41, 'Biscoito Integral', 4.00, 200, 15, 5, 0),
@@ -309,25 +310,37 @@ INSERT INTO `sexo` (`id`, `nome`) VALUES
 CREATE TABLE `vendas` (
   `id` int(11) NOT NULL,
   `cliente_id` int(11) DEFAULT NULL,
-  `data_venda` datetime DEFAULT NULL,
+  `data_venda` date DEFAULT NULL,
   `total_venda` decimal(10,2) DEFAULT NULL,
-  `observacoes` text DEFAULT NULL
+  `observacoes` text DEFAULT NULL,
+  `hora` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Despejando dados para a tabela `vendas`
 --
 
-INSERT INTO `vendas` (`id`, `cliente_id`, `data_venda`, `total_venda`, `observacoes`) VALUES
-(294, 426, '2024-07-13 14:33:17', 11.00, ''),
-(295, 392, '2024-07-13 14:34:30', 15.00, ''),
-(296, 406, '2024-07-13 14:42:58', 7.00, ''),
-(297, 406, '2024-07-13 14:52:13', 30.00, ''),
-(298, 406, '2024-07-13 14:53:24', 85.00, ''),
-(299, 426, '2024-07-13 14:55:05', 110.00, ''),
-(300, 426, '2024-07-13 16:46:47', 3.00, ''),
-(301, 406, '2024-07-13 18:41:46', 7.00, 'oi'),
-(302, 406, '2024-07-14 11:32:04', 8.00, 'receita entregue ');
+INSERT INTO `vendas` (`id`, `cliente_id`, `data_venda`, `total_venda`, `observacoes`, `hora`) VALUES
+(294, 426, '2024-07-13', 11.00, '', NULL),
+(295, 392, '2024-07-13', 15.00, '', NULL),
+(296, 406, '2024-07-13', 7.00, '', NULL),
+(297, 406, '2024-07-13', 30.00, '', NULL),
+(298, 406, '2024-07-13', 85.00, '', NULL),
+(299, 426, '2024-07-13', 110.00, '', NULL),
+(300, 426, '2024-07-13', 3.00, '', NULL),
+(301, 406, '2024-07-13', 7.00, 'oi', NULL),
+(302, 406, '2024-07-14', 8.00, 'receita entregue ', NULL),
+(303, 406, '2024-07-14', 5.60, '', '17:31:19');
+
+--
+-- Acionadores `vendas`
+--
+DELIMITER $$
+CREATE TRIGGER `before_vendas_insert` BEFORE INSERT ON `vendas` FOR EACH ROW BEGIN
+    SET NEW.hora = CURTIME();
+END
+$$
+DELIMITER ;
 
 --
 -- Índices para tabelas despejadas
@@ -428,7 +441,7 @@ ALTER TABLE `funcionarios`
 -- AUTO_INCREMENT de tabela `itensvenda`
 --
 ALTER TABLE `itensvenda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=261;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=262;
 
 --
 -- AUTO_INCREMENT de tabela `parcelas`
@@ -452,7 +465,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=303;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
 
 --
 -- Restrições para tabelas despejadas
