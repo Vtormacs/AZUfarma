@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14/07/2024 às 00:50
+-- Tempo de geração: 14/07/2024 às 20:21
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -188,7 +188,8 @@ INSERT INTO `itensvenda` (`id`, `venda_id`, `produto_id`, `qtd`, `subtotal`) VAL
 (256, 298, 65, 1, 85.00),
 (257, 299, 48, 1, 110.00),
 (258, 300, 80, 1, 3.00),
-(259, 301, 38, 1, 7.00);
+(259, 301, 38, 1, 7.00),
+(260, 302, 42, 1, 8.00);
 
 -- --------------------------------------------------------
 
@@ -240,7 +241,7 @@ INSERT INTO `produtos` (`id`, `descricao`, `preco`, `qtd_estoque`, `for_id`, `cl
 (39, 'Água Mineral 500ml', 2.00, 290, 15, 5, 0),
 (40, 'Chocolate ao Leite', 5.50, 150, 15, 5, 0),
 (41, 'Biscoito Integral', 4.00, 200, 15, 5, 0),
-(42, 'Analgésico 500mg', 8.00, 300, 14, 6, 0),
+(42, 'Analgésico 500mg', 8.00, 299, 14, 6, 1),
 (43, 'Antigripal', 15.00, 179, 14, 6, 1),
 (44, 'Creme Dental', 6.00, 220, 16, 1, 0),
 (45, 'Enxaguante Bucal', 18.00, 90, 16, 1, 0),
@@ -325,7 +326,8 @@ INSERT INTO `vendas` (`id`, `cliente_id`, `data_venda`, `total_venda`, `observac
 (298, 406, '2024-07-13 14:53:24', 85.00, ''),
 (299, 426, '2024-07-13 14:55:05', 110.00, ''),
 (300, 426, '2024-07-13 16:46:47', 3.00, ''),
-(301, 406, '2024-07-13 18:41:46', 7.00, 'oi');
+(301, 406, '2024-07-13 18:41:46', 7.00, 'oi'),
+(302, 406, '2024-07-14 11:32:04', 8.00, 'receita entregue ');
 
 --
 -- Índices para tabelas despejadas
@@ -426,7 +428,7 @@ ALTER TABLE `funcionarios`
 -- AUTO_INCREMENT de tabela `itensvenda`
 --
 ALTER TABLE `itensvenda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=260;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=261;
 
 --
 -- AUTO_INCREMENT de tabela `parcelas`
@@ -450,7 +452,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=303;
 
 --
 -- Restrições para tabelas despejadas
