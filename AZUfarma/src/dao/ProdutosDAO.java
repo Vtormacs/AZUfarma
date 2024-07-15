@@ -21,8 +21,8 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
     @Override
     public void Salvar(Produtos obj) {
         try {
-            String sql = "INSERT INTO produtos (descricao,preco,qtd_estoque,for_id,classe_id,precisa_de_receita) "
-                    + "VALUES (?,?,?,?,(SELECT id FROM classeProduto WHERE nome = ?),?)";
+            String sql = "INSERT INTO produtos (descricao,preco,qtd_estoque,for_id,classe_id,precisa_de_receita,validade) "
+                    + "VALUES (?,?,?,?,(SELECT id FROM classeProduto WHERE nome = ?),?,?)";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -32,6 +32,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
             stmt.setInt(4, obj.getFornecedor().getId());
             stmt.setString(5, obj.getNomeClasse());
             stmt.setBoolean(6, obj.isPrecisa_de_receita());
+            stmt.setString(7, obj.getDataValidade());
 
             stmt.execute();
             stmt.close();
@@ -46,7 +47,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
     @Override
     public void Editar(Produtos obj) {
         try {
-            String sql = "UPDATE produtos SET descricao= ?,preco = ?,qtd_estoque = ?,for_id = ?,classe_id =(SELECT id FROM classeProduto WHERE nome = ?), precisa_de_receita = ? "
+            String sql = "UPDATE produtos SET descricao= ?,preco = ?,qtd_estoque = ?,for_id = ?,classe_id =(SELECT id FROM classeProduto WHERE nome = ?), precisa_de_receita = ?, validade = ? "
                     + "WHERE id = ?";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -57,7 +58,8 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
             stmt.setInt(4, obj.getFornecedor().getId());
             stmt.setString(5, obj.getNomeClasse());
             stmt.setBoolean(6, obj.isPrecisa_de_receita());
-            stmt.setInt(7, obj.getId());
+            stmt.setString(7, obj.getDataValidade());
+            stmt.setInt(8, obj.getId());
 
             stmt.execute();
             stmt.close();
@@ -164,7 +166,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
         ArrayList<Produtos> lista = new ArrayList<>();
 
         try {
-            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome,p.precisa_de_receita "
+            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome,p.precisa_de_receita, date_format(p.validade, '%d/%m/%Y') AS data_formatada "
                     + "FROM produtos AS p "
                     + "INNER JOIN fornecedores AS f "
                     + "ON (p.for_id = f.id) "
@@ -186,6 +188,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
                 obj.setFornecedor(f);
                 obj.setNomeClasse(resultado.getString("c.nome"));
                 obj.setPrecisa_de_receita(resultado.getBoolean("p.precisa_de_receita"));
+                obj.setDataValidade(resultado.getString("data_formatada"));
 
                 lista.add(obj);
             }
@@ -202,7 +205,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
         ArrayList<Produtos> lista = new ArrayList<>();
 
         try {
-            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome,p.precisa_de_receita "
+            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome,p.precisa_de_receita, '%d/%m/%Y') AS data_formatada "
                     + "FROM produtos AS p "
                     + "INNER JOIN fornecedores AS f "
                     + "ON (p.for_id = f.id) "
@@ -227,6 +230,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
                 obj.setFornecedor(f);
                 obj.setNomeClasse(resultado.getString("c.nome"));
                 obj.setPrecisa_de_receita(resultado.getBoolean("p.precisa_de_receita"));
+                obj.setDataValidade(resultado.getString("data_formatada"));
 
                 lista.add(obj);
             }

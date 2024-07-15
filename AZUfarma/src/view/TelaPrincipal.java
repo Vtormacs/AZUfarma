@@ -12,12 +12,15 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
@@ -134,7 +137,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 c.getQtd_estoque(),
                 c.getFornecedor().getNome(),
                 c.getNomeClasse(),
-                c.isPrecisa_de_receita()
+                c.isPrecisa_de_receita(),
+                c.getDataValidade()
             });
         }
     }
@@ -363,6 +367,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         cbFornecedorProduto = new javax.swing.JComboBox();
         radioReceita = new javax.swing.JRadioButton();
+        jLabel33 = new javax.swing.JLabel();
+        txtDataVencimento = new javax.swing.JFormattedTextField();
         painel_historico_de_vendas = new javax.swing.JPanel();
         Funcionarios5 = new javax.swing.JLabel();
         painel_dados_historico = new javax.swing.JPanel();
@@ -1762,11 +1768,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Descrição", "Preço", "qtd Estoque", "Fornecedor", "Classe", "Receita"
+                "Id", "Descrição", "Preço", "qtd Estoque", "Fornecedor", "Classe", "Receita", "Vencimento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1898,6 +1904,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         radioReceita.setText("Marque se o Produto Precisa de Receita");
 
+        jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel33.setText("Vencimento:");
+
+        try {
+            txtDataVencimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout painel_dados_produtoLayout = new javax.swing.GroupLayout(painel_dados_produto);
         painel_dados_produto.setLayout(painel_dados_produtoLayout);
         painel_dados_produtoLayout.setHorizontalGroup(
@@ -1909,10 +1924,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtQuantidadeEstoqueProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painel_dados_produtoLayout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1920,21 +1943,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbClasseProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painel_dados_produtoLayout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbClasseProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel17)
+                        .addComponent(radioReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtQuantidadeEstoqueProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                        .addGap(18, 18, 18))
-                    .addGroup(painel_dados_produtoLayout.createSequentialGroup()
-                        .addComponent(radioReceita)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel33)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDataVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(painel_dados_produtoLayout.createSequentialGroup()
                         .addComponent(btnNovoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1949,27 +1965,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painel_dados_produtoLayout.setVerticalGroup(
             painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_dados_produtoLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel16)
-                        .addComponent(txtPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel17)
-                        .addComponent(txtQuantidadeEstoqueProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(txtCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9)
-                        .addComponent(txtDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(cbClasseProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(radioReceita))
-                    .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel10)
-                        .addComponent(cbFornecedorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(painel_dados_produtoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(txtCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(txtDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_dados_produtoLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(txtPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17)
+                            .addComponent(txtQuantidadeEstoqueProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(cbFornecedorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(cbClasseProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radioReceita)
+                    .addComponent(jLabel33)
+                    .addComponent(txtDataVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5))
             .addGroup(painel_dados_produtoLayout.createSequentialGroup()
                 .addGroup(painel_dados_produtoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1986,7 +2006,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painel_produtos.setLayout(painel_produtosLayout);
         painel_produtosLayout.setHorizontalGroup(
             painel_produtosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1210, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(painel_produtosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel24)
@@ -2685,6 +2705,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cbClasseProduto.setSelectedItem(tabela_produtos.getValueAt(tabela_produtos.getSelectedRow(), 5).toString());
         boolean precisaDeReceita = (boolean) tabela_produtos.getValueAt(tabela_produtos.getSelectedRow(), 6);
         radioReceita.setSelected(precisaDeReceita);
+        txtDataVencimento.setText(tabela_produtos.getValueAt(tabela_produtos.getSelectedRow(),7).toString());
 
         System.out.println("Tranferido dados da tabela para os campos");
     }//GEN-LAST:event_tabela_produtosMouseClicked
@@ -2847,6 +2868,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
             obj.setPrecisa_de_receita(radioReceita.isSelected());
             System.out.print(radioReceita.isSelected());
 
+            // Obter e converter a data de vencimento
+            String vencimentoStr = txtDataVencimento.getText();
+            SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatoSaida = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date dataVencimento = formatoEntrada.parse(vencimentoStr);
+                String dataVencimentoFormatada = formatoSaida.format(dataVencimento);
+                obj.setDataValidade(dataVencimentoFormatada);
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(null, "Data de vencimento inválida. Use o formato dd/MM/yyyy.");
+                return;
+            }
+
             ProdutosDAO dao = new ProdutosDAO();
             dao.Salvar(obj);
 
@@ -2907,6 +2941,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         f = (Fornecedores) cbFornecedorProduto.getSelectedItem();
         obj.setFornecedor(f);
         obj.setPrecisa_de_receita(radioReceita.isSelected());
+        
+        // Obter e converter a data de vencimento
+            String vencimentoStr = txtDataVencimento.getText();
+            SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatoSaida = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date dataVencimento = formatoEntrada.parse(vencimentoStr);
+                String dataVencimentoFormatada = formatoSaida.format(dataVencimento);
+                obj.setDataValidade(dataVencimentoFormatada);
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(null, "Data de vencimento inválida. Use o formato dd/MM/yyyy.");
+                return;
+            }
 
         ProdutosDAO dao = new ProdutosDAO();
         dao.Editar(obj);
@@ -2918,18 +2965,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarProdutoActionPerformed
 
     private void btnExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirProdutoActionPerformed
-        Produtos obj = new Produtos();
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja Excluir o Produto?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (resposta == JOptionPane.YES_OPTION) {
+            Produtos obj = new Produtos();
 
-        obj.setId(Integer.parseInt(txtCodigoProduto.getText()));
+            obj.setId(Integer.parseInt(txtCodigoProduto.getText()));
 
-        ProdutosDAO dao = new ProdutosDAO();
+            ProdutosDAO dao = new ProdutosDAO();
 
-        dao.Excluir(obj);
+            dao.Excluir(obj);
 
-        Utilitarios util = new Utilitarios();
+            Utilitarios util = new Utilitarios();
 
-        util.Limpar(painel_dados_produto);
-        ListarProdutos();
+            util.Limpar(painel_dados_produto);
+            ListarProdutos();
+        }
     }//GEN-LAST:event_btnExcluirProdutoActionPerformed
 
     private void txtPrecoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoProdutoActionPerformed
@@ -3106,19 +3156,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarClientesActionPerformed
 
     private void btnExcluirClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClientesActionPerformed
-        Cliente obj = new Cliente();
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja Excluir o Cliente?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (resposta == JOptionPane.YES_OPTION) {
+            Cliente obj = new Cliente();
 
-        obj.setId(Integer.parseInt(txtCodigoClientes.getText()));
+            obj.setId(Integer.parseInt(txtCodigoClientes.getText()));
 
-        ClienteDAO dao = new ClienteDAO();
+            ClienteDAO dao = new ClienteDAO();
 
-        dao.Excluir(obj);
+            dao.Excluir(obj);
 
-        Utilitarios util = new Utilitarios();
+            Utilitarios util = new Utilitarios();
 
-        util.Limpar(painel_dados_clientes);
+            util.Limpar(painel_dados_clientes);
 
-        Listar();
+            Listar();
+        }
     }//GEN-LAST:event_btnExcluirClientesActionPerformed
 
     private void txtCodigoFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoFornecedoresActionPerformed
@@ -3260,19 +3313,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarFornecedoresActionPerformed
 
     private void btnExcluirFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirFornecedoresActionPerformed
-        Fornecedores obj = new Fornecedores();
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja Exluir o Fornecedor?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (resposta == JOptionPane.YES_OPTION) {
+            Fornecedores obj = new Fornecedores();
 
-        obj.setId(Integer.parseInt(txtCodigoFornecedores.getText()));
+            obj.setId(Integer.parseInt(txtCodigoFornecedores.getText()));
 
-        FornecedoresDAO dao = new FornecedoresDAO();
+            FornecedoresDAO dao = new FornecedoresDAO();
 
-        dao.Excluir(obj);
+            dao.Excluir(obj);
 
-        Utilitarios util = new Utilitarios();
+            Utilitarios util = new Utilitarios();
 
-        util.Limpar(painel_dados_fornecedores);
+            util.Limpar(painel_dados_fornecedores);
 
-        ListarFornecedores();
+            ListarFornecedores();
+        }
     }//GEN-LAST:event_btnExcluirFornecedoresActionPerformed
 
     private void txtCodigoFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoFuncionariosActionPerformed
@@ -3394,19 +3450,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarFuncionariosActionPerformed
 
     private void btnExcluirFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirFuncionariosActionPerformed
-        Funcionario obj = new Funcionario();
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja Excluir o Funcionário", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (resposta == JOptionPane.YES_OPTION) {
+            Funcionario obj = new Funcionario();
 
-        obj.setId(Integer.parseInt(txtCodigoFuncionarios.getText()));
+            obj.setId(Integer.parseInt(txtCodigoFuncionarios.getText()));
 
-        FuncionarioDAO dao = new FuncionarioDAO();
+            FuncionarioDAO dao = new FuncionarioDAO();
 
-        dao.Excluir(obj);
+            dao.Excluir(obj);
 
-        Utilitarios util = new Utilitarios();
+            Utilitarios util = new Utilitarios();
 
-        util.Limpar(painel_dados_funcionarios);
+            util.Limpar(painel_dados_funcionarios);
 
-        ListarFuncionario();
+            ListarFuncionario();
+        }
     }//GEN-LAST:event_btnExcluirFuncionariosActionPerformed
 
     private void btnAdicionarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEstoqueActionPerformed
@@ -3468,12 +3527,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        int janela = JOptionPane.showConfirmDialog(null, "Deseja sair do sistema?");
-
-        if (janela == 0) {
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja Encerrar o Sistema?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (resposta == JOptionPane.YES_OPTION) {
             System.exit(0);
-        } else if (janela == 2) {
-            JOptionPane.showMessageDialog(null, "Cancelando...");
         }
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
@@ -3546,9 +3602,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_tabela_historicoMouseClicked
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        Login login = new Login();
-        this.dispose();
-        login.setVisible(true);
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja Trocar de Usuário?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (resposta == JOptionPane.YES_OPTION) {
+            Login login = new Login();
+            this.dispose();
+            login.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -3659,6 +3718,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
@@ -3757,6 +3817,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodigoProduto;
     private javax.swing.JTextField txtComplementoClientes;
     private javax.swing.JTextField txtComplementoFornecedores;
+    private javax.swing.JFormattedTextField txtDataVencimento;
     private javax.swing.JTextField txtDescricaoEstoque;
     private javax.swing.JTextField txtDescricaoProduto;
     private javax.swing.JTextField txtEmailClientes;

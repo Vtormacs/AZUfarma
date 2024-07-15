@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14/07/2024 às 23:15
+-- Tempo de geração: 15/07/2024 às 23:56
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -74,8 +74,6 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `nome`, `rg`, `cpf`, `email`, `telefone`, `celular`, `cep`, `endereco`, `numero`, `complemento`, `bairro`, `cidade`, `estado`, `sexo_id`, `dataCriacao`) VALUES
-(381, 'Ana Silva', '12.345.678-9', '113.456.789-01', 'ana.silva@example.com', '1123456789', '11987654321', '01001-000', 'Rua A', 123, 'Apt 1', 'Bairro 1', 'Cidade 1', 'SP', 2, '2024-06-25 18:39:37'),
-(382, 'Bruno Costa', '23.536.789-0', '234.567.300-12', 'bruno.costa@example.com', '1134567890', '11976543210', '02002-000', 'Rua B', 234, 'Apt 2', 'Bairro 2', 'Cidade 2', 'RJ', 1, '2024-06-25 18:39:37'),
 (383, 'Carla Oliveira', '34.567.430-1', '100.678.901-23', 'carla.oliveira@example.com', '1145678901', '11965432109', '03003-000', 'Rua C', 345, 'Apt 3', 'Bairro 3', 'Cidade 3', 'MG', 2, '2024-06-25 18:39:37'),
 (384, 'Diego Souza', '45.548.901-2', '456.666.012-34', 'diego.souza@example.com', '1156789012', '11954321098', '04004-000', 'Rua D', 456, 'Apt 4', 'Bairro 4', 'Cidade 4', 'RS', 1, '2024-06-25 18:39:37'),
 (385, 'Elaine Lima', '56.789.012-3', '567.890.123-45', 'elaine.lima@example.com', '1167890123', '11943210987', '05005-000', 'Rua E', 567, 'Apt 5', 'Bairro 5', 'Cidade 5', 'PR', 2, '2024-06-25 18:39:37'),
@@ -98,7 +96,8 @@ INSERT INTO `clientes` (`id`, `nome`, `rg`, `cpf`, `email`, `telefone`, `celular
 (403, 'Yara Barbosa', '34.567.855-1', '345.678.121-23', 'yara.barbosa@example.com', '1145678901', '11965432109', '23023-000', 'Rua W', 345, 'Apt 23', 'Bairro 23', 'Cidade 23', 'MA', 2, '2024-06-25 18:39:37'),
 (404, 'Zé Carlos', '45.000.901-2', '500.789.012-34', 'ze.carlos@example.com', '1156789012', '11954321098', '24024-000', 'Rua X', 456, 'Apt 24', 'Bairro 24', 'Cidade 24', 'MS', 1, '2024-06-25 18:39:37'),
 (406, 'Cliente sem Cadastro', '  .   .   - ', '   .   .   -  ', '', '(  )      -    ', '(  )      -    ', '', '', 0, '', '', '', 'AC', 3, '2024-06-25 19:04:35'),
-(426, 'Edrian', '11.111.111-1', '111.111.111-11', '', '(  )      -    ', '(11)1 1111-1111', '85857050', 'Rua Capivari', 11, '', 'Conjunto Libra', 'Foz do Iguaçu', 'PR', 1, '2024-06-26 22:43:57');
+(426, 'Edrian', '11.111.111-1', '111.111.111-11', '', '(  )      -    ', '(11)1 1111-1111', '85857050', 'Rua Capivari', 11, '', 'Conjunto Libra', 'Foz do Iguaçu', 'PR', 1, '2024-06-26 22:43:57'),
+(427, 'Vitor Eduardo Lopes Francisco', '22.222.222-2', '222.222.222-22', '', '(  )      -    ', '(45)9 9999-9999', '85858330', 'Rua José Carlos Pace', 1744, '', 'Parque Morumbi', 'Foz do Iguaçu', 'PR', 1, '2024-07-15 20:53:37');
 
 -- --------------------------------------------------------
 
@@ -159,7 +158,7 @@ CREATE TABLE `funcionarios` (
 INSERT INTO `funcionarios` (`id`, `nome`, `rg`, `cpf`, `email`, `senha`, `cargo`, `nivel_acesso`, `celular`, `salt`) VALUES
 (16, 'vitor eduardo', '11.111.111-11', '111.111.111-11', 'vitor@gmail.com', 'bSUNtOHmXGoQGqHTL7VL8BW8m3wqQFyNFB1JpVNcfXE=', 'DEV', 'ADMINISTRADOR', '(11)1 1111-1111', '7zo/y6mpGKHUEpWcmFkMRQ=='),
 (17, 'Gustavo', '23.423.424-2', '113.453.455-55', 'gustavo@gmail.com', 'SPw6yjddtckdUk13krs5IkrbpTngWalrY3hdlaHxTUE=', 'Limpa Chão', 'FUNCIONARIO', '(34)5 3453-4535', 'b/BRemleqCXf7kB5tfDL1A=='),
-(19, 'teste', '33.333.333-3', '333.333.333-33', 'teste@gmail.com', 'E7AknV3Rfg18f8iLshg/UYf/9VOAmZzYZ1NhedQMoV0=', 'teste', 'FUNCIONARIO', '(45)9 8989-8989', 'CtRuyVP3GJc1ERDeB7U9Lg==');
+(20, 'Jaqueline de Oliveira Rocha', '11.111.111-1', '111.111.111-11', 'jaqueline@gmail.com', '349qqf3aQNX8o+LUxM60xw2x7f4qkUxRjjA2lY+ccsU=', 'Farmaceutica', 'FUNCIONARIO', '(45)9 9999-9999', '/y9hK0brevHsJI9/lr71ug==');
 
 -- --------------------------------------------------------
 
@@ -190,7 +189,20 @@ INSERT INTO `itensvenda` (`id`, `venda_id`, `produto_id`, `qtd`, `subtotal`) VAL
 (258, 300, 80, 1, 3.00),
 (259, 301, 38, 1, 7.00),
 (260, 302, 42, 1, 8.00),
-(261, 303, 38, 1, 5.60);
+(261, 303, 38, 1, 5.60),
+(262, 304, 42, 1, 8.00);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `logs`
+--
+
+CREATE TABLE `logs` (
+  `id` int(11) NOT NULL,
+  `data` timestamp NOT NULL DEFAULT current_timestamp(),
+  `log` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -221,64 +233,64 @@ CREATE TABLE `produtos` (
   `qtd_estoque` int(11) DEFAULT NULL,
   `for_id` int(11) DEFAULT NULL,
   `classe_id` int(11) NOT NULL,
-  `precisa_de_receita` tinyint(1) DEFAULT 0
+  `precisa_de_receita` tinyint(1) DEFAULT 0,
+  `validade` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Despejando dados para a tabela `produtos`
 --
 
-INSERT INTO `produtos` (`id`, `descricao`, `preco`, `qtd_estoque`, `for_id`, `classe_id`, `precisa_de_receita`) VALUES
-(29, 'Shampoo Anticaspa', 15.90, 90, 14, 1, 0),
-(30, 'Sabonete Líquido', 7.50, 200, 16, 1, 0),
-(31, 'Desodorante Aerosol', 12.00, 150, 16, 1, 0),
-(32, 'Perfume Floral', 120.00, 50, 14, 2, 0),
-(33, 'Colônia Masculina', 95.00, 78, 14, 2, 0),
-(34, 'Vitamínico ABC', 45.00, 100, 17, 3, 0),
-(35, 'Ômega 3', 60.00, 120, 17, 3, 0),
-(36, 'Multivitamínico Infantil', 25.00, 90, 17, 4, 0),
-(37, 'Shampoo Infantil', 10.50, 110, 16, 4, 0),
-(38, 'Chupeta Ortodôntica', 7.00, 126, 13, 4, 0),
-(39, 'Água Mineral 500ml', 2.00, 290, 15, 5, 0),
-(40, 'Chocolate ao Leite', 5.50, 150, 15, 5, 0),
-(41, 'Biscoito Integral', 4.00, 200, 15, 5, 0),
-(42, 'Analgésico 500mg', 8.00, 299, 14, 6, 1),
-(43, 'Antigripal', 15.00, 179, 14, 6, 1),
-(44, 'Creme Dental', 6.00, 220, 16, 1, 0),
-(45, 'Enxaguante Bucal', 18.00, 90, 16, 1, 0),
-(46, 'Condicionador Capilar', 11.00, 130, 16, 1, 0),
-(47, 'Creme Hidratante', 22.00, 80, 14, 2, 0),
-(48, 'Perfume Cítrico', 110.00, 58, 14, 2, 0),
-(49, 'Whey Protein', 150.00, 70, 17, 3, 0),
-(50, 'Creatina', 90.00, 100, 17, 3, 0),
-(51, 'Leite Infantil', 30.00, 87, 13, 4, 0),
-(52, 'Fralda Descartável', 25.00, 139, 13, 4, 0),
-(53, 'Lenço Umedecido', 12.00, 150, 13, 4, 0),
-(54, 'Refrigerante 2L', 7.00, 200, 15, 5, 0),
-(55, 'Suco Natural 1L', 6.00, 170, 15, 5, 0),
-(56, 'Salgadinho', 5.00, 190, 15, 5, 0),
-(57, 'Antibiótico 500mg', 35.00, 79, 14, 6, 1),
-(58, 'Anti-inflamatório', 25.00, 120, 14, 6, 0),
-(59, 'Sabonete em Barra', 3.00, 200, 16, 1, 0),
-(60, 'Desodorante Roll-on', 10.00, 170, 16, 1, 0),
-(61, 'Escova de Dentes', 4.50, 200, 16, 1, 0),
-(62, 'Loção Corporal', 24.00, 80, 14, 2, 0),
-(63, 'Água de Colônia', 75.00, 90, 14, 2, 0),
-(64, 'BCAA', 80.00, 110, 17, 3, 0),
-(65, 'Glutamina', 85.00, 89, 17, 3, 0),
-(66, 'Xarope Infantil', 20.00, 60, 14, 4, 0),
-(67, 'Brinquedo Educativo', 45.00, 59, 13, 4, 0),
-(68, 'Mamadeira', 15.00, 129, 13, 4, 0),
-(69, 'Água Tônica 1L', 5.00, 179, 15, 5, 0),
-(70, 'Barra de Cereal', 3.50, 220, 15, 5, 0),
-(71, 'Café Solúvel', 10.00, 150, 15, 5, 0),
-(72, 'Analgésico Infantil', 10.00, 110, 14, 6, 0),
-(73, 'Antisséptico Bucal', 8.00, 130, 14, 6, 0),
-(74, 'Toalha de Rosto', 15.00, 100, 16, 1, 0),
-(75, 'Cotonetes', 5.00, 300, 16, 1, 0),
-(76, 'Hidratante Facial', 35.00, 70, 14, 2, 0),
-(77, 'Perfume Amadeirado', 150.00, 50, 14, 2, 0),
-(80, 'Água Minera c/Gásl 500ml', 3.00, 96, 13, 5, 0);
+INSERT INTO `produtos` (`id`, `descricao`, `preco`, `qtd_estoque`, `for_id`, `classe_id`, `precisa_de_receita`, `validade`) VALUES
+(29, 'Shampoo Anticaspa', 15.90, 90, 14, 1, 0, '2030-01-01'),
+(30, 'Sabonete Líquido', 7.50, 200, 16, 1, 0, '2030-01-01'),
+(31, 'Desodorante Aerosol', 12.00, 150, 16, 1, 0, '2030-01-01'),
+(32, 'Perfume Floral', 120.00, 50, 14, 2, 0, '2030-01-01'),
+(33, 'Colônia Masculina', 95.00, 78, 14, 2, 0, '2030-01-01'),
+(34, 'Vitamínico ABC', 45.00, 100, 17, 3, 0, '2030-01-01'),
+(35, 'Ômega 3', 60.00, 120, 17, 3, 0, '2030-01-01'),
+(36, 'Multivitamínico Infantil', 25.00, 90, 17, 4, 0, '2030-01-01'),
+(37, 'Shampoo Infantil', 10.50, 110, 16, 4, 0, '2030-01-01'),
+(38, 'Chupeta Ortodôntica', 7.00, 126, 13, 4, 0, '2030-01-01'),
+(39, 'Água Mineral 500ml', 2.00, 290, 15, 5, 0, '2030-01-01'),
+(40, 'Chocolate ao Leite', 5.50, 150, 15, 5, 0, '2030-01-01'),
+(41, 'Biscoito Integral', 4.00, 200, 15, 5, 0, '2030-01-01'),
+(42, 'Analgésico 500mg', 8.00, 298, 14, 6, 1, '2030-01-01'),
+(43, 'Antigripal', 15.00, 179, 14, 6, 1, '2030-01-01'),
+(44, 'Creme Dental', 6.00, 220, 16, 1, 0, '2030-01-01'),
+(45, 'Enxaguante Bucal', 18.00, 90, 16, 1, 0, '2030-01-01'),
+(46, 'Condicionador Capilar', 11.00, 130, 16, 1, 0, '2030-01-01'),
+(47, 'Creme Hidratante', 22.00, 80, 14, 2, 0, '2030-01-01'),
+(48, 'Perfume Cítrico', 110.00, 58, 14, 2, 0, '2030-01-01'),
+(49, 'Whey Protein', 150.00, 70, 17, 3, 0, '2030-01-01'),
+(50, 'Creatina', 90.00, 100, 17, 3, 0, '2030-01-01'),
+(51, 'Leite Infantil', 30.00, 87, 13, 4, 0, '2030-01-01'),
+(52, 'Fralda Descartável', 25.00, 139, 13, 4, 0, '2030-01-01'),
+(53, 'Lenço Umedecido', 12.00, 150, 13, 4, 0, '2030-01-01'),
+(54, 'Refrigerante 2L', 7.00, 200, 15, 5, 0, '2030-01-01'),
+(55, 'Suco Natural 1L', 6.00, 170, 15, 5, 0, '2030-01-01'),
+(56, 'Salgadinho', 5.00, 190, 15, 5, 0, '2030-01-01'),
+(57, 'Antibiótico 500mg', 35.00, 79, 14, 6, 1, '2030-01-01'),
+(58, 'Anti-inflamatório', 25.00, 120, 14, 6, 0, '2030-01-01'),
+(59, 'Sabonete em Barra', 3.00, 200, 16, 1, 0, '2030-01-01'),
+(60, 'Desodorante Roll-on', 10.00, 170, 16, 1, 0, '2030-01-01'),
+(61, 'Escova de Dentes', 4.50, 200, 16, 1, 0, '2030-01-01'),
+(62, 'Loção Corporal', 24.00, 80, 14, 2, 0, '2030-01-01'),
+(63, 'Água de Colônia', 75.00, 90, 14, 2, 0, '2030-01-01'),
+(64, 'BCAA', 80.00, 110, 17, 3, 0, '2030-01-01'),
+(65, 'Glutamina', 85.00, 89, 17, 3, 0, '2030-01-01'),
+(66, 'Xarope Infantil', 20.00, 60, 14, 4, 0, '2030-01-01'),
+(68, 'Mamadeira', 15.00, 129, 13, 4, 0, '2023-11-11'),
+(69, 'Água Tônica 1L', 5.00, 179, 15, 5, 0, '2030-01-01'),
+(70, 'Barra de Cereal', 3.50, 220, 15, 5, 0, '2030-01-01'),
+(71, 'Café Solúvel', 10.00, 150, 15, 5, 0, '2030-01-01'),
+(72, 'Analgésico Infantil', 10.00, 110, 14, 6, 0, '2030-01-01'),
+(73, 'Antisséptico Bucal', 8.00, 130, 14, 6, 0, '2030-01-01'),
+(74, 'Toalha de Rosto', 15.00, 100, 16, 1, 0, '2030-01-01'),
+(75, 'Cotonetes', 5.00, 300, 16, 1, 0, '2030-01-01'),
+(76, 'Hidratante Facial', 35.00, 70, 14, 2, 0, '2030-01-01'),
+(77, 'Perfume Amadeirado', 150.00, 50, 14, 2, 0, '2030-01-01'),
+(80, 'Água Minera c/Gásl 500ml', 3.00, 96, 13, 5, 0, '2030-01-01');
 
 -- --------------------------------------------------------
 
@@ -330,7 +342,8 @@ INSERT INTO `vendas` (`id`, `cliente_id`, `data_venda`, `total_venda`, `observac
 (300, 426, '2024-07-13', 3.00, '', NULL),
 (301, 406, '2024-07-13', 7.00, 'oi', NULL),
 (302, 406, '2024-07-14', 8.00, 'receita entregue ', NULL),
-(303, 406, '2024-07-14', 5.60, '', '17:31:19');
+(303, 406, '2024-07-14', 5.60, '', '17:31:19'),
+(304, 406, '2024-07-15', 8.00, '', '00:35:53');
 
 --
 -- Acionadores `vendas`
@@ -382,6 +395,12 @@ ALTER TABLE `itensvenda`
   ADD KEY `produto_id` (`produto_id`);
 
 --
+-- Índices de tabela `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `parcelas`
 --
 ALTER TABLE `parcelas`
@@ -423,7 +442,7 @@ ALTER TABLE `classeproduto`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=427;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=428;
 
 --
 -- AUTO_INCREMENT de tabela `fornecedores`
@@ -435,13 +454,19 @@ ALTER TABLE `fornecedores`
 -- AUTO_INCREMENT de tabela `funcionarios`
 --
 ALTER TABLE `funcionarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `itensvenda`
 --
 ALTER TABLE `itensvenda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=262;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
+
+--
+-- AUTO_INCREMENT de tabela `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `parcelas`
@@ -453,7 +478,7 @@ ALTER TABLE `parcelas`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT de tabela `sexo`
@@ -465,7 +490,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
 
 --
 -- Restrições para tabelas despejadas

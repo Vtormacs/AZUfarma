@@ -18,6 +18,7 @@ public class Produtos {
     private int classe_id;
     private String nomeClasse;
     private boolean precisa_de_receita;
+    private String dataValidade;
 
     public int getId() {
         return id;
@@ -83,4 +84,12 @@ public class Produtos {
         this.precisa_de_receita = precisa_de_receita;
     }
 
+    public String getDataValidade() {
+        return dataValidade;
+    }
+
+    public void setDataValidade(String dataValidade) {
+        this.dataValidade = dataValidade;
+    }
+    
 }

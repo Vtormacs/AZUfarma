@@ -436,8 +436,8 @@ public class PontoDeVendas extends javax.swing.JFrame {
         });
 
         btnCancelarVenda.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnCancelarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/4753731_business_cash_coin_dollar_finance_icon.png"))); // NOI18N
-        btnCancelarVenda.setText("CANCELAR");
+        btnCancelarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/216785_cancel_x_delete_icon.png"))); // NOI18N
+        btnCancelarVenda.setText("CANCELAR VENDA");
         btnCancelarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarVendaActionPerformed(evt);
