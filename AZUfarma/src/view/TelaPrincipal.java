@@ -44,17 +44,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     public String usuarioLogado;
 
-    /**
-     * Este método público 'Listar' é usado para listar todos os clientes.
-     * Primeiro, ele cria um novo objeto 'ClienteDAO' e chama o método 'Listar'.
-     * O método 'Listar' retorna uma lista de todos os clientes. Em seguida, ele
-     * obtém o modelo da tabela 'tabela_clientes' e limpa todas as linhas
-     * existentes. Depois disso, ele percorre a lista de clientes e adiciona
-     * cada cliente como uma nova linha na tabela. Cada linha contém detalhes do
-     * cliente, incluindo id, nome, rg, cpf, sexo, email, telefone, celular,
-     * cep, endereço, número, complemento, bairro, cidade e estado.
-     */
+//Lista os clientes
     public void Listar() {
+        System.out.println("Listei Clientes");
         ClienteDAO dao = new ClienteDAO();
         List<Cliente> lista = dao.Listar();
         DefaultTableModel dados = (DefaultTableModel) tabela_clientes.getModel();
@@ -80,8 +72,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    //Lista os funcionarios
     public void ListarFuncionario() {
-        System.out.print("carreguei funcionario");
+        System.out.println("Listei Funcionarios");
         FuncionarioDAO dao = new FuncionarioDAO();
         List<Funcionario> lista = dao.Listar();
         DefaultTableModel dados = (DefaultTableModel) tabela_funcionarios.getModel();
@@ -100,8 +93,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    //Lista os fornecedores
     public void ListarFornecedores() {
-        System.out.print("carreguei fornecedores");
+        System.out.println("Listei Fornecedores");
         FornecedoresDAO dao = new FornecedoresDAO();
         List<Fornecedores> lista = dao.Listar();
         DefaultTableModel dados = (DefaultTableModel) tabela_fornecedores.getModel();
@@ -125,8 +119,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    //Lista os produtos
     public void ListarProdutos() {
-        System.out.print("carreguei produtos");
+        System.out.println("Listei Produtos");
         ProdutosDAO dao = new ProdutosDAO();
         List<Produtos> lista = dao.Listar();
         DefaultTableModel dados = (DefaultTableModel) tabela_produtos.getModel();
@@ -144,8 +139,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
+//Lista os produto do estoque
     public void ListarEstoque() {
-        System.out.print("carreguei Estoque");
+        System.out.println("Listei Produtos do Estoque");
         ProdutosDAO dao = new ProdutosDAO();
         List<Produtos> lista = dao.Listar();
         DefaultTableModel dados2 = (DefaultTableModel) tabela_estoque.getModel();
@@ -171,6 +167,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
             txtBairroClientes.setText(cepInfo.getBairro());
             cbUFClientes.setSelectedItem(cepInfo.getUf());
             txtEnderecoClientes.setText(cepInfo.getTipoLogradouro() + " " + cepInfo.getLogradouro());
+
+            System.out.println("CEP do Cliente Encontrado");
+        } else {
+            System.out.println("CEP não Encontrado");
         }
     }
 
@@ -183,6 +183,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
             txtBairroFornecedores.setText(cepInfo.getBairro());
             cbUFFornecedores.setSelectedItem(cepInfo.getUf());
             txtEnderecoFornecedores.setText(cepInfo.getTipoLogradouro() + " " + cepInfo.getLogradouro());
+
+            System.out.println("CEP do Fornecedor Encontrado");
+        } else {
+            System.out.println("CEP não Encontrado");
         }
     }
 
@@ -2395,13 +2399,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesquisaNomeClientesActionPerformed
 
-    /**
-     * Este método é chamado quando a janela do formulário é ativada. Ele chama
-     * o método 'Listar()' para preencher a tabela na interface do usuário com a
-     * lista atual de clientes.
-     */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-
 
     }//GEN-LAST:event_formWindowActivated
 
@@ -2415,14 +2413,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ListarProdutos();
     }//GEN-LAST:event_btnProdutosActionPerformed
 
-    /**
-     * Este método é chamado quando uma tecla é liberada no campo de texto de
-     * pesquisa por nome. Ele inicia um Timer que é reiniciado a cada vez que
-     * uma tecla é liberada. Quando o Timer expira (ou seja, algum tempo após o
-     * usuário parar de digitar), ele busca clientes cujo nome corresponde ao
-     * texto no campo de pesquisa. Em seguida, ele atualiza a tabela na
-     * interface do usuário com os clientes encontrados.
-     */
     private void txtPesquisaNomeClientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaNomeClientesKeyReleased
         // Obtém o nome para a pesquisa
         String nome = "%" + txtPesquisaNomeClientes.getText() + "%";
@@ -2471,13 +2461,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }.execute();
     }//GEN-LAST:event_txtPesquisaNomeClientesKeyReleased
 
-    /**
-     * Este método é chamado quando um evento de clique do mouse é acionado na
-     * tabela_clientes. Ele pega os valores da linha selecionada na tabela e
-     * preenche os campos de texto correspondentes na interface do usuário. Isso
-     * permite que os usuários vejam e editem os detalhes do cliente
-     * selecionado.
-     */
     private void tabela_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_clientesMouseClicked
         content.setSelectedIndex(2);
         txtCodigoClientes.setText(tabela_clientes.getValueAt(tabela_clientes.getSelectedRow(), 0).toString());
@@ -2496,6 +2479,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtCidadeClientes.setText(tabela_clientes.getValueAt(tabela_clientes.getSelectedRow(), 13).toString());
         cbUFClientes.setSelectedItem(tabela_clientes.getValueAt(tabela_clientes.getSelectedRow(), 14).toString());
 
+        System.out.println("Tranferido dados da tabela para os campos");
     }//GEN-LAST:event_tabela_clientesMouseClicked
 
     private void txtPesquisaNomeFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaNomeFuncionarioActionPerformed
@@ -2555,6 +2539,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cbNivelAcessoFuncionarios.setSelectedItem(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 6).toString());
         txtCelularFuncionarios.setText(tabela_funcionarios.getValueAt(tabela_funcionarios.getSelectedRow(), 7).toString());
         txtSenhaFuncionarios.setEnabled(false);
+
+        System.out.println("Tranferido dados da tabela para os campos");
     }//GEN-LAST:event_tabela_funcionariosMouseClicked
 
     private void tabela_fornecedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_fornecedoresMouseClicked
@@ -2573,6 +2559,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtCidadeFornecedores.setText(tabela_fornecedores.getValueAt(tabela_fornecedores.getSelectedRow(), 11).toString());
         cbUFFornecedores.setSelectedItem(tabela_fornecedores.getValueAt(tabela_fornecedores.getSelectedRow(), 12).toString());
 
+        System.out.println("Tranferido dados da tabela para os campos");
     }//GEN-LAST:event_tabela_fornecedoresMouseClicked
 
     private void txtPesquisaNomeFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaNomeFornecedoresActionPerformed
@@ -2698,6 +2685,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cbClasseProduto.setSelectedItem(tabela_produtos.getValueAt(tabela_produtos.getSelectedRow(), 5).toString());
         boolean precisaDeReceita = (boolean) tabela_produtos.getValueAt(tabela_produtos.getSelectedRow(), 6);
         radioReceita.setSelected(precisaDeReceita);
+
+        System.out.println("Tranferido dados da tabela para os campos");
     }//GEN-LAST:event_tabela_produtosMouseClicked
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
@@ -2711,6 +2700,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtCodigoEstoque.setText(tabela_estoque.getValueAt(tabela_estoque.getSelectedRow(), 0).toString());
         txtDescricaoEstoque.setText(tabela_estoque.getValueAt(tabela_estoque.getSelectedRow(), 1).toString());
         txtQtdAtualEstoque.setText(tabela_estoque.getValueAt(tabela_estoque.getSelectedRow(), 3).toString());
+
+        System.out.println("Tranferido dados da tabela para os campos");
     }//GEN-LAST:event_tabela_estoqueMouseClicked
 
     private void txtCodigoEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoEstoqueActionPerformed
@@ -2742,6 +2733,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 txtQtdAtualEstoque.setText(String.valueOf(obj.getPreco()));
                 txtQtdNova.setText(String.valueOf(obj.getQtd_estoque()));
 
+                System.out.println("Produto Encontrado");
+
             } else {
                 JOptionPane.showMessageDialog(null, "Produto não encontrado");
             }
@@ -2761,6 +2754,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Utilitarios util = new Utilitarios();
 
         util.Limpar(painel_dados_estoque);
+
+        System.out.println("Campos Limpados");
     }//GEN-LAST:event_btnNovoEstoqueActionPerformed
 
     private void btnSalvarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarEstoqueActionPerformed
@@ -2860,6 +2855,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             util.Limpar(painel_dados_produto);
 
             ListarProdutos();
+
+            System.out.println("Produto Salvo");
         } else {
             JOptionPane.showMessageDialog(null, "Esse produto já existe!!");
         }
@@ -2962,7 +2959,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCelularClientesActionPerformed
 
     private void txtEmailClientesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailClientesFocusLost
-        if (!(Pattern.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", txtEmailClientes.getText()))) {
+        String email = txtEmailClientes.getText().trim();
+        if (!email.isEmpty() && !(Pattern.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", email))) {
             JOptionPane.showMessageDialog(null, "Por favor, digite um e-mail válido", "Error", JOptionPane.ERROR_MESSAGE);
             txtEmailClientes.requestFocus();
         }
@@ -3165,7 +3163,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeFornecedoresKeyPressed
 
     private void txtEmailFornecedoresFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFornecedoresFocusLost
-        if (!(Pattern.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", txtEmailFornecedores.getText()))) {
+        String emailFornecedores = txtEmailFornecedores.getText().trim();
+        if (!emailFornecedores.isEmpty() && !(Pattern.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", emailFornecedores))) {
             JOptionPane.showMessageDialog(null, "Por favor, digite um e-mail válido", "Error", JOptionPane.ERROR_MESSAGE);
             txtEmailFornecedores.requestFocus();
         }
@@ -3314,7 +3313,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeFuncionariosKeyPressed
 
     private void txtEmailFuncionariosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFuncionariosFocusLost
-        if (!(Pattern.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", txtEmailFuncionarios.getText()))) {
+        String emailFuncionarios = txtEmailFuncionarios.getText().trim();
+        if (!emailFuncionarios.isEmpty() && !(Pattern.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", emailFuncionarios))) {
             JOptionPane.showMessageDialog(null, "Por favor, digite um e-mail válido", "Error", JOptionPane.ERROR_MESSAGE);
             txtEmailFuncionarios.requestFocus();
         }
