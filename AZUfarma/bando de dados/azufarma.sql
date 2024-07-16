@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16/07/2024 às 04:05
+-- Tempo de geração: 16/07/2024 às 06:02
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -90,14 +90,40 @@ INSERT INTO `clientes` (`id`, `nome`, `rg`, `cpf`, `email`, `telefone`, `celular
 (397, 'Rafaela Araujo', '68.901.234-5', '689.012.345-67', 'rafaela.araujo@example.com', '1189012345', '11921098765', '17017-000', 'Rua Q', 789, 'Apt 17', 'Bairro 17', 'Cidade 17', 'RN', 2, '2024-06-25 18:39:37'),
 (398, 'Sérgio Martins', '79.012.345-6', '790.123.456-78', 'sergio.martins@example.com', '1190123456', '11910987654', '18018-000', 'Rua R', 890, 'Apt 18', 'Bairro 18', 'Cidade 18', 'RR', 1, '2024-06-25 18:39:37'),
 (399, 'Tatiana Souza', '80.123.456-7', '801.234.567-89', 'tatiana.souza@example.com', '1101234567', '11909876543', '19019-000', 'Rua S', 901, 'Apt 19', 'Bairro 19', 'Cidade 19', 'TO', 2, '2024-06-25 18:39:37'),
-(400, 'Ubirajara Lima', '91.234.567-8', '912.525.678-90', 'ubirajara.lima@example.com', '1112345678', '11998765432', '20020-000', 'Rua T', 12, 'Apt 20', 'Bairro 20', 'Cidade 20', 'DF', 1, '2024-06-25 18:39:37'),
+(400, 'Ubirajara Lima', '91.234.567-8', '912.525.678-90', 'ubirajara.lima@example.com', '(11)1 2345-678 ', '(11)9 9876-5432', '20020000', 'Rua T', 12, 'Apt 20', 'Bairro 20', 'Cidade 20', 'DF', 2, '2024-06-25 18:39:37'),
 (401, 'Valéria Duarte', '12.345.728-9', '123.176.789-01', 'valeria.duarte@example.com', '1123456789', '11987654321', '21021-000', 'Rua U', 123, 'Apt 21', 'Bairro 21', 'Cidade 21', 'AC', 2, '2024-06-25 18:39:37'),
 (402, 'Xavier Nunes', '23.456.729-0', '234.562.890-12', 'xavier.nunes@example.com', '1134567890', '11976543210', '22022-000', 'Rua V', 234, 'Apt 22', 'Bairro 22', 'Cidade 22', 'ES', 1, '2024-06-25 18:39:37'),
 (403, 'Yara Barbosa', '34.567.855-1', '345.678.121-23', 'yara.barbosa@example.com', '1145678901', '11965432109', '23023-000', 'Rua W', 345, 'Apt 23', 'Bairro 23', 'Cidade 23', 'MA', 2, '2024-06-25 18:39:37'),
 (404, 'Zé Carlos', '45.000.901-2', '500.789.012-34', 'ze.carlos@example.com', '1156789012', '11954321098', '24024-000', 'Rua X', 456, 'Apt 24', 'Bairro 24', 'Cidade 24', 'MS', 1, '2024-06-25 18:39:37'),
 (406, 'Cliente sem Cadastro', '  .   .   - ', '   .   .   -  ', '', '(  )      -    ', '(  )      -    ', '', '', 0, '', '', '', 'AC', 3, '2024-06-25 19:04:35'),
 (426, 'Edrian', '11.111.111-1', '111.111.111-11', '', '(  )      -    ', '(11)1 1111-1111', '85857050', 'Rua Capivari', 11, '', 'Conjunto Libra', 'Foz do Iguaçu', 'PR', 1, '2024-06-26 22:43:57'),
-(427, 'Vitor Eduardo Lopes Francisco', '22.222.222-2', '222.222.222-22', '', '(  )      -    ', '(45)9 9999-9999', '85858330', 'Rua José Carlos Pace', 1744, '', 'Parque Morumbi', 'Foz do Iguaçu', 'PR', 1, '2024-07-15 20:53:37');
+(427, 'Vitor Eduardo Lopes Francisco', '22.222.222-2', '222.222.222-22', '', '(  )      -    ', '(45)9 9999-9999', '85858330', 'Rua José Carlos Pace', 1744, '', 'Parque Morumbi', 'Foz do Iguaçu', 'PR', 1, '2024-07-15 20:53:37'),
+(430, 'teste3333', '33.333.333-3', '333.333.333-33', '', '(  )      -    ', '(  )      -    ', '', '', 1, '', '', '', 'AC', 1, '2024-07-16 03:43:33');
+
+--
+-- Acionadores `clientes`
+--
+DELIMITER $$
+CREATE TRIGGER `after_cliente_delete` AFTER DELETE ON `clientes` FOR EACH ROW BEGIN
+    INSERT INTO log_clientes (operacao, id_cliente, nome, rg, cpf, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado, sexo_id, dataCriacao)
+    VALUES ('DELETE', OLD.id, OLD.nome, OLD.rg, OLD.cpf, OLD.email, OLD.telefone, OLD.celular, OLD.cep, OLD.endereco, OLD.numero, OLD.complemento, OLD.bairro, OLD.cidade, OLD.estado, OLD.sexo_id, OLD.dataCriacao);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_cliente_insert` AFTER INSERT ON `clientes` FOR EACH ROW BEGIN
+    INSERT INTO log_clientes (operacao, id_cliente, nome, rg, cpf, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado, sexo_id, dataCriacao)
+    VALUES ('INSERT', NEW.id, NEW.nome, NEW.rg, NEW.cpf, NEW.email, NEW.telefone, NEW.celular, NEW.cep, NEW.endereco, NEW.numero, NEW.complemento, NEW.bairro, NEW.cidade, NEW.estado, NEW.sexo_id, NEW.dataCriacao);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_cliente_update` AFTER UPDATE ON `clientes` FOR EACH ROW BEGIN
+    INSERT INTO log_clientes (operacao, id_cliente, nome, rg, cpf, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado, sexo_id, dataCriacao)
+    VALUES ('UPDATE', NEW.id, NEW.nome, NEW.rg, NEW.cpf, NEW.email, NEW.telefone, NEW.celular, NEW.cep, NEW.endereco, NEW.numero, NEW.complemento, NEW.bairro, NEW.cidade, NEW.estado, NEW.sexo_id, NEW.dataCriacao);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -132,6 +158,31 @@ INSERT INTO `fornecedores` (`id`, `nome`, `cnpj`, `email`, `telefone`, `celular`
 (16, 'Cosmeticos sul', '23.453.455/0001-35', 'gg@gmail.com', '(45)6 4564-5645', '(56)7 5675-6756', '38400039', 'Praça Bercário Gomes Correa', 454, '', 'Cazeca', 'Uberlândia', 'MG'),
 (17, 'Growth Suplemntos', '43.534.534/5645-64', 'growth@gmail.com', '(21)2 3454-5645', '(56)7 5675-6756', '79081728', 'Rua Galdina Ifran Catarinelli', 888, '', 'Jardim das Nações ', 'Campo Grande', 'MS');
 
+--
+-- Acionadores `fornecedores`
+--
+DELIMITER $$
+CREATE TRIGGER `after_fornecedor_delete` AFTER DELETE ON `fornecedores` FOR EACH ROW BEGIN
+    INSERT INTO log_fornecedores (operacao, id_fornecedor, nome, cnpj, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado)
+    VALUES ('DELETE', OLD.id, OLD.nome, OLD.cnpj, OLD.email, OLD.telefone, OLD.celular, OLD.cep, OLD.endereco, OLD.numero, OLD.complemento, OLD.bairro, OLD.cidade, OLD.estado);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_fornecedor_insert` AFTER INSERT ON `fornecedores` FOR EACH ROW BEGIN
+    INSERT INTO log_fornecedores (operacao, id_fornecedor, nome, cnpj, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado)
+    VALUES ('INSERT', NEW.id, NEW.nome, NEW.cnpj, NEW.email, NEW.telefone, NEW.celular, NEW.cep, NEW.endereco, NEW.numero, NEW.complemento, NEW.bairro, NEW.cidade, NEW.estado);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_fornecedor_update` AFTER UPDATE ON `fornecedores` FOR EACH ROW BEGIN
+    INSERT INTO log_fornecedores (operacao, id_fornecedor, nome, cnpj, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado)
+    VALUES ('UPDATE', NEW.id, NEW.nome, NEW.cnpj, NEW.email, NEW.telefone, NEW.celular, NEW.cep, NEW.endereco, NEW.numero, NEW.complemento, NEW.bairro, NEW.cidade, NEW.estado);
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -159,6 +210,31 @@ INSERT INTO `funcionarios` (`id`, `nome`, `rg`, `cpf`, `email`, `senha`, `cargo`
 (16, 'vitor eduardo', '11.111.111-11', '111.111.111-11', 'vitor@gmail.com', 'bSUNtOHmXGoQGqHTL7VL8BW8m3wqQFyNFB1JpVNcfXE=', 'DEV', 'ADMINISTRADOR', '(11)1 1111-1111', '7zo/y6mpGKHUEpWcmFkMRQ=='),
 (17, 'Gustavo', '23.423.424-2', '113.453.455-55', 'gustavo@gmail.com', 'SPw6yjddtckdUk13krs5IkrbpTngWalrY3hdlaHxTUE=', 'Limpa Chão', 'FUNCIONARIO', '(34)5 3453-4535', 'b/BRemleqCXf7kB5tfDL1A=='),
 (20, 'Jaqueline de Oliveira Rocha', '11.111.111-1', '111.111.111-11', 'jaqueline@gmail.com', '349qqf3aQNX8o+LUxM60xw2x7f4qkUxRjjA2lY+ccsU=', 'Farmaceutica', 'FUNCIONARIO', '(45)9 9999-9999', '/y9hK0brevHsJI9/lr71ug==');
+
+--
+-- Acionadores `funcionarios`
+--
+DELIMITER $$
+CREATE TRIGGER `after_funcionario_delete` AFTER DELETE ON `funcionarios` FOR EACH ROW BEGIN
+    INSERT INTO log_funcionarios (operacao, id_funcionario, nome, rg, cpf, email, senha, cargo, nivel_acesso, celular, salt)
+    VALUES ('DELETE', OLD.id, OLD.nome, OLD.rg, OLD.cpf, OLD.email, OLD.senha, OLD.cargo, OLD.nivel_acesso, OLD.celular, OLD.salt);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_funcionario_insert` AFTER INSERT ON `funcionarios` FOR EACH ROW BEGIN
+    INSERT INTO log_funcionarios (operacao, id_funcionario, nome, rg, cpf, email, senha, cargo, nivel_acesso, celular, salt)
+    VALUES ('INSERT', NEW.id, NEW.nome, NEW.rg, NEW.cpf, NEW.email, NEW.senha, NEW.cargo, NEW.nivel_acesso, NEW.celular, NEW.salt);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_funcionario_update` AFTER UPDATE ON `funcionarios` FOR EACH ROW BEGIN
+    INSERT INTO log_funcionarios (operacao, id_funcionario, nome, rg, cpf, email, senha, cargo, nivel_acesso, celular, salt)
+    VALUES ('UPDATE', NEW.id, NEW.nome, NEW.rg, NEW.cpf, NEW.email, NEW.senha, NEW.cargo, NEW.nivel_acesso, NEW.celular, NEW.salt);
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -197,13 +273,122 @@ INSERT INTO `itensvenda` (`id`, `venda_id`, `produto_id`, `qtd`, `subtotal`) VAL
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `logs`
+-- Estrutura para tabela `log_clientes`
 --
 
-CREATE TABLE `logs` (
-  `id` int(11) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT current_timestamp(),
-  `log` varchar(1000) DEFAULT NULL
+CREATE TABLE `log_clientes` (
+  `log_id` int(11) NOT NULL,
+  `operacao` varchar(10) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `nome` varchar(100) DEFAULT NULL,
+  `rg` varchar(30) DEFAULT NULL,
+  `cpf` varchar(20) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  `celular` varchar(30) DEFAULT NULL,
+  `cep` varchar(100) DEFAULT NULL,
+  `endereco` varchar(255) DEFAULT NULL,
+  `numero` int(11) DEFAULT NULL,
+  `complemento` varchar(200) DEFAULT NULL,
+  `bairro` varchar(100) DEFAULT NULL,
+  `cidade` varchar(100) DEFAULT NULL,
+  `estado` varchar(18) DEFAULT NULL,
+  `sexo_id` int(11) DEFAULT NULL,
+  `dataCriacao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `dataOperacao` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `log_clientes`
+--
+
+INSERT INTO `log_clientes` (`log_id`, `operacao`, `id_cliente`, `nome`, `rg`, `cpf`, `email`, `telefone`, `celular`, `cep`, `endereco`, `numero`, `complemento`, `bairro`, `cidade`, `estado`, `sexo_id`, `dataCriacao`, `dataOperacao`) VALUES
+(1, 'INSERT', 430, 'teste3333', '33.333.333-3', '333.333.333-33', '', '(  )      -    ', '(  )      -    ', '', '', 1, '', '', '', 'AC', 1, '2024-07-16 03:43:33', '2024-07-16 03:43:33'),
+(2, 'UPDATE', 400, 'Ubirajara Lima', '91.234.567-8', '912.525.678-90', 'ubirajara.lima@example.com', '(11)1 2345-678 ', '(11)9 9876-5432', '20020000', 'Rua T', 12, 'Apt 20', 'Bairro 20', 'Cidade 20', 'DF', 2, '2024-06-25 18:39:37', '2024-07-16 03:53:34');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `log_fornecedores`
+--
+
+CREATE TABLE `log_fornecedores` (
+  `log_id` int(11) NOT NULL,
+  `operacao` varchar(10) NOT NULL,
+  `id_fornecedor` int(11) NOT NULL,
+  `nome` varchar(100) DEFAULT NULL,
+  `cnpj` varchar(100) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  `celular` varchar(30) DEFAULT NULL,
+  `cep` varchar(100) DEFAULT NULL,
+  `endereco` varchar(255) DEFAULT NULL,
+  `numero` int(11) DEFAULT NULL,
+  `complemento` varchar(200) DEFAULT NULL,
+  `bairro` varchar(100) DEFAULT NULL,
+  `cidade` varchar(100) DEFAULT NULL,
+  `estado` varchar(2) DEFAULT NULL,
+  `dataOperacao` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `log_funcionarios`
+--
+
+CREATE TABLE `log_funcionarios` (
+  `log_id` int(11) NOT NULL,
+  `operacao` varchar(10) NOT NULL,
+  `id_funcionario` int(11) NOT NULL,
+  `nome` varchar(100) DEFAULT NULL,
+  `rg` varchar(30) DEFAULT NULL,
+  `cpf` varchar(20) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `senha` varchar(256) DEFAULT NULL,
+  `cargo` varchar(100) DEFAULT NULL,
+  `nivel_acesso` varchar(50) DEFAULT NULL,
+  `celular` varchar(30) DEFAULT NULL,
+  `salt` varchar(256) DEFAULT NULL,
+  `dataOperacao` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `log_produtos`
+--
+
+CREATE TABLE `log_produtos` (
+  `log_id` int(11) NOT NULL,
+  `operacao` varchar(10) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  `descricao` varchar(100) DEFAULT NULL,
+  `preco` decimal(10,2) DEFAULT NULL,
+  `qtd_estoque` int(11) DEFAULT NULL,
+  `for_id` int(11) DEFAULT NULL,
+  `classe_id` int(11) NOT NULL,
+  `precisa_de_receita` tinyint(1) DEFAULT 0,
+  `validade` date DEFAULT NULL,
+  `dataOperacao` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `log_vendas`
+--
+
+CREATE TABLE `log_vendas` (
+  `log_id` int(11) NOT NULL,
+  `operacao` varchar(10) NOT NULL,
+  `id_venda` int(11) NOT NULL,
+  `cliente_id` int(11) DEFAULT NULL,
+  `data_venda` date DEFAULT NULL,
+  `total_venda` decimal(10,2) DEFAULT NULL,
+  `observacoes` text DEFAULT NULL,
+  `hora` time DEFAULT NULL,
+  `dataOperacao` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -295,6 +480,31 @@ INSERT INTO `produtos` (`id`, `descricao`, `preco`, `qtd_estoque`, `for_id`, `cl
 (80, 'Água Minera c/Gásl 500ml', 3.00, 96, 13, 5, 0, '2030-01-01'),
 (83, 'Amoxicilina 500mg 15cps', 40.00, 99, 14, 6, 1, '2025-12-01');
 
+--
+-- Acionadores `produtos`
+--
+DELIMITER $$
+CREATE TRIGGER `after_produto_delete` AFTER DELETE ON `produtos` FOR EACH ROW BEGIN
+    INSERT INTO log_produtos (operacao, id_produto, descricao, preco, qtd_estoque, for_id, classe_id, precisa_de_receita, validade)
+    VALUES ('DELETE', OLD.id, OLD.descricao, OLD.preco, OLD.qtd_estoque, OLD.for_id, OLD.classe_id, OLD.precisa_de_receita, OLD.validade);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_produto_insert` AFTER INSERT ON `produtos` FOR EACH ROW BEGIN
+    INSERT INTO log_produtos (operacao, id_produto, descricao, preco, qtd_estoque, for_id, classe_id, precisa_de_receita, validade)
+    VALUES ('INSERT', NEW.id, NEW.descricao, NEW.preco, NEW.qtd_estoque, NEW.for_id, NEW.classe_id, NEW.precisa_de_receita, NEW.validade);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_produto_update` AFTER UPDATE ON `produtos` FOR EACH ROW BEGIN
+    INSERT INTO log_produtos (operacao, id_produto, descricao, preco, qtd_estoque, for_id, classe_id, precisa_de_receita, validade)
+    VALUES ('UPDATE', NEW.id, NEW.descricao, NEW.preco, NEW.qtd_estoque, NEW.for_id, NEW.classe_id, NEW.precisa_de_receita, NEW.validade);
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -354,6 +564,27 @@ INSERT INTO `vendas` (`id`, `cliente_id`, `data_venda`, `total_venda`, `observac
 -- Acionadores `vendas`
 --
 DELIMITER $$
+CREATE TRIGGER `after_venda_delete` AFTER DELETE ON `vendas` FOR EACH ROW BEGIN
+    INSERT INTO log_vendas (operacao, id_venda, cliente_id, data_venda, total_venda, observacoes, hora)
+    VALUES ('DELETE', OLD.id, OLD.cliente_id, OLD.data_venda, OLD.total_venda, OLD.observacoes, OLD.hora);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_venda_insert` AFTER INSERT ON `vendas` FOR EACH ROW BEGIN
+    INSERT INTO log_vendas (operacao, id_venda, cliente_id, data_venda, total_venda, observacoes, hora)
+    VALUES ('INSERT', NEW.id, NEW.cliente_id, NEW.data_venda, NEW.total_venda, NEW.observacoes, NEW.hora);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_venda_update` AFTER UPDATE ON `vendas` FOR EACH ROW BEGIN
+    INSERT INTO log_vendas (operacao, id_venda, cliente_id, data_venda, total_venda, observacoes, hora)
+    VALUES ('UPDATE', NEW.id, NEW.cliente_id, NEW.data_venda, NEW.total_venda, NEW.observacoes, NEW.hora);
+END
+$$
+DELIMITER ;
+DELIMITER $$
 CREATE TRIGGER `before_vendas_insert` BEFORE INSERT ON `vendas` FOR EACH ROW BEGIN
     SET NEW.hora = CURTIME();
 END
@@ -400,10 +631,43 @@ ALTER TABLE `itensvenda`
   ADD KEY `produto_id` (`produto_id`);
 
 --
--- Índices de tabela `logs`
+-- Índices de tabela `log_clientes`
 --
-ALTER TABLE `logs`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `log_clientes`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `id_cliente` (`id_cliente`),
+  ADD KEY `sexo_id` (`sexo_id`);
+
+--
+-- Índices de tabela `log_fornecedores`
+--
+ALTER TABLE `log_fornecedores`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `id_fornecedor` (`id_fornecedor`);
+
+--
+-- Índices de tabela `log_funcionarios`
+--
+ALTER TABLE `log_funcionarios`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `id_funcionario` (`id_funcionario`);
+
+--
+-- Índices de tabela `log_produtos`
+--
+ALTER TABLE `log_produtos`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `id_produto` (`id_produto`),
+  ADD KEY `for_id` (`for_id`),
+  ADD KEY `classe_id` (`classe_id`);
+
+--
+-- Índices de tabela `log_vendas`
+--
+ALTER TABLE `log_vendas`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `id_venda` (`id_venda`),
+  ADD KEY `cliente_id` (`cliente_id`);
 
 --
 -- Índices de tabela `parcelas`
@@ -447,7 +711,7 @@ ALTER TABLE `classeproduto`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=428;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=431;
 
 --
 -- AUTO_INCREMENT de tabela `fornecedores`
@@ -468,10 +732,34 @@ ALTER TABLE `itensvenda`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
 
 --
--- AUTO_INCREMENT de tabela `logs`
+-- AUTO_INCREMENT de tabela `log_clientes`
 --
-ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `log_clientes`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `log_fornecedores`
+--
+ALTER TABLE `log_fornecedores`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `log_funcionarios`
+--
+ALTER TABLE `log_funcionarios`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `log_produtos`
+--
+ALTER TABLE `log_produtos`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `log_vendas`
+--
+ALTER TABLE `log_vendas`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `parcelas`
@@ -513,6 +801,40 @@ ALTER TABLE `clientes`
 ALTER TABLE `itensvenda`
   ADD CONSTRAINT `itensVenda_ibfk_1` FOREIGN KEY (`venda_id`) REFERENCES `vendas` (`id`),
   ADD CONSTRAINT `itensVenda_ibfk_2` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`);
+
+--
+-- Restrições para tabelas `log_clientes`
+--
+ALTER TABLE `log_clientes`
+  ADD CONSTRAINT `log_clientes_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`),
+  ADD CONSTRAINT `log_clientes_ibfk_2` FOREIGN KEY (`sexo_id`) REFERENCES `sexo` (`id`);
+
+--
+-- Restrições para tabelas `log_fornecedores`
+--
+ALTER TABLE `log_fornecedores`
+  ADD CONSTRAINT `log_fornecedores_ibfk_1` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedores` (`id`);
+
+--
+-- Restrições para tabelas `log_funcionarios`
+--
+ALTER TABLE `log_funcionarios`
+  ADD CONSTRAINT `log_funcionarios_ibfk_1` FOREIGN KEY (`id_funcionario`) REFERENCES `funcionarios` (`id`);
+
+--
+-- Restrições para tabelas `log_produtos`
+--
+ALTER TABLE `log_produtos`
+  ADD CONSTRAINT `log_produtos_ibfk_1` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id`),
+  ADD CONSTRAINT `log_produtos_ibfk_2` FOREIGN KEY (`for_id`) REFERENCES `fornecedores` (`id`),
+  ADD CONSTRAINT `log_produtos_ibfk_3` FOREIGN KEY (`classe_id`) REFERENCES `classeproduto` (`id`);
+
+--
+-- Restrições para tabelas `log_vendas`
+--
+ALTER TABLE `log_vendas`
+  ADD CONSTRAINT `log_vendas_ibfk_1` FOREIGN KEY (`id_venda`) REFERENCES `vendas` (`id`),
+  ADD CONSTRAINT `log_vendas_ibfk_2` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`);
 
 --
 -- Restrições para tabelas `parcelas`
