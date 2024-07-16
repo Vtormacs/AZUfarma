@@ -19,8 +19,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Timer;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
@@ -158,6 +156,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 c.getQtd_estoque(),
                 c.getFornecedor().getNome(),
                 c.getNomeClasse()
+            });
+        }
+    }
+
+    //Listar historico das vendas
+    public void ListarHistoricoVendas() {
+        System.out.println("Listei Historioco de Vendas");
+        VendasDAO dao = new VendasDAO();
+        List<Vendas> lista = dao.listarVendas();
+        DefaultTableModel dados = (DefaultTableModel) tabela_historico.getModel();
+        dados.setNumRows(0);
+        for (Vendas v : lista) {
+            dados.addRow(new Object[]{
+                v.getId(),
+                v.getCliente().getNome(),
+                v.getDataVenda(),
+                v.getTotalVenda(),
+                v.getObservacoes()
             });
         }
     }
@@ -376,6 +392,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtInicio = new javax.swing.JFormattedTextField();
         txtFim = new javax.swing.JFormattedTextField();
+        btnRecarregarLista = new javax.swing.JButton();
         btnPesquisarVenda = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tabela_historico = new javax.swing.JTable();
@@ -2062,6 +2079,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        btnRecarregarLista.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnRecarregarLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/134221_refresh_reload_repeat_update_arrow_icon.png"))); // NOI18N
+        btnRecarregarLista.setText("Recarregar Histórico");
+        btnRecarregarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecarregarListaActionPerformed(evt);
+            }
+        });
+
         btnPesquisarVenda.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnPesquisarVenda.setText("Pesquisar");
         btnPesquisarVenda.addActionListener(new java.awt.event.ActionListener() {
@@ -2083,9 +2109,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(txtFim, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(39, 39, 39)
                 .addComponent(btnPesquisarVenda)
-                .addContainerGap(600, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(btnRecarregarLista)
+                .addContainerGap(316, Short.MAX_VALUE))
         );
         painel_dados_historicoLayout.setVerticalGroup(
             painel_dados_historicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2095,6 +2123,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRecarregarLista)
                     .addComponent(btnPesquisarVenda))
                 .addGap(0, 3, Short.MAX_VALUE))
         );
@@ -2681,7 +2710,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             p.getQtd_estoque(),
                             p.getFornecedor().getNome(),
                             p.getNomeClasse(),
-                            p.isPrecisa_de_receita()
+                            p.isPrecisa_de_receita(),
+                            p.getDataValidade()
                         });
                     }
                 } catch (Exception e) {
@@ -2705,7 +2735,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cbClasseProduto.setSelectedItem(tabela_produtos.getValueAt(tabela_produtos.getSelectedRow(), 5).toString());
         boolean precisaDeReceita = (boolean) tabela_produtos.getValueAt(tabela_produtos.getSelectedRow(), 6);
         radioReceita.setSelected(precisaDeReceita);
-        txtDataVencimento.setText(tabela_produtos.getValueAt(tabela_produtos.getSelectedRow(),7).toString());
+        txtDataVencimento.setText(tabela_produtos.getValueAt(tabela_produtos.getSelectedRow(), 7).toString());
 
         System.out.println("Tranferido dados da tabela para os campos");
     }//GEN-LAST:event_tabela_produtosMouseClicked
@@ -2941,19 +2971,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         f = (Fornecedores) cbFornecedorProduto.getSelectedItem();
         obj.setFornecedor(f);
         obj.setPrecisa_de_receita(radioReceita.isSelected());
-        
+
         // Obter e converter a data de vencimento
-            String vencimentoStr = txtDataVencimento.getText();
-            SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
-            SimpleDateFormat formatoSaida = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                Date dataVencimento = formatoEntrada.parse(vencimentoStr);
-                String dataVencimentoFormatada = formatoSaida.format(dataVencimento);
-                obj.setDataValidade(dataVencimentoFormatada);
-            } catch (ParseException e) {
-                JOptionPane.showMessageDialog(null, "Data de vencimento inválida. Use o formato dd/MM/yyyy.");
-                return;
-            }
+        String vencimentoStr = txtDataVencimento.getText();
+        SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatoSaida = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date dataVencimento = formatoEntrada.parse(vencimentoStr);
+            String dataVencimentoFormatada = formatoSaida.format(dataVencimento);
+            obj.setDataValidade(dataVencimentoFormatada);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Data de vencimento inválida. Use o formato dd/MM/yyyy.");
+            return;
+        }
 
         ProdutosDAO dao = new ProdutosDAO();
         dao.Editar(obj);
@@ -3547,31 +3577,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         content.setSelectedIndex(6);
+        ListarHistoricoVendas();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    private void btnPesquisarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarVendaActionPerformed
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataInicio = LocalDate.parse(txtInicio.getText(), formato);
-        LocalDate dataFim = LocalDate.parse(txtFim.getText(), formato);
-
-        VendasDAO vd = new VendasDAO();
-
-        List<Vendas> lista = vd.historicoVendas(dataInicio, dataFim);
-
-        DefaultTableModel historico = (DefaultTableModel) tabela_historico.getModel();
-
-        historico.setNumRows(0);
-
-        for (Vendas v : lista) {
-            historico.addRow(new Object[]{
-                v.getId(),
-                v.getCliente().getNome(),
-                v.getDataVenda(),
-                v.getTotalVenda(),
-                v.getObservacoes()
-            });
-        }
-    }//GEN-LAST:event_btnPesquisarVendaActionPerformed
+    private void btnRecarregarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecarregarListaActionPerformed
+        ListarHistoricoVendas();
+    }//GEN-LAST:event_btnRecarregarListaActionPerformed
 
     private void tabela_historicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_historicoMouseClicked
         DetalheVenda dv = new DetalheVenda();
@@ -3613,6 +3624,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         new PosicaoDoCaixaDoDia().setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void btnPesquisarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarVendaActionPerformed
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataInicio = LocalDate.parse(txtInicio.getText(), formato);
+        LocalDate dataFim = LocalDate.parse(txtFim.getText(), formato);
+
+        VendasDAO vd = new VendasDAO();
+
+        List<Vendas> lista = vd.historicoVendas(dataInicio, dataFim);
+
+        DefaultTableModel historico = (DefaultTableModel) tabela_historico.getModel();
+
+        historico.setNumRows(0);
+
+        for (Vendas v : lista) {
+            historico.addRow(new Object[]{
+                v.getId(),
+                v.getCliente().getNome(),
+                v.getDataVenda(),
+                v.getTotalVenda(),
+                v.getObservacoes()
+            });
+        }
+    }//GEN-LAST:event_btnPesquisarVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3678,6 +3713,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPTV;
     private javax.swing.JButton btnPesquisarVenda;
     private javax.swing.JButton btnProdutos;
+    private javax.swing.JButton btnRecarregarLista;
     private javax.swing.JButton btnSalvarClientes;
     private javax.swing.JButton btnSalvarEstoque;
     private javax.swing.JButton btnSalvarFornecedores;

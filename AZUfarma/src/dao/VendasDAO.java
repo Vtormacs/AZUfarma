@@ -60,15 +60,18 @@ public class VendasDAO {
         }
     }
     
-    public List<Vendas>historicoVendas(LocalDate dataInicio, LocalDate dataFim){
+    public ArrayList<Vendas>historicoVendas(LocalDate dataInicio, LocalDate dataFim){
+        ArrayList<Vendas> lista = new ArrayList<>();
+        
         try {
-            List<Vendas> lista = new ArrayList<>();
+
             
             String sql = "SELECT v.id, c.nome, date_format(v.data_venda, '%d/%m/%Y') AS data_formatada, v.total_venda, v.observacoes "
                     + "FROM vendas AS v "
                     + "INNER JOIN clientes AS c "
                     + "ON (v.cliente_id = c.id) "
-                    + "WHERE v.data_venda BETWEEN ? AND ?";
+                    + "WHERE v.data_venda BETWEEN ? AND ? "
+                    + "ORDER BY data_formatada DESC";
             
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, dataInicio.toString());
@@ -89,6 +92,42 @@ public class VendasDAO {
                 lista.add(v);
 
             }
+            stmt.close();
+            return lista;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao criar historico de vendas!!!" + e);
+        }
+    }
+    
+     public ArrayList<Vendas>listarVendas(){
+         ArrayList<Vendas> lista = new ArrayList<>();
+         
+        try {
+            
+            String sql = "SELECT v.id, c.nome, date_format(v.data_venda, '%d/%m/%Y') AS data_formatada, v.total_venda, v.observacoes "
+                    + "FROM vendas AS v "
+                    + "INNER JOIN clientes AS c "
+                    + "ON (v.cliente_id = c.id) "
+                    + "ORDER BY data_formatada DESC";
+            
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            ResultSet resultado = stmt.executeQuery();
+            
+            while (resultado.next()) {
+                Vendas v =  new Vendas();
+                Cliente c = new Cliente();
+                
+                v.setId(resultado.getInt("v.id"));
+                c.setNome(resultado.getString("c.nome"));
+                v.setCliente(c);
+                v.setDataVenda(resultado.getString("data_formatada"));
+                v.setTotalVenda(resultado.getDouble("v.total_venda"));
+                v.setObservacoes(resultado.getString("v.observacoes"));
+                
+                lista.add(v);
+
+            }
+            stmt.close();
             return lista;
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao criar historico de vendas!!!" + e);

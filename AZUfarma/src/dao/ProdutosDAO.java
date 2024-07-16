@@ -205,7 +205,7 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
         ArrayList<Produtos> lista = new ArrayList<>();
 
         try {
-            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome,p.precisa_de_receita, '%d/%m/%Y') AS data_formatada "
+            String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome,p.precisa_de_receita, date_format(p.validade, '%d/%m/%Y') AS data_formatada "
                     + "FROM produtos AS p "
                     + "INNER JOIN fornecedores AS f "
                     + "ON (p.for_id = f.id) "

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15/07/2024 às 23:56
+-- Tempo de geração: 16/07/2024 às 04:05
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -79,7 +79,7 @@ INSERT INTO `clientes` (`id`, `nome`, `rg`, `cpf`, `email`, `telefone`, `celular
 (385, 'Elaine Lima', '56.789.012-3', '567.890.123-45', 'elaine.lima@example.com', '1167890123', '11943210987', '05005-000', 'Rua E', 567, 'Apt 5', 'Bairro 5', 'Cidade 5', 'PR', 2, '2024-06-25 18:39:37'),
 (386, 'Fabio Almeida', '67.890.123-4', '678.901.234-56', 'fabio.almeida@example.com', '1178901234', '11932109876', '06006-000', 'Rua F', 678, 'Apt 6', 'Bairro 6', 'Cidade 6', 'SC', 1, '2024-06-25 18:39:37'),
 (387, 'Gabriela Pereira', '78.901.234-5', '789.012.345-67', 'gabriela.pereira@example.com', '1189012345', '11921098765', '07007-000', 'Rua G', 789, 'Apt 7', 'Bairro 7', 'Cidade 7', 'BA', 2, '2024-06-25 18:39:37'),
-(388, 'Henrique Santos', '89.012.345-6', '890.123.456-78', 'henrique.santos@example.com', '1190123456', '11910987654', '08008-000', 'Rua H', 890, 'Apt 8', 'Bairro 8', 'Cidade 8', 'PE', 1, '2024-06-25 18:39:37'),
+(388, 'Henrique Santos', '89.012.345-6', '890.123.456-78', 'henrique.santos@example.com', '(11)9 0123-456 ', '(11)9 1098-7654', '85858330', 'Rua José Carlos Pace', 890, 'Apt 8', 'Parque Morumbi', 'Foz do Iguaçu', 'PR', 1, '2024-06-25 18:39:37'),
 (389, 'Isabel Fernandes', '90.123.456-7', '901.234.567-89', 'isabel.fernandes@example.com', '1101234567', '11909876543', '09009-000', 'Rua I', 901, 'Apt 9', 'Bairro 9', 'Cidade 9', 'GO', 2, '2024-06-25 18:39:37'),
 (391, 'Luana Marques', '02.345.678-9', '023.456.229-01', 'luana.marques@example.com', '1123456789', '11987654321', '11011-000', 'Rua K', 123, 'Apt 11', 'Bairro 11', 'Cidade 11', 'AM', 2, '2024-06-25 18:39:37'),
 (392, 'Marcelo Ferreira', '13.456.789-0', '134.317.890-12', 'marcelo.ferreira@example.com', '1134567890', '11976543210', '12012-000', 'Rua L', 234, 'Apt 12', 'Bairro 12', 'Cidade 12', 'AL', 1, '2024-06-25 18:39:37'),
@@ -190,7 +190,9 @@ INSERT INTO `itensvenda` (`id`, `venda_id`, `produto_id`, `qtd`, `subtotal`) VAL
 (259, 301, 38, 1, 7.00),
 (260, 302, 42, 1, 8.00),
 (261, 303, 38, 1, 5.60),
-(262, 304, 42, 1, 8.00);
+(262, 304, 42, 1, 8.00),
+(263, 305, 38, 1, 7.00),
+(264, 306, 83, 1, 32.80);
 
 -- --------------------------------------------------------
 
@@ -251,7 +253,7 @@ INSERT INTO `produtos` (`id`, `descricao`, `preco`, `qtd_estoque`, `for_id`, `cl
 (35, 'Ômega 3', 60.00, 120, 17, 3, 0, '2030-01-01'),
 (36, 'Multivitamínico Infantil', 25.00, 90, 17, 4, 0, '2030-01-01'),
 (37, 'Shampoo Infantil', 10.50, 110, 16, 4, 0, '2030-01-01'),
-(38, 'Chupeta Ortodôntica', 7.00, 126, 13, 4, 0, '2030-01-01'),
+(38, 'Chupeta Ortodôntica', 7.00, 125, 13, 4, 0, '2030-01-01'),
 (39, 'Água Mineral 500ml', 2.00, 290, 15, 5, 0, '2030-01-01'),
 (40, 'Chocolate ao Leite', 5.50, 150, 15, 5, 0, '2030-01-01'),
 (41, 'Biscoito Integral', 4.00, 200, 15, 5, 0, '2030-01-01'),
@@ -290,7 +292,8 @@ INSERT INTO `produtos` (`id`, `descricao`, `preco`, `qtd_estoque`, `for_id`, `cl
 (75, 'Cotonetes', 5.00, 300, 16, 1, 0, '2030-01-01'),
 (76, 'Hidratante Facial', 35.00, 70, 14, 2, 0, '2030-01-01'),
 (77, 'Perfume Amadeirado', 150.00, 50, 14, 2, 0, '2030-01-01'),
-(80, 'Água Minera c/Gásl 500ml', 3.00, 96, 13, 5, 0, '2030-01-01');
+(80, 'Água Minera c/Gásl 500ml', 3.00, 96, 13, 5, 0, '2030-01-01'),
+(83, 'Amoxicilina 500mg 15cps', 40.00, 99, 14, 6, 1, '2025-12-01');
 
 -- --------------------------------------------------------
 
@@ -343,7 +346,9 @@ INSERT INTO `vendas` (`id`, `cliente_id`, `data_venda`, `total_venda`, `observac
 (301, 406, '2024-07-13', 7.00, 'oi', NULL),
 (302, 406, '2024-07-14', 8.00, 'receita entregue ', NULL),
 (303, 406, '2024-07-14', 5.60, '', '17:31:19'),
-(304, 406, '2024-07-15', 8.00, '', '00:35:53');
+(304, 406, '2024-07-15', 8.00, '', '00:35:53'),
+(305, 406, '2024-07-15', 7.00, '', '20:47:16'),
+(306, 427, '2024-07-15', 32.80, 'receita foi entregue ', '23:02:17');
 
 --
 -- Acionadores `vendas`
@@ -460,7 +465,7 @@ ALTER TABLE `funcionarios`
 -- AUTO_INCREMENT de tabela `itensvenda`
 --
 ALTER TABLE `itensvenda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
 
 --
 -- AUTO_INCREMENT de tabela `logs`
@@ -478,7 +483,7 @@ ALTER TABLE `parcelas`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT de tabela `sexo`
@@ -490,7 +495,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=307;
 
 --
 -- Restrições para tabelas despejadas

@@ -730,10 +730,13 @@ public class PontoDeVendas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnCancelarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVendaActionPerformed
-        DefaultTableModel model = (DefaultTableModel) tabelaCarrinho.getModel();
-        model.setRowCount(0);
-        total = 0.0;
-        txtTotalVenda.setText(String.valueOf(total));
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja Cancelar a Venda?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (resposta == JOptionPane.YES_OPTION) {
+            DefaultTableModel model = (DefaultTableModel) tabelaCarrinho.getModel();
+            model.setRowCount(0);
+            total = 0.0;
+            txtTotalVenda.setText(String.valueOf(total));
+        }
     }//GEN-LAST:event_btnCancelarVendaActionPerformed
 
     private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
