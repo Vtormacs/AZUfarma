@@ -1,6 +1,7 @@
 package model;
 
 public class Cliente {
+
     private int id;
     private String nome;
     private String rg;
@@ -145,5 +146,4 @@ public class Cliente {
     public void setNomeSexo(String nomeSexo) {
         this.nomeSexo = nomeSexo;
     }
-    
 }

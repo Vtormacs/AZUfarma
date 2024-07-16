@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16/07/2024 às 06:02
+-- Tempo de geração: 16/07/2024 às 16:08
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -97,33 +97,7 @@ INSERT INTO `clientes` (`id`, `nome`, `rg`, `cpf`, `email`, `telefone`, `celular
 (404, 'Zé Carlos', '45.000.901-2', '500.789.012-34', 'ze.carlos@example.com', '1156789012', '11954321098', '24024-000', 'Rua X', 456, 'Apt 24', 'Bairro 24', 'Cidade 24', 'MS', 1, '2024-06-25 18:39:37'),
 (406, 'Cliente sem Cadastro', '  .   .   - ', '   .   .   -  ', '', '(  )      -    ', '(  )      -    ', '', '', 0, '', '', '', 'AC', 3, '2024-06-25 19:04:35'),
 (426, 'Edrian', '11.111.111-1', '111.111.111-11', '', '(  )      -    ', '(11)1 1111-1111', '85857050', 'Rua Capivari', 11, '', 'Conjunto Libra', 'Foz do Iguaçu', 'PR', 1, '2024-06-26 22:43:57'),
-(427, 'Vitor Eduardo Lopes Francisco', '22.222.222-2', '222.222.222-22', '', '(  )      -    ', '(45)9 9999-9999', '85858330', 'Rua José Carlos Pace', 1744, '', 'Parque Morumbi', 'Foz do Iguaçu', 'PR', 1, '2024-07-15 20:53:37'),
-(430, 'teste3333', '33.333.333-3', '333.333.333-33', '', '(  )      -    ', '(  )      -    ', '', '', 1, '', '', '', 'AC', 1, '2024-07-16 03:43:33');
-
---
--- Acionadores `clientes`
---
-DELIMITER $$
-CREATE TRIGGER `after_cliente_delete` AFTER DELETE ON `clientes` FOR EACH ROW BEGIN
-    INSERT INTO log_clientes (operacao, id_cliente, nome, rg, cpf, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado, sexo_id, dataCriacao)
-    VALUES ('DELETE', OLD.id, OLD.nome, OLD.rg, OLD.cpf, OLD.email, OLD.telefone, OLD.celular, OLD.cep, OLD.endereco, OLD.numero, OLD.complemento, OLD.bairro, OLD.cidade, OLD.estado, OLD.sexo_id, OLD.dataCriacao);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_cliente_insert` AFTER INSERT ON `clientes` FOR EACH ROW BEGIN
-    INSERT INTO log_clientes (operacao, id_cliente, nome, rg, cpf, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado, sexo_id, dataCriacao)
-    VALUES ('INSERT', NEW.id, NEW.nome, NEW.rg, NEW.cpf, NEW.email, NEW.telefone, NEW.celular, NEW.cep, NEW.endereco, NEW.numero, NEW.complemento, NEW.bairro, NEW.cidade, NEW.estado, NEW.sexo_id, NEW.dataCriacao);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_cliente_update` AFTER UPDATE ON `clientes` FOR EACH ROW BEGIN
-    INSERT INTO log_clientes (operacao, id_cliente, nome, rg, cpf, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado, sexo_id, dataCriacao)
-    VALUES ('UPDATE', NEW.id, NEW.nome, NEW.rg, NEW.cpf, NEW.email, NEW.telefone, NEW.celular, NEW.cep, NEW.endereco, NEW.numero, NEW.complemento, NEW.bairro, NEW.cidade, NEW.estado, NEW.sexo_id, NEW.dataCriacao);
-END
-$$
-DELIMITER ;
+(427, 'Vitor Eduardo Lopes Francisco', '22.222.222-2', '222.222.222-22', '', '(  )      -    ', '(45)9 9999-9999', '85858330', 'Rua José Carlos Pace', 1744, '', 'Parque Morumbi', 'Foz do Iguaçu', 'PR', 1, '2024-07-15 20:53:37');
 
 -- --------------------------------------------------------
 
@@ -273,127 +247,6 @@ INSERT INTO `itensvenda` (`id`, `venda_id`, `produto_id`, `qtd`, `subtotal`) VAL
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `log_clientes`
---
-
-CREATE TABLE `log_clientes` (
-  `log_id` int(11) NOT NULL,
-  `operacao` varchar(10) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `nome` varchar(100) DEFAULT NULL,
-  `rg` varchar(30) DEFAULT NULL,
-  `cpf` varchar(20) DEFAULT NULL,
-  `email` varchar(200) DEFAULT NULL,
-  `telefone` varchar(30) DEFAULT NULL,
-  `celular` varchar(30) DEFAULT NULL,
-  `cep` varchar(100) DEFAULT NULL,
-  `endereco` varchar(255) DEFAULT NULL,
-  `numero` int(11) DEFAULT NULL,
-  `complemento` varchar(200) DEFAULT NULL,
-  `bairro` varchar(100) DEFAULT NULL,
-  `cidade` varchar(100) DEFAULT NULL,
-  `estado` varchar(18) DEFAULT NULL,
-  `sexo_id` int(11) DEFAULT NULL,
-  `dataCriacao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `dataOperacao` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `log_clientes`
---
-
-INSERT INTO `log_clientes` (`log_id`, `operacao`, `id_cliente`, `nome`, `rg`, `cpf`, `email`, `telefone`, `celular`, `cep`, `endereco`, `numero`, `complemento`, `bairro`, `cidade`, `estado`, `sexo_id`, `dataCriacao`, `dataOperacao`) VALUES
-(1, 'INSERT', 430, 'teste3333', '33.333.333-3', '333.333.333-33', '', '(  )      -    ', '(  )      -    ', '', '', 1, '', '', '', 'AC', 1, '2024-07-16 03:43:33', '2024-07-16 03:43:33'),
-(2, 'UPDATE', 400, 'Ubirajara Lima', '91.234.567-8', '912.525.678-90', 'ubirajara.lima@example.com', '(11)1 2345-678 ', '(11)9 9876-5432', '20020000', 'Rua T', 12, 'Apt 20', 'Bairro 20', 'Cidade 20', 'DF', 2, '2024-06-25 18:39:37', '2024-07-16 03:53:34');
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `log_fornecedores`
---
-
-CREATE TABLE `log_fornecedores` (
-  `log_id` int(11) NOT NULL,
-  `operacao` varchar(10) NOT NULL,
-  `id_fornecedor` int(11) NOT NULL,
-  `nome` varchar(100) DEFAULT NULL,
-  `cnpj` varchar(100) DEFAULT NULL,
-  `email` varchar(200) DEFAULT NULL,
-  `telefone` varchar(30) DEFAULT NULL,
-  `celular` varchar(30) DEFAULT NULL,
-  `cep` varchar(100) DEFAULT NULL,
-  `endereco` varchar(255) DEFAULT NULL,
-  `numero` int(11) DEFAULT NULL,
-  `complemento` varchar(200) DEFAULT NULL,
-  `bairro` varchar(100) DEFAULT NULL,
-  `cidade` varchar(100) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  `dataOperacao` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `log_funcionarios`
---
-
-CREATE TABLE `log_funcionarios` (
-  `log_id` int(11) NOT NULL,
-  `operacao` varchar(10) NOT NULL,
-  `id_funcionario` int(11) NOT NULL,
-  `nome` varchar(100) DEFAULT NULL,
-  `rg` varchar(30) DEFAULT NULL,
-  `cpf` varchar(20) DEFAULT NULL,
-  `email` varchar(200) DEFAULT NULL,
-  `senha` varchar(256) DEFAULT NULL,
-  `cargo` varchar(100) DEFAULT NULL,
-  `nivel_acesso` varchar(50) DEFAULT NULL,
-  `celular` varchar(30) DEFAULT NULL,
-  `salt` varchar(256) DEFAULT NULL,
-  `dataOperacao` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `log_produtos`
---
-
-CREATE TABLE `log_produtos` (
-  `log_id` int(11) NOT NULL,
-  `operacao` varchar(10) NOT NULL,
-  `id_produto` int(11) NOT NULL,
-  `descricao` varchar(100) DEFAULT NULL,
-  `preco` decimal(10,2) DEFAULT NULL,
-  `qtd_estoque` int(11) DEFAULT NULL,
-  `for_id` int(11) DEFAULT NULL,
-  `classe_id` int(11) NOT NULL,
-  `precisa_de_receita` tinyint(1) DEFAULT 0,
-  `validade` date DEFAULT NULL,
-  `dataOperacao` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `log_vendas`
---
-
-CREATE TABLE `log_vendas` (
-  `log_id` int(11) NOT NULL,
-  `operacao` varchar(10) NOT NULL,
-  `id_venda` int(11) NOT NULL,
-  `cliente_id` int(11) DEFAULT NULL,
-  `data_venda` date DEFAULT NULL,
-  `total_venda` decimal(10,2) DEFAULT NULL,
-  `observacoes` text DEFAULT NULL,
-  `hora` time DEFAULT NULL,
-  `dataOperacao` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `parcelas`
 --
 
@@ -478,7 +331,8 @@ INSERT INTO `produtos` (`id`, `descricao`, `preco`, `qtd_estoque`, `for_id`, `cl
 (76, 'Hidratante Facial', 35.00, 70, 14, 2, 0, '2030-01-01'),
 (77, 'Perfume Amadeirado', 150.00, 50, 14, 2, 0, '2030-01-01'),
 (80, 'Água Minera c/Gásl 500ml', 3.00, 96, 13, 5, 0, '2030-01-01'),
-(83, 'Amoxicilina 500mg 15cps', 40.00, 99, 14, 6, 1, '2025-12-01');
+(83, 'Amoxicilina 500mg 15cps', 40.00, 99, 14, 6, 1, '2025-12-01'),
+(84, 'teste', 2.00, 101, 16, 1, 1, '1111-11-11');
 
 --
 -- Acionadores `produtos`
@@ -631,45 +485,6 @@ ALTER TABLE `itensvenda`
   ADD KEY `produto_id` (`produto_id`);
 
 --
--- Índices de tabela `log_clientes`
---
-ALTER TABLE `log_clientes`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `id_cliente` (`id_cliente`),
-  ADD KEY `sexo_id` (`sexo_id`);
-
---
--- Índices de tabela `log_fornecedores`
---
-ALTER TABLE `log_fornecedores`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `id_fornecedor` (`id_fornecedor`);
-
---
--- Índices de tabela `log_funcionarios`
---
-ALTER TABLE `log_funcionarios`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `id_funcionario` (`id_funcionario`);
-
---
--- Índices de tabela `log_produtos`
---
-ALTER TABLE `log_produtos`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `id_produto` (`id_produto`),
-  ADD KEY `for_id` (`for_id`),
-  ADD KEY `classe_id` (`classe_id`);
-
---
--- Índices de tabela `log_vendas`
---
-ALTER TABLE `log_vendas`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `id_venda` (`id_venda`),
-  ADD KEY `cliente_id` (`cliente_id`);
-
---
 -- Índices de tabela `parcelas`
 --
 ALTER TABLE `parcelas`
@@ -732,36 +547,6 @@ ALTER TABLE `itensvenda`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
 
 --
--- AUTO_INCREMENT de tabela `log_clientes`
---
-ALTER TABLE `log_clientes`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de tabela `log_fornecedores`
---
-ALTER TABLE `log_fornecedores`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `log_funcionarios`
---
-ALTER TABLE `log_funcionarios`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `log_produtos`
---
-ALTER TABLE `log_produtos`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `log_vendas`
---
-ALTER TABLE `log_vendas`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `parcelas`
 --
 ALTER TABLE `parcelas`
@@ -771,7 +556,7 @@ ALTER TABLE `parcelas`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT de tabela `sexo`
@@ -801,40 +586,6 @@ ALTER TABLE `clientes`
 ALTER TABLE `itensvenda`
   ADD CONSTRAINT `itensVenda_ibfk_1` FOREIGN KEY (`venda_id`) REFERENCES `vendas` (`id`),
   ADD CONSTRAINT `itensVenda_ibfk_2` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`);
-
---
--- Restrições para tabelas `log_clientes`
---
-ALTER TABLE `log_clientes`
-  ADD CONSTRAINT `log_clientes_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id`),
-  ADD CONSTRAINT `log_clientes_ibfk_2` FOREIGN KEY (`sexo_id`) REFERENCES `sexo` (`id`);
-
---
--- Restrições para tabelas `log_fornecedores`
---
-ALTER TABLE `log_fornecedores`
-  ADD CONSTRAINT `log_fornecedores_ibfk_1` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedores` (`id`);
-
---
--- Restrições para tabelas `log_funcionarios`
---
-ALTER TABLE `log_funcionarios`
-  ADD CONSTRAINT `log_funcionarios_ibfk_1` FOREIGN KEY (`id_funcionario`) REFERENCES `funcionarios` (`id`);
-
---
--- Restrições para tabelas `log_produtos`
---
-ALTER TABLE `log_produtos`
-  ADD CONSTRAINT `log_produtos_ibfk_1` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id`),
-  ADD CONSTRAINT `log_produtos_ibfk_2` FOREIGN KEY (`for_id`) REFERENCES `fornecedores` (`id`),
-  ADD CONSTRAINT `log_produtos_ibfk_3` FOREIGN KEY (`classe_id`) REFERENCES `classeproduto` (`id`);
-
---
--- Restrições para tabelas `log_vendas`
---
-ALTER TABLE `log_vendas`
-  ADD CONSTRAINT `log_vendas_ibfk_1` FOREIGN KEY (`id_venda`) REFERENCES `vendas` (`id`),
-  ADD CONSTRAINT `log_vendas_ibfk_2` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`);
 
 --
 -- Restrições para tabelas `parcelas`

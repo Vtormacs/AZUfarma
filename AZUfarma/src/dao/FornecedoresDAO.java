@@ -1,16 +1,15 @@
 package dao;
-
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import model.Fornecedores;
 
 public class FornecedoresDAO implements DAOInterface<Fornecedores> {
+
     private Connection conexao;
 
     public FornecedoresDAO() {
@@ -42,7 +41,6 @@ public class FornecedoresDAO implements DAOInterface<Fornecedores> {
             stmt.close();
 
             JOptionPane.showMessageDialog(null, "Fornecedor salvo com sucesso!!");
-
         } catch (HeadlessException | SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar o fornecedor!!" + erro);
         }
@@ -74,7 +72,6 @@ public class FornecedoresDAO implements DAOInterface<Fornecedores> {
             stmt.close();
 
             JOptionPane.showMessageDialog(null, "Fornecedor editado com sucesso!!");
-
         } catch (HeadlessException | SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao editar o fornecedor!!" + erro);
         }
@@ -87,8 +84,8 @@ public class FornecedoresDAO implements DAOInterface<Fornecedores> {
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, nome);
-
             ResultSet resultado = stmt.executeQuery();
+
             Fornecedores obj = new Fornecedores();
 
             if (resultado.next()) {
@@ -108,7 +105,6 @@ public class FornecedoresDAO implements DAOInterface<Fornecedores> {
             }
             stmt.close();
             return obj;
-
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o fornecedor!!" + erro);
         }
@@ -135,9 +131,9 @@ public class FornecedoresDAO implements DAOInterface<Fornecedores> {
     @Override
     public ArrayList<Fornecedores> Listar() {
         ArrayList<Fornecedores> lista = new ArrayList<>();
-
         try {
-            String sql = "SELECT * FROM fornecedores";
+            String sql = "SELECT * FROM fornecedores "
+                    + "ORDER BY `fornecedores`.`id` DESC ";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             ResultSet resultado = stmt.executeQuery();
@@ -172,13 +168,11 @@ public class FornecedoresDAO implements DAOInterface<Fornecedores> {
     @Override
     public ArrayList<Fornecedores> Filtrar(String nome) {
         ArrayList<Fornecedores> lista = new ArrayList<>();
-
         try {
             String sql = "SELECT * FROM fornecedores WHERE nome LIKE ?";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, nome);
-
             ResultSet resultado = stmt.executeQuery();
 
             while (resultado.next()) {

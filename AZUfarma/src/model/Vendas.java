@@ -1,6 +1,7 @@
 package model;
 
 public class Vendas {
+
     private int id;
     private Cliente cliente;
     private String dataVenda;
@@ -46,6 +47,4 @@ public class Vendas {
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
-    
-    
 }

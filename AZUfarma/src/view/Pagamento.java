@@ -254,7 +254,6 @@ public class Pagamento extends javax.swing.JFrame {
             this.dispose();
 
             new PontoDeVendas().setVisible(true);
-
         } else {
             JOptionPane.showMessageDialog(null, "Não foi possivel fazer a venda!! O valor pago é menor do que a venda");
         }

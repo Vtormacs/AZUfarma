@@ -89,7 +89,6 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
             stmt.close();
 
             JOptionPane.showMessageDialog(null, "Funcionario salvo com sucesso!!");
-
         } catch (HeadlessException | SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar o funcionario!!" + erro);
         } catch (Exception ex) {
@@ -118,7 +117,6 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
             stmt.close();
 
             JOptionPane.showMessageDialog(null, "Funcionario editado com sucesso!!");
-
         } catch (HeadlessException | SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao editar o funcionario!!" + erro);
         }
@@ -131,8 +129,8 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, nome);
-
             ResultSet resultado = stmt.executeQuery();
+
             Funcionario obj = new Funcionario();
 
             if (resultado.next()) {
@@ -149,7 +147,6 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
             }
             stmt.close();
             return obj;
-
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o funcionario!!" + erro);
         }
@@ -176,9 +173,9 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
     @Override
     public ArrayList<Funcionario> Listar() {
         ArrayList<Funcionario> lista = new ArrayList<>();
-
         try {
-            String sql = "SELECT * FROM funcionarios";
+            String sql = "SELECT * FROM funcionarios "
+                    + "ORDER BY `funcionarios`.`id` DESC ";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             ResultSet resultado = stmt.executeQuery();
@@ -208,7 +205,6 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
     @Override
     public ArrayList<Funcionario> Filtrar(String nome) {
         ArrayList<Funcionario> lista = new ArrayList<>();
-
         try {
             String sql = "SELECT * FROM funcionarios WHERE nome LIKE ?";
 

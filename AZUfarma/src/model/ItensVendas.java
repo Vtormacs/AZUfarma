@@ -1,6 +1,7 @@
 package model;
 
 public class ItensVendas {
+
     private int id;
     private Vendas vendas;
     private Produtos produtos;
@@ -46,6 +47,4 @@ public class ItensVendas {
     public void setSubTotal(double subTotal) {
         this.subTotal = subTotal;
     }
-    
-    
 }

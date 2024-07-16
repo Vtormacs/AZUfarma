@@ -34,10 +34,6 @@ import model.Produtos;
 import model.Vendas;
 import utilitarios.Utilitarios;
 
-/**
- *
- * @author vitor
- */
 public class TelaPrincipal extends javax.swing.JFrame {
 
     //variavei globai que seram usadas no estoque

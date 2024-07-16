@@ -1,5 +1,4 @@
 package dao;
-
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.sql.Connection;
@@ -80,7 +79,6 @@ public class ClienteDAO implements DAOInterface<Cliente> {
             stmt.close();
 
             JOptionPane.showMessageDialog(null, "Cliente editado com sucesso!!");
-
         } catch (HeadlessException | SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao editar o cliente!!" + erro);
         }
@@ -97,8 +95,8 @@ public class ClienteDAO implements DAOInterface<Cliente> {
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, nome);
-
             ResultSet resultado = stmt.executeQuery();
+
             Cliente obj = new Cliente();
 
             if (resultado.next()) {
@@ -117,17 +115,15 @@ public class ClienteDAO implements DAOInterface<Cliente> {
                 obj.setCidade(resultado.getString("cidade"));
                 obj.setEstado(resultado.getString("estado"));
                 obj.setNomeSexo(resultado.getString("nome_sexo"));
-
             }
             stmt.close();
             return obj;
-
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente!!" + erro);
         }
         return null;
     }
-    
+
     //Buscao cliente atravez do cpf no no banco
     @Override
     public Cliente BuscarCpf(String cpf) {
@@ -159,11 +155,9 @@ public class ClienteDAO implements DAOInterface<Cliente> {
                 obj.setCidade(resultado.getString("cidade"));
                 obj.setEstado(resultado.getString("estado"));
                 obj.setNomeSexo(resultado.getString("nome_sexo"));
-
             }
             stmt.close();
             return obj;
-
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente!!" + erro);
         }
@@ -175,13 +169,13 @@ public class ClienteDAO implements DAOInterface<Cliente> {
     public void Excluir(Cliente obj) {
         try {
             String sql = "DELETE FROM clientes WHERE id = ?";
-            
+
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, obj.getId());
-            
+
             stmt.execute();
             stmt.close();
-            
+
             JOptionPane.showMessageDialog(null, "Cliente excluído!!");
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao excluir cliente!!" + erro);
@@ -192,12 +186,12 @@ public class ClienteDAO implements DAOInterface<Cliente> {
     @Override
     public ArrayList<Cliente> Listar() {
         ArrayList<Cliente> lista = new ArrayList<>();
-
         try {
             String sql = """
-                         SELECT c.id, c.nome, c.rg, c.cpf,s.nome AS nome_sexo, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado
+                         SELECT c.id, c.nome, c.rg, c.cpf,s.nome AS nome_sexo, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado 
                          FROM clientes AS c
-                         LEFT JOIN sexo AS s ON (s.id = c.sexo_id)""";
+                         LEFT JOIN sexo AS s ON (s.id = c.sexo_id) 
+                         ORDER BY `c`.`id` DESC""";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             ResultSet resultado = stmt.executeQuery();
@@ -230,12 +224,11 @@ public class ClienteDAO implements DAOInterface<Cliente> {
         }
         return null;
     }
-    
+
     //Cria uma lista de clientes atravez do nome
     @Override
     public ArrayList<Cliente> Filtrar(String nome) {
         ArrayList<Cliente> lista = new ArrayList<>();
-
         try {
             String sql = """
                          SELECT c.id, c.nome, c.rg, c.cpf,s.nome AS nome_sexo, c.email, c.telefone, c.celular, c.cep, c.endereco, c.numero, c.complemento, c.bairro, c.cidade, c.estado
@@ -245,7 +238,6 @@ public class ClienteDAO implements DAOInterface<Cliente> {
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, nome);
-
             ResultSet resultado = stmt.executeQuery();
 
             while (resultado.next()) {

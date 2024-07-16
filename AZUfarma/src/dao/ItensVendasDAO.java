@@ -49,7 +49,6 @@ public class ItensVendasDAO {
             PreparedStatement stmt = conexao.prepareStatement(sql);
 
             stmt.setInt(1, venda_id);
-
             ResultSet resultado = stmt.executeQuery();
 
             while (resultado.next()) {

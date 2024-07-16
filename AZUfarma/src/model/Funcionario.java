@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author vitor
- */
 public class Funcionario {
+
     private int id;
     private String nome;
     private String rg;
@@ -99,6 +92,4 @@ public class Funcionario {
     public void setSalt(String salt) {
         this.salt = salt;
     }
-    
-    
 }

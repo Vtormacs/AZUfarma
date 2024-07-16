@@ -38,7 +38,6 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
             stmt.close();
 
             JOptionPane.showMessageDialog(null, "Produto salvo com sucesso!!");
-
         } catch (HeadlessException | SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar o Produto!!" + erro);
         }
@@ -65,7 +64,6 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
             stmt.close();
 
             JOptionPane.showMessageDialog(null, "Produto editado com sucesso!!");
-
         } catch (HeadlessException | SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao editar o produto!!" + erro);
         }
@@ -84,8 +82,8 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, descricao);
-
             ResultSet resultado = stmt.executeQuery();
+
             Produtos obj = new Produtos();
             Fornecedores f = new Fornecedores();
 
@@ -98,17 +96,15 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
                 obj.setFornecedor(f);
                 obj.setNomeClasse(resultado.getString("c.nome"));
                 obj.setPrecisa_de_receita(resultado.getBoolean("p.precisa_de_receita"));
-
             }
             stmt.close();
             return obj;
-
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o produto!!" + erro);
         }
         return null;
     }
-    
+
     public Produtos BuscarCodigoProduto(int id) {
         try {
             String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome "
@@ -121,8 +117,8 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, id);
-
             ResultSet resultado = stmt.executeQuery();
+
             Produtos obj = new Produtos();
             Fornecedores f = new Fornecedores();
 
@@ -137,7 +133,6 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
             }
             stmt.close();
             return obj;
-
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o produto!!" + erro);
         }
@@ -164,14 +159,14 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
     @Override
     public ArrayList<Produtos> Listar() {
         ArrayList<Produtos> lista = new ArrayList<>();
-
         try {
             String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome,p.precisa_de_receita, date_format(p.validade, '%d/%m/%Y') AS data_formatada "
                     + "FROM produtos AS p "
                     + "INNER JOIN fornecedores AS f "
                     + "ON (p.for_id = f.id) "
                     + "LEFT JOIN classeProduto AS c "
-                    + "ON (c.id = p.classe_id)";
+                    + "ON (c.id = p.classe_id) "
+                    + "ORDER BY `p`.`id` DESC";
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             ResultSet resultado = stmt.executeQuery();
@@ -203,7 +198,6 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
     @Override
     public ArrayList<Produtos> Filtrar(String descricao) {
         ArrayList<Produtos> lista = new ArrayList<>();
-
         try {
             String sql = "SELECT p.id,p.descricao,p.preco,p.qtd_estoque,f.nome,c.nome,p.precisa_de_receita, date_format(p.validade, '%d/%m/%Y') AS data_formatada "
                     + "FROM produtos AS p "
@@ -215,7 +209,6 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
 
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setString(1, descricao);
-
             ResultSet resultado = stmt.executeQuery();
 
             while (resultado.next()) {
@@ -242,14 +235,14 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
         return null;
     }
 
-    public void AdicionarEstoque(int id, int qtd_nova){
+    public void AdicionarEstoque(int id, int qtd_nova) {
         try {
             String sql = "UPDATE produtos SET qtd_estoque = ? WHERE id = ? ";
-            
+
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, qtd_nova);
             stmt.setInt(2, id);
-            
+
             stmt.execute();
             stmt.close();
             JOptionPane.showMessageDialog(null, "Adicionado com sucesso ao estoque");
@@ -258,14 +251,14 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
         }
     }
 
-    public void BaixaEstoque(int id, int qtd_nova){
+    public void BaixaEstoque(int id, int qtd_nova) {
         try {
             String sql = "UPDATE produtos SET qtd_estoque = ? WHERE id = ? ";
-            
+
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, qtd_nova);
             stmt.setInt(2, id);
-            
+
             stmt.execute();
             stmt.close();
         } catch (SQLException erro) {
@@ -277,18 +270,18 @@ public class ProdutosDAO implements DAOInterface<Produtos> {
     public Produtos BuscarCpf(String cpf) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public int retornaQtdAtualEstoque (int id){
+
+    public int retornaQtdAtualEstoque(int id) {
         try {
             int qtdAtualEstoque = 0;
-            
+
             String sql = "SELECT qtd_estoque FROM produtos WHERE id = ?";
-            
+
             PreparedStatement stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, id);
             ResultSet resultado = stmt.executeQuery();
-            
-            if(resultado.next()){
+
+            if (resultado.next()) {
                 qtdAtualEstoque = (resultado.getInt("qtd_estoque"));
             }
             return qtdAtualEstoque;
