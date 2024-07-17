@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16/07/2024 às 16:08
+-- Tempo de geração: 17/07/2024 às 19:20
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -132,31 +132,6 @@ INSERT INTO `fornecedores` (`id`, `nome`, `cnpj`, `email`, `telefone`, `celular`
 (16, 'Cosmeticos sul', '23.453.455/0001-35', 'gg@gmail.com', '(45)6 4564-5645', '(56)7 5675-6756', '38400039', 'Praça Bercário Gomes Correa', 454, '', 'Cazeca', 'Uberlândia', 'MG'),
 (17, 'Growth Suplemntos', '43.534.534/5645-64', 'growth@gmail.com', '(21)2 3454-5645', '(56)7 5675-6756', '79081728', 'Rua Galdina Ifran Catarinelli', 888, '', 'Jardim das Nações ', 'Campo Grande', 'MS');
 
---
--- Acionadores `fornecedores`
---
-DELIMITER $$
-CREATE TRIGGER `after_fornecedor_delete` AFTER DELETE ON `fornecedores` FOR EACH ROW BEGIN
-    INSERT INTO log_fornecedores (operacao, id_fornecedor, nome, cnpj, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado)
-    VALUES ('DELETE', OLD.id, OLD.nome, OLD.cnpj, OLD.email, OLD.telefone, OLD.celular, OLD.cep, OLD.endereco, OLD.numero, OLD.complemento, OLD.bairro, OLD.cidade, OLD.estado);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_fornecedor_insert` AFTER INSERT ON `fornecedores` FOR EACH ROW BEGIN
-    INSERT INTO log_fornecedores (operacao, id_fornecedor, nome, cnpj, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado)
-    VALUES ('INSERT', NEW.id, NEW.nome, NEW.cnpj, NEW.email, NEW.telefone, NEW.celular, NEW.cep, NEW.endereco, NEW.numero, NEW.complemento, NEW.bairro, NEW.cidade, NEW.estado);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_fornecedor_update` AFTER UPDATE ON `fornecedores` FOR EACH ROW BEGIN
-    INSERT INTO log_fornecedores (operacao, id_fornecedor, nome, cnpj, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado)
-    VALUES ('UPDATE', NEW.id, NEW.nome, NEW.cnpj, NEW.email, NEW.telefone, NEW.celular, NEW.cep, NEW.endereco, NEW.numero, NEW.complemento, NEW.bairro, NEW.cidade, NEW.estado);
-END
-$$
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
@@ -184,31 +159,6 @@ INSERT INTO `funcionarios` (`id`, `nome`, `rg`, `cpf`, `email`, `senha`, `cargo`
 (16, 'vitor eduardo', '11.111.111-11', '111.111.111-11', 'vitor@gmail.com', 'bSUNtOHmXGoQGqHTL7VL8BW8m3wqQFyNFB1JpVNcfXE=', 'DEV', 'ADMINISTRADOR', '(11)1 1111-1111', '7zo/y6mpGKHUEpWcmFkMRQ=='),
 (17, 'Gustavo', '23.423.424-2', '113.453.455-55', 'gustavo@gmail.com', 'SPw6yjddtckdUk13krs5IkrbpTngWalrY3hdlaHxTUE=', 'Limpa Chão', 'FUNCIONARIO', '(34)5 3453-4535', 'b/BRemleqCXf7kB5tfDL1A=='),
 (20, 'Jaqueline de Oliveira Rocha', '11.111.111-1', '111.111.111-11', 'jaqueline@gmail.com', '349qqf3aQNX8o+LUxM60xw2x7f4qkUxRjjA2lY+ccsU=', 'Farmaceutica', 'FUNCIONARIO', '(45)9 9999-9999', '/y9hK0brevHsJI9/lr71ug==');
-
---
--- Acionadores `funcionarios`
---
-DELIMITER $$
-CREATE TRIGGER `after_funcionario_delete` AFTER DELETE ON `funcionarios` FOR EACH ROW BEGIN
-    INSERT INTO log_funcionarios (operacao, id_funcionario, nome, rg, cpf, email, senha, cargo, nivel_acesso, celular, salt)
-    VALUES ('DELETE', OLD.id, OLD.nome, OLD.rg, OLD.cpf, OLD.email, OLD.senha, OLD.cargo, OLD.nivel_acesso, OLD.celular, OLD.salt);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_funcionario_insert` AFTER INSERT ON `funcionarios` FOR EACH ROW BEGIN
-    INSERT INTO log_funcionarios (operacao, id_funcionario, nome, rg, cpf, email, senha, cargo, nivel_acesso, celular, salt)
-    VALUES ('INSERT', NEW.id, NEW.nome, NEW.rg, NEW.cpf, NEW.email, NEW.senha, NEW.cargo, NEW.nivel_acesso, NEW.celular, NEW.salt);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_funcionario_update` AFTER UPDATE ON `funcionarios` FOR EACH ROW BEGIN
-    INSERT INTO log_funcionarios (operacao, id_funcionario, nome, rg, cpf, email, senha, cargo, nivel_acesso, celular, salt)
-    VALUES ('UPDATE', NEW.id, NEW.nome, NEW.rg, NEW.cpf, NEW.email, NEW.senha, NEW.cargo, NEW.nivel_acesso, NEW.celular, NEW.salt);
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -242,7 +192,9 @@ INSERT INTO `itensvenda` (`id`, `venda_id`, `produto_id`, `qtd`, `subtotal`) VAL
 (261, 303, 38, 1, 5.60),
 (262, 304, 42, 1, 8.00),
 (263, 305, 38, 1, 7.00),
-(264, 306, 83, 1, 32.80);
+(264, 306, 83, 1, 32.80),
+(265, 332, 74, 1, 15.00),
+(266, 333, 71, 1, 10.00);
 
 -- --------------------------------------------------------
 
@@ -323,41 +275,16 @@ INSERT INTO `produtos` (`id`, `descricao`, `preco`, `qtd_estoque`, `for_id`, `cl
 (68, 'Mamadeira', 15.00, 129, 13, 4, 0, '2023-11-11'),
 (69, 'Água Tônica 1L', 5.00, 179, 15, 5, 0, '2030-01-01'),
 (70, 'Barra de Cereal', 3.50, 220, 15, 5, 0, '2030-01-01'),
-(71, 'Café Solúvel', 10.00, 150, 15, 5, 0, '2030-01-01'),
+(71, 'Café Solúvel', 10.00, 149, 15, 5, 0, '2030-01-01'),
 (72, 'Analgésico Infantil', 10.00, 110, 14, 6, 0, '2030-01-01'),
 (73, 'Antisséptico Bucal', 8.00, 130, 14, 6, 0, '2030-01-01'),
-(74, 'Toalha de Rosto', 15.00, 100, 16, 1, 0, '2030-01-01'),
+(74, 'Toalha de Rosto', 15.00, 99, 16, 1, 0, '2030-01-01'),
 (75, 'Cotonetes', 5.00, 300, 16, 1, 0, '2030-01-01'),
 (76, 'Hidratante Facial', 35.00, 70, 14, 2, 0, '2030-01-01'),
 (77, 'Perfume Amadeirado', 150.00, 50, 14, 2, 0, '2030-01-01'),
 (80, 'Água Minera c/Gásl 500ml', 3.00, 96, 13, 5, 0, '2030-01-01'),
 (83, 'Amoxicilina 500mg 15cps', 40.00, 99, 14, 6, 1, '2025-12-01'),
 (84, 'teste', 2.00, 101, 16, 1, 1, '1111-11-11');
-
---
--- Acionadores `produtos`
---
-DELIMITER $$
-CREATE TRIGGER `after_produto_delete` AFTER DELETE ON `produtos` FOR EACH ROW BEGIN
-    INSERT INTO log_produtos (operacao, id_produto, descricao, preco, qtd_estoque, for_id, classe_id, precisa_de_receita, validade)
-    VALUES ('DELETE', OLD.id, OLD.descricao, OLD.preco, OLD.qtd_estoque, OLD.for_id, OLD.classe_id, OLD.precisa_de_receita, OLD.validade);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_produto_insert` AFTER INSERT ON `produtos` FOR EACH ROW BEGIN
-    INSERT INTO log_produtos (operacao, id_produto, descricao, preco, qtd_estoque, for_id, classe_id, precisa_de_receita, validade)
-    VALUES ('INSERT', NEW.id, NEW.descricao, NEW.preco, NEW.qtd_estoque, NEW.for_id, NEW.classe_id, NEW.precisa_de_receita, NEW.validade);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_produto_update` AFTER UPDATE ON `produtos` FOR EACH ROW BEGIN
-    INSERT INTO log_produtos (operacao, id_produto, descricao, preco, qtd_estoque, for_id, classe_id, precisa_de_receita, validade)
-    VALUES ('UPDATE', NEW.id, NEW.descricao, NEW.preco, NEW.qtd_estoque, NEW.for_id, NEW.classe_id, NEW.precisa_de_receita, NEW.validade);
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -412,38 +339,9 @@ INSERT INTO `vendas` (`id`, `cliente_id`, `data_venda`, `total_venda`, `observac
 (303, 406, '2024-07-14', 5.60, '', '17:31:19'),
 (304, 406, '2024-07-15', 8.00, '', '00:35:53'),
 (305, 406, '2024-07-15', 7.00, '', '20:47:16'),
-(306, 427, '2024-07-15', 32.80, 'receita foi entregue ', '23:02:17');
-
---
--- Acionadores `vendas`
---
-DELIMITER $$
-CREATE TRIGGER `after_venda_delete` AFTER DELETE ON `vendas` FOR EACH ROW BEGIN
-    INSERT INTO log_vendas (operacao, id_venda, cliente_id, data_venda, total_venda, observacoes, hora)
-    VALUES ('DELETE', OLD.id, OLD.cliente_id, OLD.data_venda, OLD.total_venda, OLD.observacoes, OLD.hora);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_venda_insert` AFTER INSERT ON `vendas` FOR EACH ROW BEGIN
-    INSERT INTO log_vendas (operacao, id_venda, cliente_id, data_venda, total_venda, observacoes, hora)
-    VALUES ('INSERT', NEW.id, NEW.cliente_id, NEW.data_venda, NEW.total_venda, NEW.observacoes, NEW.hora);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_venda_update` AFTER UPDATE ON `vendas` FOR EACH ROW BEGIN
-    INSERT INTO log_vendas (operacao, id_venda, cliente_id, data_venda, total_venda, observacoes, hora)
-    VALUES ('UPDATE', NEW.id, NEW.cliente_id, NEW.data_venda, NEW.total_venda, NEW.observacoes, NEW.hora);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `before_vendas_insert` BEFORE INSERT ON `vendas` FOR EACH ROW BEGIN
-    SET NEW.hora = CURTIME();
-END
-$$
-DELIMITER ;
+(306, 427, '2024-07-15', 32.80, 'receita foi entregue ', '23:02:17'),
+(332, 406, '2024-07-16', 15.00, '', NULL),
+(333, 427, '2024-07-16', 10.00, '', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -526,25 +424,25 @@ ALTER TABLE `classeproduto`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=431;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=432;
 
 --
 -- AUTO_INCREMENT de tabela `fornecedores`
 --
 ALTER TABLE `fornecedores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `funcionarios`
 --
 ALTER TABLE `funcionarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `itensvenda`
 --
 ALTER TABLE `itensvenda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=267;
 
 --
 -- AUTO_INCREMENT de tabela `parcelas`
@@ -568,7 +466,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=307;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=334;
 
 --
 -- Restrições para tabelas despejadas
