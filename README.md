@@ -22,6 +22,7 @@ AZUfarma é um sistema de gerenciamento de farmácias desenvolvido em Java. Ele 
 - **Swing**
 - **MySQL**
 - **API ViaCEP**
+- **IDE NetBeans**
 
 ## Requisitos
 
